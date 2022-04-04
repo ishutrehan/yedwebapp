@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ApiProvider } from '../providers/utilities/utility';
+import { UtilityProvider } from '../providers/utilities/utility';
 
 @Component({
   selector: 'app-root',
@@ -7,9 +7,20 @@ import { ApiProvider } from '../providers/utilities/utility';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-
-  constructor(public api: ApiProvider,) { 
+  showHeader: boolean
+  constructor(public utility: UtilityProvider) { 
    
+  }
+  ngOnInit(): void {
+    this.utility.getStorage('isLogin').then((status: any) => {
+      if(status){
+        //this.rootPage = HomePage;
+      }else{
+        this.showHeader = false;
+        //this.menuCtrl.enable(false, 'myMenu');
+        //this.rootPage = LandingPage;
+      }
+    });
   }
   
   
