@@ -7,20 +7,12 @@ import { UtilityProvider } from '../providers/utilities/utility';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  showHeader: boolean
-  constructor(public utility: UtilityProvider) { 
+  
+  constructor() { 
    
   }
   ngOnInit(): void {
-    this.utility.getStorage('isLogin').then((status: any) => {
-      if(status){
-        //this.rootPage = HomePage;
-      }else{
-        this.showHeader = false;
-        //this.menuCtrl.enable(false, 'myMenu');
-        //this.rootPage = LandingPage;
-      }
-    });
+    
   }
   
   

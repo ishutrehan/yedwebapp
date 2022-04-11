@@ -16,10 +16,11 @@ export class UtilityProvider {
   }
   // For get data from local Storage
   getStorage(key:any) {
-    return new Promise((resolve, reject) => {
-      if(localStorage.getItem(key))
-        resolve(localStorage.getItem(key))
-    });
+    if(localStorage.getItem(key)){
+      return localStorage.getItem(key);
+    }else{
+      return false;
+    }
   }
 
   removeStorage(key:any) {

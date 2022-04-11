@@ -10,11 +10,15 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms'; 
 import { ReactiveFormsModule } from '@angular/forms';
 import { LandingComponent } from './pages/landing/landing.component';
+import { ListingsComponent } from './pages/listings/listings.component';
+import { HeaderComponent } from './common/header/header.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LandingComponent
+    LandingComponent,
+    ListingsComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
