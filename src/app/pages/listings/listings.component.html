@@ -1,0 +1,409 @@
+<div class="container ">
+    <div class="row listing">
+    <div class="col-md-4 sidebar pt-4">
+        <h5 class="heading">Trier par</h5>
+        <label class="sort-radio" for="recent">Plus récent
+            <input type="radio" [(ngModel)]="searchParams.sort_by" checked="checked" name="sorting" id="recent" value="recent">
+            <span class="checkmark"></span>
+        </label>
+        <label class="sort-radio" for="low_price">Prix : du Moins au Plus Cher
+            <input type="radio" [(ngModel)]="searchParams.sort_by" name="sorting" value="low_price" id="low_price">
+            <span class="checkmark"></span>
+        </label>
+        <label class="sort-radio" for="high_price">Prix : du Plus au Moins Cher
+            <input type="radio" [(ngModel)]="searchParams.sort_by" name="sorting" value="high_price" id="high_price">
+            <span class="checkmark"></span>
+        </label>
+        <label class="sort-radio" for="reset">Réinitialiser
+            <input type="radio" [(ngModel)]="searchParams.sort_by" name="sorting" value="reset" id="reset">
+            <span class="checkmark"></span>
+        </label>
+        <div class="btn-group mt-4" role="group" aria-label="Basic radio toggle button">
+            <input type="radio" [(ngModel)]="searchParams.purpose" class="btn-check mt-4" name="sale" id="sale" autocomplete="off" value="sale">
+            <label class="btn btn-outline-primary" for="sale">À vendre</label>
+            
+            <input type="radio" [(ngModel)]="searchParams.purpose" class="btn-check" name="rent" id="rent" autocomplete="off" value="rent">
+            <label class="btn btn-outline-primary" for="rent">À louer</label>
+        </div>
+        <div class="btn-group mt-4" role="group" aria-label="Basic radio toggle button">
+            <input type="radio" [(ngModel)]="searchParams.user_role" class="btn-check mt-4" name="individual" id="individual" autocomplete="off" value="individual">
+            <label class="btn btn-outline-primary" for="individual">Particulier</label>
+            
+            <input type="radio" [(ngModel)]="searchParams.user_role" class="btn-check" name="agent" id="agent" autocomplete="off" value="agent">
+            <label class="btn btn-outline-primary" for="agent">Professionnel</label>
+        </div>
+        <h5 class="heading ">Localisation</h5>				  
+        <div class="search "> 
+            <i class="fa fa-search"></i> 
+            <input type="text" class="form-control" [(ngModel)]="searchParams.location">
+        </div>
+        <h5 class="heading">Rayon de Localisation</h5>	
+        <select class="form-control" [(ngModel)]="searchParams.distance">
+            <option value="">-- Select --</option>
+            <option *ngFor="let distance of distanceOptions; let i = index;" value="{{distance.value}}">{{ distance.name }}</option>
+        </select>
+        <h5 class="heading">Types de bien</h5>
+        <div class="row">
+            <div class="col-md-6">
+                <label class="container">Appartement
+                    <input type="checkbox" checked="checked">
+                    <span class="checkmark1"></span>
+                </label>
+                <label class="container">Bureau
+                    <input type="checkbox">
+                    <span class="checkmark1"></span>
+                </label>
+                <label class="container">Boutque
+                    <input type="checkbox" checked="checked">
+                    <span class="checkmark1"></span>
+                </label>
+                <label class="container">Duplex
+                    <input type="checkbox" checked="checked">
+                    <span class="checkmark1"></span>
+                </label>
+            </div>
+            <div class="col-md-6">
+                <label class="container">Magasin
+                    <input type="checkbox">
+                    <span class="checkmark1"></span>
+                </label>
+                <label class="container">Villa
+                    <input type="checkbox" checked="checked">
+                    <span class="checkmark1"></span>
+                </label>
+                <label class="container">Terrain
+                    <input type="checkbox">
+                    <span class="checkmark1"></span>
+                </label>
+                <label class="container">Champ
+                    <input type="checkbox">
+                    <span class="checkmark1"></span>
+                </label>
+            </div>
+        </div>	
+    
+        <h5 class="heading">Surface m2</h5>
+        <div class="row Surface">	
+            <div class="col-md-12 surfacemax">	
+                <h4 class="m2">m2`</h4>								
+                <input type="text" class="form-control" placeholder="Surface min">	
+            </div>	
+        </div>
+    
+        <div class="row">	
+            <div class="col-md-12 surfacemax">	
+            <h4 class="m2">m2`</h4>						
+            <input type="text" class="form-control" placeholder="surface max">		
+            </div>
+        </div>	
+        <div class="container">
+            <div class="input-counter">
+            <span class="minus-btn"><i class="bx bx-minus"></i></span>
+            <input type="text" value="1">
+            <span class="plus-btn"><i class="bx bx-plus"></i></span>
+            </div>
+        </div>
+    
+        <h5 class="heading">Budget</h5>
+        <div class="row Surface">	
+            <div class="col-md-12 surfacemax">
+            <h4 class="m2">FCFA</h4>						
+            <input type="text" class="form-control" placeholder="prix min">	
+            </div>	
+        </div>
+        <div class="row">	
+            <div class="col-md-12 surfacemax">	
+            <h4 class="m2">FCFA</h4>
+            <input type="text" class="form-control" placeholder="prix max">		
+            </div>
+        </div>
+        <h5 class="heading ">Number de pices</h5>
+        <div class="row Surface">	
+            <div class="col-md-12 surfacemax">					 
+                <input type="text" class="form-control" placeholder="Nom d Utilisateur">	
+            </div>				
+        </div>
+        <h5 class="heading ">Mots-cles de localisation</h5>
+        <div class="row Surface">	
+            <div class="col-md-12 surfacemax">					 
+                <input type="text" class="form-control" placeholder="Num d Utilisateur">	
+            </div>	
+        </div>  
+        <h5 class="heading ">Type de location</h5>
+        <div class="row">
+            <div class="col-md-6">
+                <label class="container">Meuble
+                    <input type="checkbox" checked="checked">
+                    <span class="checkmark1"></span>
+                </label>
+                <label class="container">Bureau
+                    <input type="checkbox">
+                    <span class="checkmark1"></span>
+                </label>
+            </div>
+            <div class="col-md-6">
+                <label class="container">Non Meuble
+                    <input type="checkbox">
+                    <span class="checkmark1"></span>
+                </label>
+            </div>
+        </div>	 
+    
+        <button type="button" class="lancer">lancer la recherche</button>
+        <button type="button" class="lancer-2">lancer la recherche</button>
+        <div class="space"></div>
+    </div>	 
+    <div class="col-md-8">
+        <div class="row">
+            <div class="col-md-6 right">
+                <div class="row listing-colum">
+                    <div class="listing-image">
+                        <button class="like-button ">
+                            <i class="fa fa-heart"></i>
+                        </button>
+                    </div>
+                    <div class="col-5">
+                        <span class="id-badge text text-md"> #588</span>
+    
+                        <span class="id-badge text text-md"> YED EXPERTISES</span>
+                    </div>
+                    <div class="col-3 eye">
+                        <i class="fa fa-eye" style="font-size:18px"></i>
+                        <span>15</span>
+                    </div>
+                    <div class="col-4 a-vendra">
+                        <button class="vendra">Ã€ Vendre</button>
+                    </div>
+                    <div class="title card-title card-title-md">
+                        <span class="primary-heading"> TERRAIN DE 330MÂ² EN VENTE A SONG-NAABA</span>
+                    </div>
+                    <div class="detail card-title card-title-md">
+                        <span>
+                        Une parcelle situÃ©e Ã&nbsp; Song-naaba, juste derriÃ¨re 
+                        </span>
+                    </div>
+                    <span class="id-badge text text-md"> 13 000 000 FCFA</span>
+                    <span class="id-badge text text-md" ion-text="">Jan 12, 2022</span>
+                    <a href="#" class="contact button-inner col-md-5">
+                        <i class="fa fa-envelope" aria-hidden="true"></i>
+                        Contacter
+                    </a>	
+                    <a href="#" class="Telephone button-inner-1 col-md-5">
+                        <i class="fa fa-phone" aria-hidden="true" style="color:#ff5722;"></i>
+                        Telephone
+                    </a>
+                    <div class="col-md-1"></div>											  
+                    <div class="space"></div>
+                </div> 
+                <div class="row listing-colum">
+                    <div class="listing-image">
+                        <button class="like-button ">
+                        <i class="fa fa-heart"></i>
+                        </button>
+                    </div>
+                    <div class="col-5">
+                        <span class="id-badge text text-md"> #588</span>
+    
+                        <span class="id-badge text text-md"> YED EXPERTISES</span>
+                    </div>
+                    <div class="col-3 eye">
+                        <i class="fa fa-eye" style="font-size:18px"></i>
+                        <span>15</span>
+                    </div>
+                    <div class="col-4 a-vendra">
+                        <button class="vendra">Ã€ Vendre</button>
+                    </div>
+                    <div class="title card-title card-title-md">
+                        <span class="primary-heading"> TERRAIN DE 330MÂ² EN VENTE A SONG-NAABA</span>
+                    </div>
+                    <div class="detail card-title card-title-md">
+                        <span>
+                        Une parcelle situÃ©e Ã&nbsp; Song-naaba, juste derriÃ¨re 
+                        </span>
+                    </div>
+                    <span class="id-badge text text-md"> 13 000 000 FCFA</span>
+                    <span class="id-badge text text-md" ion-text="">Jan 12, 2022</span>
+                    <a href="#" class="contact button-inner col-md-5">
+                        <i class="fa fa-envelope" aria-hidden="true"></i>
+                        Contacter
+                    </a>	
+                    <a href="#" class="Telephone button-inner-1 col-md-5">
+                        <i class="fa fa-phone" aria-hidden="true" style="color:#ff5722;"></i>
+                        Telephone
+                    </a>
+                    <div class="col-md-1"></div>											  
+                    <div class="space"></div>
+                </div>
+                <div class="row listing-colum">
+                    <div class="listing-image">
+                        <button class="like-button ">
+                        <i class="fa fa-heart"></i>
+                        </button>
+                    </div>
+                    <div class="col-5">
+                        <span class="id-badge text text-md"> #588</span>
+    
+                        <span class="id-badge text text-md"> YED EXPERTISES</span>
+                    </div>
+                    <div class="col-3 eye">
+                        <i class="fa fa-eye" style="font-size:18px"></i>
+                        <span>15</span>
+                    </div>
+                    <div class="col-4 a-vendra">
+                        <button class="vendra">Ã€ Vendre</button>
+                    </div>
+                    <div class="title card-title card-title-md">
+                        <span class="primary-heading"> TERRAIN DE 330MÂ² EN VENTE A SONG-NAABA</span>
+                    </div>
+                    <div class="detail card-title card-title-md">
+                        <span>
+                        Une parcelle situÃ©e Ã&nbsp; Song-naaba, juste derriÃ¨re 
+                        </span>
+                    </div>
+                    <span class="id-badge text text-md"> 13 000 000 FCFA</span>
+                    <span class="id-badge text text-md" ion-text="">Jan 12, 2022</span>
+                    <a href="#" class="contact button-inner col-md-5">
+                        <i class="fa fa-envelope" aria-hidden="true"></i>
+                        Contacter
+                    </a>	
+                    <a href="#" class="Telephone button-inner-1 col-md-5">
+                        <i class="fa fa-phone" aria-hidden="true" style="color:#ff5722;"></i>
+                        Telephone
+                    </a>
+                    <div class="col-md-1"></div>											  
+                    <div class="space"></div>
+                </div>
+            </div>
+    
+            <div class="col-md-6 left">
+                <div class="row listing-colum">
+                    <div class="listing-image">
+                        <button class="like-button ">
+                        <i class="fa fa-heart"></i>
+                        </button>
+                    </div>
+                    <div class="col-5">
+                        <span class="id-badge text text-md"> #588</span>
+                        <span class="id-badge text text-md"> YED EXPERTISES</span>
+                    </div>
+                    <div class="col-3 eye">
+                        <i class="fa fa-eye" style="font-size:18px"></i>
+                        <span>15</span>
+                    </div>
+                    <div class="col-4 a-vendra">
+                        <button class="vendra">Ã€ Vendre</button>
+                    </div>
+                    <div class="title card-title card-title-md">
+                        <span class="primary-heading"> TERRAIN DE 330MÂ² EN VENTE A SONG-NAABA</span>
+                    </div>
+                    <div class="detail card-title card-title-md">
+                        <span>
+                        Une parcelle situÃ©e Ã&nbsp; Song-naaba, juste derriÃ¨re 
+                        </span>
+                    </div>
+                    <span class="id-badge text text-md"> 13 000 000 FCFA</span>
+                    <span class="id-badge text text-md" ion-text="">Jan 12, 2022</span>
+                    <a href="#" class="contact button-inner col-md-5">
+                        <i class="fa fa-envelope" aria-hidden="true"></i>
+                        Contacter
+                    </a>	
+                    <a href="#" class="Telephone button-inner-1 col-md-5">
+                        <i class="fa fa-phone" aria-hidden="true" style="color:#ff5722;"></i>
+                        Telephone
+                    </a>
+                    <div class="col-md-1"></div>											  
+                    <div class="space"></div>
+                </div>
+                <div class="row listing-colum">				
+                    <div class="listing-image">			
+                        <button class="like-button"><i class="fa fa-heart"></i></button>
+                    </div>
+                    <div class="col-5">
+    
+                        <span class="id-badge text text-md"> #588</span>	
+                    </div>											
+                    <div class="col-3 eye">								
+                        <i class="fa fa-eye" style="font-size:18px"></i>							
+                        <span>15</span>					
+                    </div>
+                    <div class="col-4 a-vendra">
+                        <button class="vendra">Ã€ Vendre</button>
+                    </div>
+                    <div class="title card-title card-title-md">
+                        <span class="primary-heading"> TERRAIN DE 330MÂ² EN VENTE A SONG-NAABA</span>
+                    </div>
+                    <div class="detail card-title card-title-md">
+                        <span>
+                        Une parcelle situÃ©e Ã&nbsp; Song-naaba, juste derriÃ¨re 
+                        </span>
+                    </div>
+                    <span class="id-badge text text-md"> 13 000 000 FCFA</span>
+                    <span class="id-badge text text-md" ion-text="">Jan 12, 2022</span>
+                    <a href="#" class="contact button-inner col-md-5">
+                        <i class="fa fa-envelope" aria-hidden="true"></i>
+                        Contacter
+                    </a>	
+                    <a href="#" class="Telephone button-inner-1 col-md-5">
+                        <i class="fa fa-phone" aria-hidden="true" style="color:#ff5722;"></i>
+                        Telephone
+                    </a>
+                    <div class="col-md-1"></div>											  
+                    <div class="space"></div>
+                </div>						  
+    
+                <div class="row listing-colum">
+                    <div class="listing-image">
+                        <button class="like-button ">
+                        <i class="fa fa-heart"></i>
+                        </button>
+                    </div>
+                    <div class="col-5">
+                        <span class="id-badge text text-md"> #588</span>
+                        <span class="id-badge text text-md"> YED EXPERTISES</span>
+                    </div>
+                    <div class="col-3 eye">
+                        <i class="fa fa-eye" style="font-size:18px"></i>
+                        <span>15</span>
+                    </div>
+                    <div class="col-4 a-vendra">
+                        <button class="vendra">Ã€ Vendre</button>
+                    </div>
+                    <div class="title card-title card-title-md">
+                        <span class="primary-heading"> TERRAIN DE 330MÂ² EN VENTE A SONG-NAABA</span>
+                    </div>
+                    <div class="detail card-title card-title-md">
+                        <span>
+                        Une parcelle situÃ©e Ã&nbsp; Song-naaba, juste derriÃ¨re 
+                        </span>
+                    </div>
+                    <span class="id-badge text text-md"> 13 000 000 FCFA</span>
+                    <span class="id-badge text text-md" ion-text="">Jan 12, 2022</span>
+                    <a href="#" class="contact button-inner col-md-5">
+                        <i class="fa fa-envelope" aria-hidden="true"></i>
+                        Contacter
+                    </a>	
+                    <a href="#" class="Telephone button-inner-1 col-md-5">
+                        <i class="fa fa-phone" aria-hidden="true" style="color:#ff5722;"></i>
+                        Telephone
+                    </a>
+                    <div class="col-md-1"></div>											  
+                    <div class="space"></div>
+                </div>	
+            </div>	
+            <div class="col-md-12">										
+                <ul class="pagination">
+                    <a href="#" class="prev">&lt; Prev</a>
+                    <li><a class="techincal" href="#">1</a></li>
+                    <li class="active"><a class="techincal" href="#">2</a></li>
+                    <li><a class="techincal" href="#">3</a></li>
+                    <li><a class="techincal" href="#">4</a></li>
+                    <li><a class="techincal" href="#">5</a></li>
+                    <li><a class="techincal" href="#">6</a></li>
+                    <li><a class="techincal" href="#">7</a></li>
+                    <a href="#" class="prev">Next &gt;</a>
+                </ul>
+            </div>	
+    </div>
+    </div>
+    </div>								
+    </div>

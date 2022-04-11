@@ -1,0 +1,42 @@
+.listing-bc {
+    background-image: url(../../../assets/images/building.jpg);
+    height: 100%;
+    width: 100%;
+    background-size: cover;
+}
+.box{
+    border-left: solid #e85d19 9px;
+    border-bottom: solid #e85d19 9px;
+    border-radius: 12px;
+    background: #fff;
+    width: 100%;
+    padding: 100px 0px;
+}
+.box img {
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+}
+.box h3 {
+    /* display: flex; */
+    align-items: center;
+    justify-content: center;
+    margin: 10px;
+    font-size: 24px;
+    color: #ff5722;
+}
+button.louer.un-bien {
+    background: #ff5722;
+    padding: 195px;
+    border-radius: 15px;
+    padding: 12px 88px 18px 90px;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    border: none;
+    color: #fff;
+    font-size: 18px;
+}
+.listing{
+    text-align: center;
+}
