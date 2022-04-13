@@ -1,6 +1,6 @@
 <div class="container ">
     <div class="row listing">
-    <div class="col-md-4 sidebar pt-4">
+    <div class="col-md-4 sidebar pt-5">
         <h5 class="heading">Trier par</h5>
         <label class="sort-radio" for="recent">Plus récent
             <input type="radio" [(ngModel)]="searchParams.sort_by" checked="checked" name="sorting" id="recent" value="recent">
@@ -44,7 +44,7 @@
         </select>
         <h5 class="heading">Types de bien</h5>
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-8">
                 <label class="container">Appartement
                     <input type="checkbox" checked="checked">
                     <span class="checkmark1"></span>
@@ -155,241 +155,52 @@
     </div>	 
     <div class="col-md-8">
         <div class="row">
-            <div class="col-md-6 right">
-                <div class="row listing-colum">
-                    <div class="listing-image">
+            <div class="col-md-6 listing-colum" *ngFor="let property of propertyList; let i = index;">
+                <div class="p-3">
+                    <div class="listing-image" [ngStyle]="{ 'background-image': 'url('+property.featured+ ')'}">
                         <button class="like-button ">
                             <i class="fa fa-heart"></i>
                         </button>
                     </div>
-                    <div class="col-5">
-                        <span class="id-badge text text-md"> #588</span>
-    
-                        <span class="id-badge text text-md"> YED EXPERTISES</span>
+                    <div class="row">
+                        <div class="col-5">
+                            <span class="id-badge text text-md"> #{{property.id}}</span>
+                    
+                            <span class="id-badge text text-md"> {{property.username}}</span>
+                        </div>
+                        <div class="col-3 eye">
+                            <i class="fa fa-eye" style="font-size:18px"></i>
+                            <span>{{ property.viewCount }}</span>
+                        </div>
+                        <div class="col-4 a-vendra">
+                            <button class="vendra">{{ property.purpose }}</button>
+                        </div>
                     </div>
-                    <div class="col-3 eye">
-                        <i class="fa fa-eye" style="font-size:18px"></i>
-                        <span>15</span>
-                    </div>
-                    <div class="col-4 a-vendra">
-                        <button class="vendra">Ã€ Vendre</button>
-                    </div>
+                    
                     <div class="title card-title card-title-md">
-                        <span class="primary-heading"> TERRAIN DE 330MÂ² EN VENTE A SONG-NAABA</span>
+                        <span class="primary-heading">{{ property.title }}</span>
                     </div>
                     <div class="detail card-title card-title-md">
-                        <span>
-                        Une parcelle situÃ©e Ã&nbsp; Song-naaba, juste derriÃ¨re 
-                        </span>
+                        {{SubString(property.description) }}
                     </div>
                     <span class="id-badge text text-md"> 13 000 000 FCFA</span>
                     <span class="id-badge text text-md" ion-text="">Jan 12, 2022</span>
-                    <a href="#" class="contact button-inner col-md-5">
-                        <i class="fa fa-envelope" aria-hidden="true"></i>
-                        Contacter
-                    </a>	
-                    <a href="#" class="Telephone button-inner-1 col-md-5">
-                        <i class="fa fa-phone" aria-hidden="true" style="color:#ff5722;"></i>
-                        Telephone
-                    </a>
-                    <div class="col-md-1"></div>											  
-                    <div class="space"></div>
-                </div> 
-                <div class="row listing-colum">
-                    <div class="listing-image">
-                        <button class="like-button ">
-                        <i class="fa fa-heart"></i>
-                        </button>
+                    
+                    <div class="row">
+                        <a href="#" class="contact button-inner col-md-5">
+                            <i class="fa fa-envelope" aria-hidden="true"></i>
+                            Contacter
+                        </a>
+                        <a href="#" class="Telephone button-inner-1 col-md-5">
+                            <i class="fa fa-phone" aria-hidden="true" style="color:#ff5722;"></i>
+                            Telephone
+                        </a>
                     </div>
-                    <div class="col-5">
-                        <span class="id-badge text text-md"> #588</span>
-    
-                        <span class="id-badge text text-md"> YED EXPERTISES</span>
-                    </div>
-                    <div class="col-3 eye">
-                        <i class="fa fa-eye" style="font-size:18px"></i>
-                        <span>15</span>
-                    </div>
-                    <div class="col-4 a-vendra">
-                        <button class="vendra">Ã€ Vendre</button>
-                    </div>
-                    <div class="title card-title card-title-md">
-                        <span class="primary-heading"> TERRAIN DE 330MÂ² EN VENTE A SONG-NAABA</span>
-                    </div>
-                    <div class="detail card-title card-title-md">
-                        <span>
-                        Une parcelle situÃ©e Ã&nbsp; Song-naaba, juste derriÃ¨re 
-                        </span>
-                    </div>
-                    <span class="id-badge text text-md"> 13 000 000 FCFA</span>
-                    <span class="id-badge text text-md" ion-text="">Jan 12, 2022</span>
-                    <a href="#" class="contact button-inner col-md-5">
-                        <i class="fa fa-envelope" aria-hidden="true"></i>
-                        Contacter
-                    </a>	
-                    <a href="#" class="Telephone button-inner-1 col-md-5">
-                        <i class="fa fa-phone" aria-hidden="true" style="color:#ff5722;"></i>
-                        Telephone
-                    </a>
-                    <div class="col-md-1"></div>											  
+                    
+                    <div class="col-md-1"></div>
                     <div class="space"></div>
                 </div>
-                <div class="row listing-colum">
-                    <div class="listing-image">
-                        <button class="like-button ">
-                        <i class="fa fa-heart"></i>
-                        </button>
-                    </div>
-                    <div class="col-5">
-                        <span class="id-badge text text-md"> #588</span>
-    
-                        <span class="id-badge text text-md"> YED EXPERTISES</span>
-                    </div>
-                    <div class="col-3 eye">
-                        <i class="fa fa-eye" style="font-size:18px"></i>
-                        <span>15</span>
-                    </div>
-                    <div class="col-4 a-vendra">
-                        <button class="vendra">Ã€ Vendre</button>
-                    </div>
-                    <div class="title card-title card-title-md">
-                        <span class="primary-heading"> TERRAIN DE 330MÂ² EN VENTE A SONG-NAABA</span>
-                    </div>
-                    <div class="detail card-title card-title-md">
-                        <span>
-                        Une parcelle situÃ©e Ã&nbsp; Song-naaba, juste derriÃ¨re 
-                        </span>
-                    </div>
-                    <span class="id-badge text text-md"> 13 000 000 FCFA</span>
-                    <span class="id-badge text text-md" ion-text="">Jan 12, 2022</span>
-                    <a href="#" class="contact button-inner col-md-5">
-                        <i class="fa fa-envelope" aria-hidden="true"></i>
-                        Contacter
-                    </a>	
-                    <a href="#" class="Telephone button-inner-1 col-md-5">
-                        <i class="fa fa-phone" aria-hidden="true" style="color:#ff5722;"></i>
-                        Telephone
-                    </a>
-                    <div class="col-md-1"></div>											  
-                    <div class="space"></div>
-                </div>
-            </div>
-    
-            <div class="col-md-6 left">
-                <div class="row listing-colum">
-                    <div class="listing-image">
-                        <button class="like-button ">
-                        <i class="fa fa-heart"></i>
-                        </button>
-                    </div>
-                    <div class="col-5">
-                        <span class="id-badge text text-md"> #588</span>
-                        <span class="id-badge text text-md"> YED EXPERTISES</span>
-                    </div>
-                    <div class="col-3 eye">
-                        <i class="fa fa-eye" style="font-size:18px"></i>
-                        <span>15</span>
-                    </div>
-                    <div class="col-4 a-vendra">
-                        <button class="vendra">Ã€ Vendre</button>
-                    </div>
-                    <div class="title card-title card-title-md">
-                        <span class="primary-heading"> TERRAIN DE 330MÂ² EN VENTE A SONG-NAABA</span>
-                    </div>
-                    <div class="detail card-title card-title-md">
-                        <span>
-                        Une parcelle situÃ©e Ã&nbsp; Song-naaba, juste derriÃ¨re 
-                        </span>
-                    </div>
-                    <span class="id-badge text text-md"> 13 000 000 FCFA</span>
-                    <span class="id-badge text text-md" ion-text="">Jan 12, 2022</span>
-                    <a href="#" class="contact button-inner col-md-5">
-                        <i class="fa fa-envelope" aria-hidden="true"></i>
-                        Contacter
-                    </a>	
-                    <a href="#" class="Telephone button-inner-1 col-md-5">
-                        <i class="fa fa-phone" aria-hidden="true" style="color:#ff5722;"></i>
-                        Telephone
-                    </a>
-                    <div class="col-md-1"></div>											  
-                    <div class="space"></div>
-                </div>
-                <div class="row listing-colum">				
-                    <div class="listing-image">			
-                        <button class="like-button"><i class="fa fa-heart"></i></button>
-                    </div>
-                    <div class="col-5">
-    
-                        <span class="id-badge text text-md"> #588</span>	
-                    </div>											
-                    <div class="col-3 eye">								
-                        <i class="fa fa-eye" style="font-size:18px"></i>							
-                        <span>15</span>					
-                    </div>
-                    <div class="col-4 a-vendra">
-                        <button class="vendra">Ã€ Vendre</button>
-                    </div>
-                    <div class="title card-title card-title-md">
-                        <span class="primary-heading"> TERRAIN DE 330MÂ² EN VENTE A SONG-NAABA</span>
-                    </div>
-                    <div class="detail card-title card-title-md">
-                        <span>
-                        Une parcelle situÃ©e Ã&nbsp; Song-naaba, juste derriÃ¨re 
-                        </span>
-                    </div>
-                    <span class="id-badge text text-md"> 13 000 000 FCFA</span>
-                    <span class="id-badge text text-md" ion-text="">Jan 12, 2022</span>
-                    <a href="#" class="contact button-inner col-md-5">
-                        <i class="fa fa-envelope" aria-hidden="true"></i>
-                        Contacter
-                    </a>	
-                    <a href="#" class="Telephone button-inner-1 col-md-5">
-                        <i class="fa fa-phone" aria-hidden="true" style="color:#ff5722;"></i>
-                        Telephone
-                    </a>
-                    <div class="col-md-1"></div>											  
-                    <div class="space"></div>
-                </div>						  
-    
-                <div class="row listing-colum">
-                    <div class="listing-image">
-                        <button class="like-button ">
-                        <i class="fa fa-heart"></i>
-                        </button>
-                    </div>
-                    <div class="col-5">
-                        <span class="id-badge text text-md"> #588</span>
-                        <span class="id-badge text text-md"> YED EXPERTISES</span>
-                    </div>
-                    <div class="col-3 eye">
-                        <i class="fa fa-eye" style="font-size:18px"></i>
-                        <span>15</span>
-                    </div>
-                    <div class="col-4 a-vendra">
-                        <button class="vendra">Ã€ Vendre</button>
-                    </div>
-                    <div class="title card-title card-title-md">
-                        <span class="primary-heading"> TERRAIN DE 330MÂ² EN VENTE A SONG-NAABA</span>
-                    </div>
-                    <div class="detail card-title card-title-md">
-                        <span>
-                        Une parcelle situÃ©e Ã&nbsp; Song-naaba, juste derriÃ¨re 
-                        </span>
-                    </div>
-                    <span class="id-badge text text-md"> 13 000 000 FCFA</span>
-                    <span class="id-badge text text-md" ion-text="">Jan 12, 2022</span>
-                    <a href="#" class="contact button-inner col-md-5">
-                        <i class="fa fa-envelope" aria-hidden="true"></i>
-                        Contacter
-                    </a>	
-                    <a href="#" class="Telephone button-inner-1 col-md-5">
-                        <i class="fa fa-phone" aria-hidden="true" style="color:#ff5722;"></i>
-                        Telephone
-                    </a>
-                    <div class="col-md-1"></div>											  
-                    <div class="space"></div>
-                </div>	
-            </div>	
+            </div> 
             <div class="col-md-12">										
                 <ul class="pagination">
                     <a href="#" class="prev">&lt; Prev</a>
