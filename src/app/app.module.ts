@@ -12,13 +12,24 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { LandingComponent } from './pages/landing/landing.component';
 import { ListingsComponent } from './pages/listings/listings.component';
 import { HeaderComponent } from './common/header/header.component';
+import { JoinComponent } from './pages/join/join.component';
+import { RegisterComponent } from './pages/register/register.component';
+import { LoginComponent } from './pages/login/login.component';
+import { AboutComponent } from './pages/about/about.component';
+import { TermsComponent } from './pages/terms/terms.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     LandingComponent,
     ListingsComponent,
-    HeaderComponent
+    HeaderComponent,
+    JoinComponent,
+    RegisterComponent,
+    LoginComponent,
+    AboutComponent,
+    TermsComponent
   ],
   imports: [
     BrowserModule,

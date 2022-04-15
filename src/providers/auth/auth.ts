@@ -46,8 +46,30 @@ export class ApiProvider {
       }
     });
   }
+  // Signup Api  
+  signUp(payload) {
+    return new Promise((resolve, reject) => {
+      this.http.post(this.baseUrl + '/user/register', payload).subscribe(data => {
+        resolve(data);
+      }, err => {
+        reject(err);
+       // console.log("ERER:", err);
+      });
+    });
+  }
+  // login Api  
+  login(payload) {
+    return new Promise((resolve, reject) => {
+      this.http.post(this.baseUrl + '/user/login', payload).subscribe(data => {
+        resolve(data);
+      }, err => {
+        reject(err);
+       // console.log("ERER:", err);
+      });
+    });
+  }
   generateToken() {
-    if(this.utility.getStorage('refreshToken')){
+    if(this.utility.getStorage('refreshToen')){
       var token = this.utility.getStorage('refreshToen');
       var body = {
         'refresh_token': token
