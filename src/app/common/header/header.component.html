@@ -22,12 +22,31 @@
                 <a class="nav-link" routerLink="terms">condition generales d`nutilisation</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Contact</a>
+                <a class="nav-link" routerLink="contact">Contact</a>
               </li>
-            </ul>
-          </div>
+              </ul>
+              </div>
+          
+          
         </div>
-        <div class="col-md-3"></div>
+        <div class="col-md-3">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0" *ngIf="islogin()">
+            <li class="nav-item">
+              <i class="fa fa-spinner fa-spin" *ngIf="loading"></i>
+              <div class="dropdown" *ngIf="!loading">
+                <button class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"><img class="rounded-circle" width="40px" [attr.src]="profiledetails.profile_image" />
+                <span class="user">{{ profiledetails.name }}</span></button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                  <li><a class="dropdown-item" href="myfavorites">Mes Favoris</a></li>
+                  <li><a class="dropdown-item" href="myproperties">Mes Biens</a></li>
+                  <li><a class="dropdown-item" href="#">Mon Compte</a></li>
+                  <li><a class="dropdown-item" (click)="logout()">Se déconnecter</a></li>
+
+                </ul>
+              </div>
+            </li>          
+          </ul>
+        </div>
       </div>
     </nav>
       

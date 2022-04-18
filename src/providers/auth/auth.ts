@@ -68,20 +68,116 @@ export class ApiProvider {
       });
     });
   }
+  // contact us Api  
+   contact(payload) {
+    return new Promise((resolve, reject) => {
+      this.getHeaders()
+        .then((token: any) => {
+          if(!token) return reject(['error']);
+          let headers = new HttpHeaders({
+            'Authorization': token
+          });
+          this.http.post(this.baseUrl + '/user/contact', payload, { headers: headers }).subscribe(data => {
+            resolve(data);
+          }, err => {
+            reject(err);
+            //console.log("ERER:", err);
+          });
+        });
+    });
+  }
+  // get profile 
+  getPrfile() {
+    return new Promise((resolve, reject) => {
+      this.getHeaders()
+        .then((token: any) => {
+          if(!token) return reject(['error']);
+          let headers = new HttpHeaders({
+            'Authorization': token
+          });
+          return this.http.get(this.baseUrl + '/user/getprofile', { headers: headers }).subscribe(data => {
+            resolve(data);
+          }, err => {
+            reject(err);
+           // console.log("ERER:", err);
+          });
+        });
+    });
+  }
+  // like/dislike us Api  
+  favourite(payload) {
+    return new Promise((resolve, reject) => {
+      this.getHeaders()
+        .then((token: any) => {
+          if(!token) return reject(['error']);
+          let headers = new HttpHeaders({
+            'Authorization': token
+          });
+          this.http.post(this.baseUrl + '/user/togglefav', payload, { headers: headers }).subscribe(data => {
+            resolve(data);
+          }, err => {
+            reject(err);
+           // console.log("ERER:", err);
+          });
+        });
+    });
+  }
+  // fav Api  
+  getUserFav(payload) {
+    return new Promise((resolve, reject) => {
+      this.getHeaders()
+        .then((token: any) => {
+          if(!token) return reject(['error']);
+          let headers = new HttpHeaders({
+            'Authorization': token
+          });
+          this.http.post(this.baseUrl + '/user/fav', payload, { headers: headers }).subscribe(data => {
+            resolve(data);
+          }, err => {
+            reject(err);
+            //console.log("ERER:", err);
+          });
+        });
+    });
+  }
+  //get my properties API
+  getMyProperties(payload) {
+    return new Promise((resolve, reject) => {
+      this.getHeaders()
+        .then((token: any) => {
+          if(!token) return reject(['error']);
+          let headers = new HttpHeaders({
+            'Authorization': token
+          });
+          this.http.post(this.baseUrl + '/user/properties', payload, { headers: headers }).subscribe(data => {
+            resolve(data);
+          }, err => {
+            reject(err);
+            //console.log("ERER:", err);
+          });
+        });
+    });
+  }
   generateToken() {
-    if(this.utility.getStorage('refreshToen')){
-      var token = this.utility.getStorage('refreshToen');
-      var body = {
-        'refresh_token': token
-      }
-      return new Promise((resolve, reject) => {
-        this.http.post(this.baseUrl + '/user/refresh', body).subscribe(data => {
-          resolve(data);
-        }, err => {
-          reject(err);
+    if(this.utility.getStorage('user_email')){
+      var useremail = this.utility.getStorage('user_email');
+       return new Promise((resolve, reject) => {
+         this.http.post(this.baseUrl + '/user/getRefreshToken', {email : useremail }).subscribe((data: any) => {
+
+          var body = {
+            'refresh_token': data.refresh_token
+          }
+          return this.http.post(this.baseUrl + '/user/refresh', body).subscribe(data => {
+              resolve(data);
+            }, err => {
+            // console.log("ERER:", err);
+            });
+        }, err => {;
          // console.log("ERER:", err);
         });
-      });
+       })
+      
+      
     }else{
       return new Promise((resolve, reject) => {
        

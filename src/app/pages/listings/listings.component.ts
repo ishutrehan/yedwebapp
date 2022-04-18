@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { UtilityProvider } from '../../../providers/utilities/utility';
 import { ApiProvider } from '../../../providers/auth/auth';
+import { PaginationInstance } from 'ngx-pagination/dist/ngx-pagination.module';
+
 
 @Component({
   selector: 'app-listings',
@@ -14,8 +16,21 @@ export class ListingsComponent implements OnInit {
   offset_value : number;
   sort_name:any = "recent";
   propertyList:any = [];
+  loading: boolean;
+  placeholderCount: any;
+  page: number = 1;
+  total: number = 50;
+  public config: PaginationInstance = {
+    id: 'server',
+    itemsPerPage: 10,
+    currentPage: this.page,
+    totalItems: this.total
+  };
+  payload:any = {};
   constructor(public utility:UtilityProvider, public auth:ApiProvider) {
     this.offset_value = 0;
+    this.placeholderCount = 10;
+    
   }
 
   ngOnInit(): void {
@@ -37,12 +52,26 @@ export class ListingsComponent implements OnInit {
       { name: "45km", value: "45" },
       { name: "50km", value: "50" }
     ];
-    var payload:any = {};
-    payload.sort_by = this.sort_name == 'reset'?"":this.sort_name;
-    payload.offset = this.offset_value;
-    this.getPropertyList(payload);
+ 
+    this.payload.sort_by = this.sort_name == 'reset'?"":this.sort_name;
+    this.payload.offset = this.offset_value;
+    this.getPropertyList(this.payload);
+  }
+
+
+  onPageChange(number: number) {
+    this.config.currentPage = number;
+    this.offset_value = (number - 1) * this.config.itemsPerPage; 
+    this.payload.offset = this.offset_value;
+    this.getPropertyList(this.payload);
+    document.body.scrollTop = document.documentElement.scrollTop = 0;
+  }
+
+  onPageBoundsCorrection(number: number) {
+    this.config.currentPage = number;
   }
   getPropertyList(payload:any ) {
+    this.loading = true;
     this.currentPayload = payload;
     
     //console.log("payload is", payload);
@@ -52,7 +81,10 @@ export class ListingsComponent implements OnInit {
       .then((result: any) => {
        // console.log("propertyList", result);
         //this.propertyList = [...this.propertyList,...result.properties];
+        
+        this.config.totalItems = result.totalResults;
         this.propertyList = result.properties;
+        this.loading = false;
         // this.allow_skip = result.next;
         // this.allow_lazy_loading = true;
         // if(this.propertyList.length == 0){
@@ -74,6 +106,29 @@ export class ListingsComponent implements OnInit {
        // this.utility.stopLoading();
       })
   }
+    showIcon(){
+      if(this.utility.getStorage('isLogin')){
+      return true;
+    }else{
+      return false;
+    }
+  }
+ likeDislike(property) {
+    var payload = {
+      "property_id": parseInt(property.id),
+    }
+    property.favorite = property.favorite == true?false:true;
+    this.auth.favourite(payload)
+      .then((result: any) => {
+        console.log(result)
+        // this.getLocation();
+        //property.favorite = property.favorite == true?false:true;
+
+      }, err => {
+        //console.log("err", err);
+      })
+  }
+
   SubString(text) {
     return text = text == null ? '' : text.substring(0, 100) + '..';
   }

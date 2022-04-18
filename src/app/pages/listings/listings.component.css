@@ -40,6 +40,7 @@ h5.heading {
     display: inline-block;
     cursor: pointer;
 }
+
 .btn-group{
     width: 100%;
 }
@@ -83,7 +84,7 @@ button.like-button {
     position: absolute;
     right: 5px;
     top: 8px;
-    background: #fff;
+    background: transparent;
     border-radius: 91%;
     color: #ff5722;
     font-size: 22px;

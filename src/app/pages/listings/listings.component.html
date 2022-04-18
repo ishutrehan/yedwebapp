@@ -154,17 +154,47 @@
         <div class="space"></div>
     </div>	 
     <div class="col-md-8">
+        <div class="row" [hidden]="!loading">
+            <div class="col-12 col-sm-6" *ngFor="let i of [].constructor(10);">
+                <div class="ph-item">
+                    <div class="ph-col-12">
+                        <div class="ph-picture"></div>
+                        <div class="ph-row">
+                            <div class="ph-col-4"></div>
+                            <div class="ph-col-8 empty"></div>
+                            <div class="ph-col-12"></div>
+                        </div>
+                    </div>
+                    <div class="ph-col-2">
+                        <div class="ph-avatar"></div>
+                    </div>
+                    <div>
+                        <div class="ph-row">
+                            <div class="ph-col-12"></div>
+                            <div class="ph-col-2"></div>
+                            <div class="ph-col-10 empty"></div>
+                            <div class="ph-col-8 big"></div>
+                            <div class="ph-col-4 big empty"></div>
+                        </div>
+                    </div>
+                </div>
+        
+            </div>
+        </div>
         <div class="row">
-            <div class="col-md-6 listing-colum" *ngFor="let property of propertyList; let i = index;">
+            <div class="col-md-6 listing-colum" *ngFor="let property of propertyList | paginate: { itemsPerPage: 10,
+    currentPage: config.currentPage,
+    totalItems: config.totalItems}; let i = index;" [hidden]="loading">
                 <div class="p-3">
                     <div class="listing-image" [ngStyle]="{ 'background-image': 'url('+property.featured+ ')'}">
-                        <button class="like-button ">
-                            <i class="fa fa-heart"></i>
+                        <button class="like-button" *ngIf="showIcon()" (click)="likeDislike(property)">
+                            <i class="fa fa-heart" *ngIf="property.favorite"></i>
+                            <i class="fa fa-heart-o" *ngIf="!property.favorite"></i>
                         </button>
                     </div>
                     <div class="row">
                         <div class="col-5">
-                            <span class="id-badge text text-md"> #{{property.id}}</span>
+                            <span class="id-badge text text-md"> {{property.id}}</span>
                     
                             <span class="id-badge text text-md"> {{property.username}}</span>
                         </div>
@@ -202,17 +232,11 @@
                 </div>
             </div> 
             <div class="col-md-12">										
-                <ul class="pagination">
-                    <a href="#" class="prev">&lt; Prev</a>
-                    <li><a class="techincal" href="#">1</a></li>
-                    <li class="active"><a class="techincal" href="#">2</a></li>
-                    <li><a class="techincal" href="#">3</a></li>
-                    <li><a class="techincal" href="#">4</a></li>
-                    <li><a class="techincal" href="#">5</a></li>
-                    <li><a class="techincal" href="#">6</a></li>
-                    <li><a class="techincal" href="#">7</a></li>
-                    <a href="#" class="prev">Next &gt;</a>
-                </ul>
+            <pagination-controls (pageChange)="onPageChange($event)"
+                (pageBoundsCorrection)="onPageBoundsCorrection($event)" [directionLinks]="true"
+                [autoHide]="true" [responsive]="true" previousLabel="Prev" nextLabel="Next"
+                screenReaderPaginationLabel="Pagination" screenReaderPageLabel="page" screenReaderCurrentLabel="You're on page">
+            </pagination-controls>
             </div>	
     </div>
     </div>

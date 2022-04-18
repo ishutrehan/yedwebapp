@@ -17,7 +17,10 @@ import { RegisterComponent } from './pages/register/register.component';
 import { LoginComponent } from './pages/login/login.component';
 import { AboutComponent } from './pages/about/about.component';
 import { TermsComponent } from './pages/terms/terms.component';
-
+import { ContactComponent } from './pages/contact/contact.component';
+import {NgxPaginationModule} from 'ngx-pagination';
+import { MyfavoritesComponent } from './pages/myfavorites/myfavorites.component';
+import { MypropertiesComponent } from './pages/myproperties/myproperties.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +32,10 @@ import { TermsComponent } from './pages/terms/terms.component';
     RegisterComponent,
     LoginComponent,
     AboutComponent,
-    TermsComponent
+    TermsComponent,
+    ContactComponent,
+    MyfavoritesComponent,
+    MypropertiesComponent
   ],
   imports: [
     BrowserModule,
@@ -37,11 +43,13 @@ import { TermsComponent } from './pages/terms/terms.component';
     BrowserAnimationsModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxPaginationModule,
   ],
   providers: [
     ApiProvider,
     UtilityProvider
+   
   ],
   bootstrap: [AppComponent]
 })
