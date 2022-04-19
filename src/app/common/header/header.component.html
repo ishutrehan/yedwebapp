@@ -1,4 +1,4 @@
-<div class="toolbar" role="banner" *ngIf="showHeader">
+<div class="toolbar" role="banner">
   
     <nav class="navbar navbar-expand-lg">
       <div class="container-fluid">
@@ -22,7 +22,7 @@
                 <a class="nav-link" routerLink="terms">condition generales d`nutilisation</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" routerLink="contact">Contact</a>
+                <a class="nav-link" routerLink="contact" *ngIf="showHeader">Contact</a>
               </li>
               </ul>
               </div>

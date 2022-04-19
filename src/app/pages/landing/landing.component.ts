@@ -15,6 +15,9 @@ export class LandingComponent implements OnInit {
   ngOnInit(): void {
   }
   goToLink(link:any){
-    this.router.navigate([link]);
+    if(link == 'listings')
+      this.router.navigate([link, '']);
+    else
+      this.router.navigate([link]);
   }
 }

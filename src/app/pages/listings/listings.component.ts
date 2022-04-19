@@ -2,7 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { UtilityProvider } from '../../../providers/utilities/utility';
 import { ApiProvider } from '../../../providers/auth/auth';
 import { PaginationInstance } from 'ngx-pagination/dist/ngx-pagination.module';
+import {Router, ActivatedRoute} from '@angular/router';
 
+
+export interface MarkerOptions { 
+  center: object;
+  zoom: string;
+}
 
 @Component({
   selector: 'app-listings',
@@ -20,23 +26,40 @@ export class ListingsComponent implements OnInit {
   placeholderCount: any;
   page: number = 1;
   total: number = 50;
+  typesList:any = [];
+  rentalsList:any = [];
+  propertyid: any;
+  singleItem: any;
+  showSingle: boolean;
+  imagesObject: any = [];
+  dateFormat: any;
   public config: PaginationInstance = {
     id: 'server',
     itemsPerPage: 10,
     currentPage: this.page,
-    totalItems: this.total
+    totalItems: this.total,
   };
   payload:any = {};
-  constructor(public utility:UtilityProvider, public auth:ApiProvider) {
+  constructor(public utility:UtilityProvider, public auth:ApiProvider, private router: Router, private activatedRoute: ActivatedRoute) {
+    this.dateFormat = this.utility.getDateFormat;
     this.offset_value = 0;
     this.placeholderCount = 10;
-    
+    this.getTypes(); 
+    this.getRentalTypes();
+    this.propertyid = this.activatedRoute.snapshot.params.id ? this.activatedRoute.snapshot.params.id : '';
+    if(this.propertyid){
+      this.showSingle = true;
+    }else{
+      this.showSingle = false;
+    }
   }
 
   ngOnInit(): void {
     this.searchParams = {
       sort_by: "recent",
-      distance: ""
+      distance: "",
+      types: [],
+      rentals: []
     };
 
     this.distanceOptions = [
@@ -53,11 +76,10 @@ export class ListingsComponent implements OnInit {
       { name: "50km", value: "50" }
     ];
  
-    this.payload.sort_by = this.sort_name == 'reset'?"":this.sort_name;
+    this.payload.sort_by = this.searchParams.sort_by == 'reset'?"": this.searchParams.sort_by;
     this.payload.offset = this.offset_value;
     this.getPropertyList(this.payload);
   }
-
 
   onPageChange(number: number) {
     this.config.currentPage = number;
@@ -73,27 +95,29 @@ export class ListingsComponent implements OnInit {
   getPropertyList(payload:any ) {
     this.loading = true;
     this.currentPayload = payload;
+    this.typesList.forEach(type => {
+      if(type.checked) this.searchParams.types.push(type.id)
+    });
+    this.rentalsList.forEach(rental => {
+      if(rental.checked) this.searchParams.rentals.push(rental.id)
+    });
     
-    //console.log("payload is", payload);
-    
-    //this.utility.startLoading();
     this.auth.getPropertyList(payload)
       .then((result: any) => {
-       // console.log("propertyList", result);
-        //this.propertyList = [...this.propertyList,...result.properties];
-        
         this.config.totalItems = result.totalResults;
         this.propertyList = result.properties;
+        if(this.propertyid){
+          this.singleItem = this.propertyList.filter((item) => { return item.id == this.propertyid });
+          this.singleItem = this.singleItem[0];
+          this.singleItem.image.forEach((image) => {
+            this.imagesObject.push({
+                  path: image.url
+              });
+          });
+          console.log(this.singleItem)
+        }
         this.loading = false;
-        // this.allow_skip = result.next;
-        // this.allow_lazy_loading = true;
-        // if(this.propertyList.length == 0){
-        //   this.showList = false;
-        // }else{
-        //   this.showList = true;
-
-        // }
-        //this.utility.stopLoading();
+        
       }, err => {
         //console.log("err", err);
         if(err[0] == 'error') { //user deleted or session expired
@@ -106,8 +130,8 @@ export class ListingsComponent implements OnInit {
        // this.utility.stopLoading();
       })
   }
-    showIcon(){
-      if(this.utility.getStorage('isLogin')){
+  showIcon(){
+    if(this.utility.getStorage('isLogin')){
       return true;
     }else{
       return false;
@@ -120,16 +144,52 @@ export class ListingsComponent implements OnInit {
     property.favorite = property.favorite == true?false:true;
     this.auth.favourite(payload)
       .then((result: any) => {
-        console.log(result)
-        // this.getLocation();
-        //property.favorite = property.favorite == true?false:true;
 
       }, err => {
         //console.log("err", err);
       })
   }
+getRentalTypes(){
+        this.auth.getRentals()
+        .then((type: any) => {
+          //console.log("rental types",type)
+        type.forEach(checkbox_ => {
+            checkbox_.checked = false;
+        });
+        this.rentalsList = type;
+        }, err => {
+        })
+  }
 
   SubString(text) {
     return text = text == null ? '' : text.substring(0, 100) + '..';
+  }
+  getTypes(){
+    this.auth.getTypes()
+    .then((type: any) => {
+    type.forEach(checkbox_ => {
+        checkbox_.checked = false;
+    });
+    this.typesList = type;
+      
+    }, err => {
+    })
+  }
+  goToLink(link:any, id = ''){
+      
+    if(id){
+      this.showSingle = true;
+       this.singleItem = this.propertyList.filter((item) => { return item.id == id });
+      this.singleItem = this.singleItem[0];
+      this.singleItem.image.forEach((image) => {
+        this.imagesObject.push({
+              path: image.url
+          });
+      });
+    }else{
+      this.showSingle = false;
+    }
+    this.router.navigate([link, id]); 
+    
   }
 }

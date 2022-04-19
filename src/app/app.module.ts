@@ -21,6 +21,9 @@ import { ContactComponent } from './pages/contact/contact.component';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { MyfavoritesComponent } from './pages/myfavorites/myfavorites.component';
 import { MypropertiesComponent } from './pages/myproperties/myproperties.component';
+import {IvyCarouselModule} from 'angular-responsive-carousel';
+import { GoogleMapsModule } from '@angular/google-maps';
+
 
 @NgModule({
   declarations: [
@@ -35,7 +38,7 @@ import { MypropertiesComponent } from './pages/myproperties/myproperties.compone
     TermsComponent,
     ContactComponent,
     MyfavoritesComponent,
-    MypropertiesComponent
+    MypropertiesComponent,
   ],
   imports: [
     BrowserModule,
@@ -45,6 +48,8 @@ import { MypropertiesComponent } from './pages/myproperties/myproperties.compone
     FormsModule,
     ReactiveFormsModule,
     NgxPaginationModule,
+    IvyCarouselModule,
+    GoogleMapsModule
   ],
   providers: [
     ApiProvider,

@@ -158,6 +158,27 @@ export class ApiProvider {
         });
     });
   }
+  // get types 
+  getTypes() {
+    return new Promise((resolve, reject) => {
+     return this.http.get(this.baseUrl + '/property/types').subscribe(data => {
+        resolve(data);
+      }, err => {
+        reject(err);
+      });
+    });
+   }
+    // get rentals 
+  getRentals() {
+    return new Promise((resolve, reject) => {
+     
+      return this.http.get(this.baseUrl + '/property/rentaltypes').subscribe(data => {
+        resolve(data);
+      }, err => {
+        reject(err);
+      });
+    });
+  }
   generateToken() {
     if(this.utility.getStorage('user_email')){
       var useremail = this.utility.getStorage('user_email');

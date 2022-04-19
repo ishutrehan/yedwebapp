@@ -48,7 +48,7 @@ export class UtilityProvider {
       "11" : "novembre",
       "12" : "décembre"
     };
-   // return day + ' ' + monthObj[month] + ' ' + year;
+    return day + ' ' + monthObj[month] + ' ' + year;
   }
 
 }

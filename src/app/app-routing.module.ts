@@ -11,9 +11,10 @@ import { ContactComponent } from './pages/contact/contact.component';
 import { MyfavoritesComponent } from './pages/myfavorites/myfavorites.component';
 import { MypropertiesComponent } from './pages/myproperties/myproperties.component';
 
+
 const routes: Routes = [
   { path: '', component: localStorage.getItem('isLogin') ? ListingsComponent : LandingComponent },
-  { path: 'listings', component: ListingsComponent },
+  { path: 'listings/:id', component: ListingsComponent },
   { path: 'join-us', component: JoinComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
@@ -22,6 +23,7 @@ const routes: Routes = [
   { path: 'contact', component: ContactComponent },
   { path: 'myfavorites', component: MyfavoritesComponent },
   { path: 'myproperties', component: MypropertiesComponent },
+
 ];
 
 @NgModule({

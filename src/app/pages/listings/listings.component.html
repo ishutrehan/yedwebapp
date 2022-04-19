@@ -1,244 +1,259 @@
-<div class="container ">
+<div class="container" *ngIf="!showSingle">
     <div class="row listing">
-    <div class="col-md-4 sidebar pt-5">
-        <h5 class="heading">Trier par</h5>
-        <label class="sort-radio" for="recent">Plus récent
-            <input type="radio" [(ngModel)]="searchParams.sort_by" checked="checked" name="sorting" id="recent" value="recent">
-            <span class="checkmark"></span>
-        </label>
-        <label class="sort-radio" for="low_price">Prix : du Moins au Plus Cher
-            <input type="radio" [(ngModel)]="searchParams.sort_by" name="sorting" value="low_price" id="low_price">
-            <span class="checkmark"></span>
-        </label>
-        <label class="sort-radio" for="high_price">Prix : du Plus au Moins Cher
-            <input type="radio" [(ngModel)]="searchParams.sort_by" name="sorting" value="high_price" id="high_price">
-            <span class="checkmark"></span>
-        </label>
-        <label class="sort-radio" for="reset">Réinitialiser
-            <input type="radio" [(ngModel)]="searchParams.sort_by" name="sorting" value="reset" id="reset">
-            <span class="checkmark"></span>
-        </label>
-        <div class="btn-group mt-4" role="group" aria-label="Basic radio toggle button">
-            <input type="radio" [(ngModel)]="searchParams.purpose" class="btn-check mt-4" name="sale" id="sale" autocomplete="off" value="sale">
-            <label class="btn btn-outline-primary" for="sale">À vendre</label>
-            
-            <input type="radio" [(ngModel)]="searchParams.purpose" class="btn-check" name="rent" id="rent" autocomplete="off" value="rent">
-            <label class="btn btn-outline-primary" for="rent">À louer</label>
-        </div>
-        <div class="btn-group mt-4" role="group" aria-label="Basic radio toggle button">
-            <input type="radio" [(ngModel)]="searchParams.user_role" class="btn-check mt-4" name="individual" id="individual" autocomplete="off" value="individual">
-            <label class="btn btn-outline-primary" for="individual">Particulier</label>
-            
-            <input type="radio" [(ngModel)]="searchParams.user_role" class="btn-check" name="agent" id="agent" autocomplete="off" value="agent">
-            <label class="btn btn-outline-primary" for="agent">Professionnel</label>
-        </div>
-        <h5 class="heading ">Localisation</h5>				  
-        <div class="search "> 
-            <i class="fa fa-search"></i> 
-            <input type="text" class="form-control" [(ngModel)]="searchParams.location">
-        </div>
-        <h5 class="heading">Rayon de Localisation</h5>	
-        <select class="form-control" [(ngModel)]="searchParams.distance">
-            <option value="">-- Select --</option>
-            <option *ngFor="let distance of distanceOptions; let i = index;" value="{{distance.value}}">{{ distance.name }}</option>
-        </select>
-        <h5 class="heading">Types de bien</h5>
-        <div class="row">
-            <div class="col-md-8">
-                <label class="container">Appartement
-                    <input type="checkbox" checked="checked">
-                    <span class="checkmark1"></span>
-                </label>
-                <label class="container">Bureau
-                    <input type="checkbox">
-                    <span class="checkmark1"></span>
-                </label>
-                <label class="container">Boutque
-                    <input type="checkbox" checked="checked">
-                    <span class="checkmark1"></span>
-                </label>
-                <label class="container">Duplex
-                    <input type="checkbox" checked="checked">
-                    <span class="checkmark1"></span>
-                </label>
+        <div class="col-md-4 sidebar pt-5">
+            <button type="button" class="btn btn-link reset">Lancer La Recherche</button>
+
+             <h5 class="heading">Trier par</h5>
+            <label class="sort-radio" for="recent">Plus récent
+                <input type="radio" [(ngModel)]="searchParams.sort_by" checked="checked" name="sorting" id="recent" value="recent">
+                <span class="checkmark"></span>
+            </label>
+            <label class="sort-radio" for="low_price">Prix : du Moins au Plus Cher
+                <input type="radio" [(ngModel)]="searchParams.sort_by" name="sorting" value="low_price" id="low_price">
+                <span class="checkmark"></span>
+            </label>
+            <label class="sort-radio" for="high_price">Prix : du Plus au Moins Cher
+                <input type="radio" [(ngModel)]="searchParams.sort_by" name="sorting" value="high_price" id="high_price">
+                <span class="checkmark"></span>
+            </label>
+            <label class="sort-radio" for="reset">Réinitialiser
+                <input type="radio" [(ngModel)]="searchParams.sort_by" name="sorting" value="reset" id="reset">
+                <span class="checkmark"></span>
+            </label>
+            <div class="btn-group mt-4" role="group" aria-label="Basic radio toggle button">
+                <input type="radio" [(ngModel)]="searchParams.purpose" class="btn-check mt-4" name="sale" id="sale" autocomplete="off" value="sale">
+                <label class="btn btn-outline-primary" for="sale">À vendre</label>
+                
+                <input type="radio" [(ngModel)]="searchParams.purpose" class="btn-check" name="rent" id="rent" autocomplete="off" value="rent">
+                <label class="btn btn-outline-primary" for="rent">À louer</label>
             </div>
-            <div class="col-md-6">
-                <label class="container">Magasin
-                    <input type="checkbox">
-                    <span class="checkmark1"></span>
-                </label>
-                <label class="container">Villa
-                    <input type="checkbox" checked="checked">
-                    <span class="checkmark1"></span>
-                </label>
-                <label class="container">Terrain
-                    <input type="checkbox">
-                    <span class="checkmark1"></span>
-                </label>
-                <label class="container">Champ
-                    <input type="checkbox">
-                    <span class="checkmark1"></span>
-                </label>
+            <div class="btn-group mt-4" role="group" aria-label="Basic radio toggle button">
+                <input type="radio" [(ngModel)]="searchParams.user_role" class="btn-check mt-4" name="individual" id="individual" autocomplete="off" value="individual">
+                <label class="btn btn-outline-primary" for="individual">Particulier</label>
+                
+                <input type="radio" [(ngModel)]="searchParams.user_role" class="btn-check" name="agent" id="agent" autocomplete="off" value="agent">
+                <label class="btn btn-outline-primary" for="agent">Professionnel</label>
             </div>
-        </div>	
-    
-        <h5 class="heading">Surface m2</h5>
-        <div class="row Surface">	
-            <div class="col-md-12 surfacemax">	
-                <h4 class="m2">m2`</h4>								
-                <input type="text" class="form-control" placeholder="Surface min">	
-            </div>	
-        </div>
-    
-        <div class="row">	
-            <div class="col-md-12 surfacemax">	
-            <h4 class="m2">m2`</h4>						
-            <input type="text" class="form-control" placeholder="surface max">		
+            <h5 class="heading ">Localisation</h5>				  
+            <div class="search "> 
+                <i class="fa fa-search"></i> 
+                <input type="text" class="form-control" [(ngModel)]="searchParams.location">
             </div>
-        </div>	
-        <div class="container">
-            <div class="input-counter">
-            <span class="minus-btn"><i class="bx bx-minus"></i></span>
-            <input type="text" value="1">
-            <span class="plus-btn"><i class="bx bx-plus"></i></span>
-            </div>
-        </div>
-    
-        <h5 class="heading">Budget</h5>
-        <div class="row Surface">	
-            <div class="col-md-12 surfacemax">
-            <h4 class="m2">FCFA</h4>						
-            <input type="text" class="form-control" placeholder="prix min">	
-            </div>	
-        </div>
-        <div class="row">	
-            <div class="col-md-12 surfacemax">	
-            <h4 class="m2">FCFA</h4>
-            <input type="text" class="form-control" placeholder="prix max">		
-            </div>
-        </div>
-        <h5 class="heading ">Number de pices</h5>
-        <div class="row Surface">	
-            <div class="col-md-12 surfacemax">					 
-                <input type="text" class="form-control" placeholder="Nom d Utilisateur">	
-            </div>				
-        </div>
-        <h5 class="heading ">Mots-cles de localisation</h5>
-        <div class="row Surface">	
-            <div class="col-md-12 surfacemax">					 
-                <input type="text" class="form-control" placeholder="Num d Utilisateur">	
-            </div>	
-        </div>  
-        <h5 class="heading ">Type de location</h5>
-        <div class="row">
-            <div class="col-md-6">
-                <label class="container">Meuble
-                    <input type="checkbox" checked="checked">
-                    <span class="checkmark1"></span>
-                </label>
-                <label class="container">Bureau
-                    <input type="checkbox">
-                    <span class="checkmark1"></span>
-                </label>
-            </div>
-            <div class="col-md-6">
-                <label class="container">Non Meuble
-                    <input type="checkbox">
-                    <span class="checkmark1"></span>
-                </label>
-            </div>
-        </div>	 
-    
-        <button type="button" class="lancer">lancer la recherche</button>
-        <button type="button" class="lancer-2">lancer la recherche</button>
-        <div class="space"></div>
-    </div>	 
-    <div class="col-md-8">
-        <div class="row" [hidden]="!loading">
-            <div class="col-12 col-sm-6" *ngFor="let i of [].constructor(10);">
-                <div class="ph-item">
-                    <div class="ph-col-12">
-                        <div class="ph-picture"></div>
-                        <div class="ph-row">
-                            <div class="ph-col-4"></div>
-                            <div class="ph-col-8 empty"></div>
-                            <div class="ph-col-12"></div>
-                        </div>
-                    </div>
-                    <div class="ph-col-2">
-                        <div class="ph-avatar"></div>
-                    </div>
-                    <div>
-                        <div class="ph-row">
-                            <div class="ph-col-12"></div>
-                            <div class="ph-col-2"></div>
-                            <div class="ph-col-10 empty"></div>
-                            <div class="ph-col-8 big"></div>
-                            <div class="ph-col-4 big empty"></div>
-                        </div>
+            <h5 class="heading">Rayon de Localisation</h5>	
+            <select class="form-control" [(ngModel)]="searchParams.distance">
+                <option value="">-- Select --</option>
+                <option *ngFor="let distance of distanceOptions; let i = index;" value="{{distance.value}}">{{ distance.name }}</option>
+            </select>
+            <h5 class="heading">Types de bien</h5>
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="form-check" *ngFor="let type of typesList;let i = index;">
+                        <input class="form-check-input"  type="checkbox" [(ngModel)]="type.checked">
+                        <label class="form-check-label">
+                            {{type.name}}
+                        </label>
                     </div>
                 </div>
+            </div>	
+            <h5 class="heading" *ngIf="searchParams.purpose == 'rent'">Type de location</h5>
+            <div class="row" *ngIf="searchParams.purpose == 'rent'">
+                <div class="col-md-8">
+                    <div class="form-check" *ngFor="let rental of rentalsList;let i = index;">
+                        <input class="form-check-input" type="checkbox" [(ngModel)]="rental.checked">
+                        <label class="form-check-label" for="flexCheckDefault">
+                            {{rental.name}}
+                        </label>
+                    </div>
+                </div>
+            </div>
+            
+            <h5 class="heading">Surface m2</h5>
+            <div class="row">	
+                <div class="col-md-6 surfacemax">	
+                <input type="text" class="form-control" placeholder="Surface min" [(ngModel)]="searchParams.area_min">	
+                </div>
+                <div class="col-md-6 surfacemax">
+                    <input type="text" class="form-control" placeholder="surface max" [(ngModel)]="searchParams.area_max">
+                </div>
+            </div>
         
+            <h5 class="heading">Budget</h5>
+            <div class="row Surface">	
+                <div class="col-md-6 surfacemax">
+                <input type="text" class="form-control" placeholder="prix min" [(ngModel)]="searchParams.price_min">	
+                </div>
+                <div class="col-md-6 surfacemax">
+                <input type="text" class="form-control" placeholder="prix max" [(ngModel)]="searchParams.price_max">
+                </div>
+            </div>
+                
+            <h5 class="heading ">Nombres De Chambres</h5>
+            <div class="row Surface">	
+                <div class="col-md-12 surfacemax">					 
+                    <input type="number" class="form-control" [(ngModel)]="searchParams.number_of_bedrooms">	
+                </div>				
+            </div>
+            <h5 class="heading ">Nombres Salles De Pieces Bains</h5>
+            <div class="row Surface">	
+                <div class="col-md-12 surfacemax">					 
+                    <input type="number" class="form-control" [(ngModel)]="searchParams.number_of_bathrooms">	
+                </div>	
+            </div>
+            <br>  
+            <button class="louer un-bien" (click)="getPropertyList(searchParams)">Reinitialiser La Recherche</button>
+        </div>	 
+        <div class="col-md-8">
+            <div class="row" [hidden]="!loading">
+                <div class="col-12 col-sm-6" *ngFor="let i of [].constructor(10);">
+                    <div class="ph-item">
+                        <div class="ph-col-12">
+                            <div class="ph-picture"></div>
+                            <div class="ph-row">
+                                <div class="ph-col-4"></div>
+                                <div class="ph-col-8 empty"></div>
+                                <div class="ph-col-12"></div>
+                            </div>
+                        </div>
+                        <div class="ph-col-2">
+                            <div class="ph-avatar"></div>
+                        </div>
+                        <div>
+                            <div class="ph-row">
+                                <div class="ph-col-12"></div>
+                                <div class="ph-col-2"></div>
+                                <div class="ph-col-10 empty"></div>
+                                <div class="ph-col-8 big"></div>
+                                <div class="ph-col-4 big empty"></div>
+                            </div>
+                        </div>
+                    </div>
+            
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 listing-colum" *ngFor="let property of propertyList | paginate: { itemsPerPage: this.config.itemsPerPage, currentPage: config.currentPage, totalItems: config.totalItems}; let i = index;" [hidden]="loading" (click)="goToLink('listings', property.id)">
+                        
+                    <div class="p-3">
+                        <div class="listing-image" [ngStyle]="{ 'background-image': 'url('+property.featured+ ')'}">
+                            <button class="like-button" *ngIf="showIcon()" (click)="likeDislike(property)">
+                                <i class="fa fa-heart" *ngIf="property.favorite"></i>
+                                <i class="fa fa-heart-o" *ngIf="!property.favorite"></i>
+                            </button>
+                        </div>
+                        <div class="row">
+                            <div class="col-5">
+                                <span class="id-badge text text-md"> {{property.id}}</span>
+                        
+                                <span class="id-badge text text-md"> {{property.username}}</span>
+                            </div>
+                            <div class="col-3 eye">
+                                <i class="fa fa-eye" style="font-size:18px"></i>
+                                <span>{{ property.viewCount }}</span>
+                            </div>
+                            <div class="col-4 a-vendra">
+                                <button class="vendra">{{ property.purpose }}</button>
+                            </div>
+                        </div>
+                        
+                        <div class="title card-title card-title-md">
+                            <span class="primary-heading">{{ property.title }}</span>
+                        </div>
+                        <div class="detail card-title card-title-md">
+                            {{SubString(property.description) }}
+                        </div>
+                        <span class="id-badge text text-md"> {{ property.price }} {{property.currency}}</span><br>
+                        <span class="id-badge text text-md" ion-text="">{{ dateFormat(property.created_at)}}</span>
+                        <div class="row">
+                            <a href="mailto:{{property.contact_email}}" class="contact button-inner col-md-5">
+                                <i class="fa fa-envelope" aria-hidden="true"></i>
+                                Contacter
+                            </a>
+                            <a href="tel:{{property.contact_phone}}" class="Telephone button-inner-1 col-md-5">
+                                <i class="fa fa-phone" aria-hidden="true" style="color:#ff5722;"></i>
+                                Telephone
+                            </a>
+                        </div>
+                        
+                        <div class="col-md-1"></div>
+                        <div class="space"></div>
+                    </div>
+                </div> 
+                <div class="col-md-12">										
+                <pagination-controls (pageChange)="onPageChange($event)"
+                    (pageBoundsCorrection)="onPageBoundsCorrection($event)" [directionLinks]="true"
+                    [autoHide]="true" [responsive]="true" previousLabel="Prev" nextLabel="Next"
+                    screenReaderPaginationLabel="Pagination" screenReaderPageLabel="page" screenReaderCurrentLabel="You're on page">
+                </pagination-controls>
+                </div>	
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-6 listing-colum" *ngFor="let property of propertyList | paginate: { itemsPerPage: 10,
-    currentPage: config.currentPage,
-    totalItems: config.totalItems}; let i = index;" [hidden]="loading">
-                <div class="p-3">
-                    <div class="listing-image" [ngStyle]="{ 'background-image': 'url('+property.featured+ ')'}">
-                        <button class="like-button" *ngIf="showIcon()" (click)="likeDislike(property)">
-                            <i class="fa fa-heart" *ngIf="property.favorite"></i>
-                            <i class="fa fa-heart-o" *ngIf="!property.favorite"></i>
-                        </button>
-                    </div>
-                    <div class="row">
-                        <div class="col-5">
-                            <span class="id-badge text text-md"> {{property.id}}</span>
-                    
-                            <span class="id-badge text text-md"> {{property.username}}</span>
-                        </div>
-                        <div class="col-3 eye">
-                            <i class="fa fa-eye" style="font-size:18px"></i>
-                            <span>{{ property.viewCount }}</span>
-                        </div>
-                        <div class="col-4 a-vendra">
-                            <button class="vendra">{{ property.purpose }}</button>
-                        </div>
-                    </div>
-                    
-                    <div class="title card-title card-title-md">
-                        <span class="primary-heading">{{ property.title }}</span>
-                    </div>
-                    <div class="detail card-title card-title-md">
-                        {{SubString(property.description) }}
-                    </div>
-                    <span class="id-badge text text-md"> 13 000 000 FCFA</span>
-                    <span class="id-badge text text-md" ion-text="">Jan 12, 2022</span>
-                    
-                    <div class="row">
-                        <a href="#" class="contact button-inner col-md-5">
-                            <i class="fa fa-envelope" aria-hidden="true"></i>
-                            Contacter
-                        </a>
-                        <a href="#" class="Telephone button-inner-1 col-md-5">
-                            <i class="fa fa-phone" aria-hidden="true" style="color:#ff5722;"></i>
-                            Telephone
-                        </a>
-                    </div>
-                    
-                    <div class="col-md-1"></div>
-                    <div class="space"></div>
-                </div>
-            </div> 
-            <div class="col-md-12">										
-            <pagination-controls (pageChange)="onPageChange($event)"
-                (pageBoundsCorrection)="onPageBoundsCorrection($event)" [directionLinks]="true"
-                [autoHide]="true" [responsive]="true" previousLabel="Prev" nextLabel="Next"
-                screenReaderPaginationLabel="Pagination" screenReaderPageLabel="page" screenReaderCurrentLabel="You're on page">
-            </pagination-controls>
-            </div>	
-    </div>
-    </div>
     </div>								
+</div>
+<div class="container" *ngIf="showSingle" style="margin-top: 150px;">
+    <div class="row" [hidden]="!loading">
+        <div class="col-12 col-sm-12" *ngFor="let i of [].constructor(1);">
+            <div class="ph-item">
+                <div class="ph-col-12">
+                    <div class="ph-picture"></div>
+                    <div class="ph-row">
+                        <div class="ph-col-4"></div>
+                        <div class="ph-col-8 empty"></div>
+                        <div class="ph-col-12"></div>
+                    </div>
+                </div>
+                <div class="ph-col-2">
+                    <div class="ph-avatar"></div>
+                </div>
+                <div>
+                    <div class="ph-row">
+                        <div class="ph-col-12"></div>
+                        <div class="ph-col-2"></div>
+                        <div class="ph-col-10 empty"></div>
+                        <div class="ph-col-8 big"></div>
+                        <div class="ph-col-4 big empty"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+    <div class="row" *ngIf="!loading">
+        <carousel [images]="imagesObject" [height]="400" [objectFit]="'cover'" [cellWidth]="'100%'" [arrowsOutside]="true" [dots]="true" [loop]="true">
+        </carousel>
+        <div class="space"></div>
+        <div class="col-5">
+            <span class="id-badge text text-md"> {{singleItem.id}}</span>
+        
+            <span class="id-badge text text-md"> {{singleItem.username}}</span>
+        </div>
+        <div class="col-3 eye">
+            <i class="fa fa-eye" style="font-size:18px"></i>
+            <span>{{ singleItem.viewCount }}</span>
+        </div>
+        <div class="col-4 a-vendra">
+            <button class="vendra">{{ singleItem.purpose }}</button>
+        </div>
+        
+        <div class="title card-title card-title-md">
+            <span class="primary-heading">{{ singleItem.title }}</span>
+        </div>
+        <div class="detail card-title card-title-md">
+            {{singleItem.description }}
+        </div>
+        <span class="id-badge text text-md"> {{ singleItem.price }} {{singleItem.currency}}</span><br>
+        <span class="id-badge text text-md" ion-text="">{{ dateFormat(singleItem.created_at)}}</span>
+        <div class="row" style="justify-content: center;">
+            <a href="mailto:{{singleItem.contact_email}}" class="contact button-inner col-md-5">
+                <i class="fa fa-envelope" aria-hidden="true"></i>
+                Contacter
+            </a>
+            <a href="tel:{{singleItem.contact_phone}}" class="Telephone button-inner-1 col-md-5">
+                <i class="fa fa-phone" aria-hidden="true" style="color:#ff5722;"></i>
+                Telephone
+            </a>
+        </div>
+        <div class="col-md-1"></div>
+        <div class="space"></div>
+        <google-map></google-map>
+    </div>
+    
+</div>
