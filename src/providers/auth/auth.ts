@@ -179,6 +179,24 @@ export class ApiProvider {
       });
     });
   }
+  // update profile  Api  
+  updateProfile(payload) {
+    return new Promise((resolve, reject) => {
+      this.getHeaders()
+        .then((token: any) => {
+          if(!token) return reject(['error']);
+          let headers = new HttpHeaders({
+            'Authorization': token
+          });
+          this.http.post(this.baseUrl + '/user/update', payload, { headers: headers }).subscribe(data => {
+            resolve(data);
+          }, err => {
+            reject(err);
+           // console.log("ERER:", err);
+          });
+        });
+    });
+  }
   generateToken() {
     if(this.utility.getStorage('user_email')){
       var useremail = this.utility.getStorage('user_email');

@@ -45,6 +45,7 @@ background-color:transparent;
     background-color: #FC4E05;
     color: white;
     font-weight: 600;
+    z-index: 1;
   }
 
   .toolbar img {

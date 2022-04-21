@@ -10,6 +10,8 @@ import { TermsComponent } from './pages/terms/terms.component';
 import { ContactComponent } from './pages/contact/contact.component';
 import { MyfavoritesComponent } from './pages/myfavorites/myfavorites.component';
 import { MypropertiesComponent } from './pages/myproperties/myproperties.component';
+import { ProfileComponent } from './pages/profile/profile.component';
+
 
 
 const routes: Routes = [
@@ -23,6 +25,8 @@ const routes: Routes = [
   { path: 'contact', component: ContactComponent },
   { path: 'myfavorites', component: MyfavoritesComponent },
   { path: 'myproperties', component: MypropertiesComponent },
+  { path: 'profile', component: ProfileComponent },
+
 
 ];
 

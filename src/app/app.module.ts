@@ -23,6 +23,7 @@ import { MyfavoritesComponent } from './pages/myfavorites/myfavorites.component'
 import { MypropertiesComponent } from './pages/myproperties/myproperties.component';
 import {IvyCarouselModule} from 'angular-responsive-carousel';
 import { GoogleMapsModule } from '@angular/google-maps';
+import { ProfileComponent } from './pages/profile/profile.component';
 
 
 @NgModule({
@@ -39,6 +40,7 @@ import { GoogleMapsModule } from '@angular/google-maps';
     ContactComponent,
     MyfavoritesComponent,
     MypropertiesComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,
