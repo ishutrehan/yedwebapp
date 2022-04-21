@@ -1,0 +1,46 @@
+<div class="container-fluid mx-auto full-height">
+    <div class="card card0 border-0 full-height">
+        <div class="row d-flex full-height">
+            <div class="col-lg-5 full-height">
+
+                <div class="card1 pb-5">
+                    <div class="logo-2">
+                        <a href="/">
+                            <img src="../../../assets/images/logo-white.png">
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-7 py-5 right-box" style="text-align: center;">
+                            <h2>S'identifier</h2>
+                <div class="mb-3">
+                    <input type="email" [(ngModel)]="userPayload.email" class="form-control" id="Email" class="form-control"
+                        placeholder="Email">
+                    <input type="password" [(ngModel)]="userPayload.password" id="Mot de passe" class="form-control" placeholder="Mot de passe">
+                </div>
+                <div class="text">
+                    <h3>Mot de passe oublié ?</h3>
+                </div>
+                <div class="button">
+                    <button class="louer un-bien" (click)="login()">Se connecter<i class="fa fa-spinner fa-spin" *ngIf="loading"></i></button>
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="errormessage">
+                        {{ errormessage }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                </div>
+                <div class="social-box">
+                    <button class="socialbutton" (click)="socialSignIn('google')"><img src="../../../assets/images/google-logo.png" /> </button>
+                    <button class="socialbutton"><img src="../../../assets/images/facebook-logo.png" /> </button>
+                </div>
+                
+                <div class="form-check">
+                    <p>Pas encore inscrit ?</p>
+                </div>
+                <button class="louer un-bien" (click)="goToLink('register')"> S'inscrire</button>
+                <p><span ion-text class="medium-font">En cas de difficultés rencontrées pour s'inscrire ou se connecter, merci de contacter
+                    l'équipe YED Immobilier pour assistance au <a href="tel:+22675130101" style="text-decoration: none;">+226 75 13 01 01</a>.</span></p>
+
+                </div>
+            </div>
+        </div>
+    </div>

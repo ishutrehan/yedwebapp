@@ -1,0 +1,177 @@
+html, .full-height{
+    height: 100%;
+}
+body {
+    color: #000;
+    overflow-x: hidden;
+    height: 100%;
+    background-color: #EEEEEE;
+    background-repeat: no-repeat;
+    padding:0;
+    margin: 0;
+    height: 100%;
+}
+
+a {
+    color: #000
+}
+
+.card1 {
+    background-image: url(../../../assets/images/building.jpg);
+    height: 100%;
+    color: #fff;
+    background-position: center;
+    background-size: cover;
+}
+.card2{
+    text-align: center;
+}
+
+.logo {
+    margin-top: 30px;
+    margin-left: 15px;
+    cursor: pointer
+}
+
+.social-connect .fa-google-plus {
+    color: #df4b37;
+    padding: 10px 12px;
+    font-size: 20px
+}
+
+
+.line {
+    height: 1px;
+    width: 45%;
+    background-color: #E0E0E0;
+    margin-top: 10px
+}
+
+.or {
+    width: 10%
+}
+
+.text-sm {
+    font-size: 14px !important
+}
+
+input {
+    padding: 10px 12px 10px 12px;
+    border: 1px solid lightgrey;
+    border-radius: 10px;
+    margin-bottom: 25px;
+    margin-top: 2px;
+    width: 100%;
+    box-sizing: border-box;
+    color: #2C3E50;
+    font-size: 14px;
+    letter-spacing: 1px
+}
+
+input:focus {
+    -moz-box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+    border: 1px solid #512DA8;
+    outline-width: 0
+}
+.separator{
+    text-align: center;
+    border-bottom: 1px solid #000;
+    line-height: 0.1em;
+        width: 50%;
+        margin: 0 auto;
+}
+.separator span {
+    background: #fff;
+    padding: 0 10px;
+}
+::placeholder {
+    color: #EEEEEE;
+    opacity: 1
+}
+
+:-ms-input-placeholder {
+    color: #EEEEEE
+}
+
+::-ms-input-placeholder {
+    color: #EEEEEE
+}
+
+button:focus {
+    -moz-box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+    outline-width: 0
+}
+
+.btn-blue {
+    background-color: #512DA8;
+    width: 100%;
+    color: #fff;
+    border-radius: 6px
+}
+
+.btn-blue:hover {
+    background-color: #311B92;
+    color: #fff;
+    cursor: pointer
+}
+
+.card-0 {
+    color: #311B92;
+    background-color: #fff;
+    min-height: 352px;
+    margin-top: 80px;
+    padding: 30px
+}
+
+
+
+.content {
+    color: #000;
+    font-size: 14px
+}
+
+.social {
+    margin-top: 150px
+}
+.container-fluid{
+    padding-left:0;
+    padding-bottom: 0;
+}
+.box {
+    width: 100%;
+    padding: 100px 0px;
+}
+h1{
+    font-size: 36px;
+}
+button.louer.un-bien {
+    background: #ff5722;
+    padding: 195px;
+    border-radius: 5px;
+    padding: 18px 88px 18px 90px;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    border: none;
+    color: #fff;
+    font-size: 18px;
+    width: 100%;
+}
+.right-box {
+    padding-left: 10rem;
+    padding-right: 10rem;
+}
+button.search-button{
+    border-radius: 30px !important;
+    background: transparent !important;
+    color: #ff5722 !important;
+    border: 1px solid #ff5722 !important;
+}
+button.professional{
+    background: #cfcfcf99 !important;
+    color:#ff5722 !important;
+}

@@ -1,0 +1,203 @@
+html,
+.full-height {
+    height: 100%;
+}
+
+body {
+    color: #000;
+    overflow-x: hidden;
+    height: 100%;
+    background-color: #EEEEEE;
+    background-repeat: no-repeat;
+    padding: 0;
+    margin: 0;
+    height: 100%;
+}
+.text{
+    color: #ff5722;
+}
+.button1{
+    padding-right: 30px;
+}
+.socialbutton{
+    background-color: transparent;
+    border: none;
+    text-align: left;
+    width: 15%;
+}
+.socialbutton img{
+    width: 100%;
+}
+.right-box{
+    padding-left: 10rem;
+    padding-right: 10rem;
+}
+.social-box{
+    padding-top: 15px;
+    width: 70%;
+    margin: 0 auto;
+}
+p{
+margin-top: 30px;
+
+}
+a {
+    color: #000
+}
+.h2{
+    text-align: center;
+}
+
+
+
+.card1 {
+    background-image: url(../../../assets/images/building.jpg);
+    height: 100%;
+    color: #fff;
+    background-position: center;
+    background-size: cover;
+}
+
+.mb-3 {
+    text-align: left;
+}
+
+.form-check-input:checked {
+    background-color: #ff5722;
+    border-color: #ff5722;
+
+}
+
+.card2 {
+    text-align: left;
+}
+
+.logo {
+    margin-top: 30px;
+    margin-left: 15px;
+    cursor: pointer
+}
+
+
+
+.line {
+    height: 1px;
+    width: 45%;
+    background-color: #E0E0E0;
+    margin-top: 10px
+}
+
+.or {
+    width: 10%
+}
+
+.text-sm {
+    font-size: 14px !important
+}
+.separator span {
+    background: #fff;
+    padding: 0 10px;
+}
+
+::placeholder {
+    opacity: 1
+}
+
+:-ms-input-placeholder {
+    color: #EEEEEE
+}
+h3{
+    text-align: left;
+}
+button.louer.un-bien {
+    margin: 20px;
+    width: 100%;
+}
+
+::-ms-input-placeholder {
+    color: #EEEEEE
+}
+
+.btn-blue:hover {
+    background-color: #080808;
+    color: #fff;
+    cursor: pointer
+}
+
+.form-control {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.form-control:hover {
+    border-color: #ff5722;
+}
+
+.card-0 {
+    color: #000000;
+    background-color: #fff;
+    min-height: 352px;
+    margin-top: 80px;
+    padding: 30px
+}
+
+label.btn.btn-outline-primary:hover {
+    background-color: #ff5722 !important;
+    border-color: #ff5722 !important;
+    color: #fff;
+}
+
+label.btn.btn-outline-primary {
+    border-color: #ff5722;
+    color: #ff5722;
+}
+
+.content {
+    color: #000;
+    font-size: 14px
+}
+
+.social {
+    margin-top: 150px
+}
+
+.container-fluid {
+    padding-left: 0;
+    padding-bottom: 0;
+}
+
+.box {
+    width: 100%;
+    padding: 100px 0px;
+}
+
+h1 {
+    font-size: 36px;
+}
+
+button.louer.un-bien {
+    background: #ff5722;
+    padding: 195px;
+    border-radius: 5px;
+    padding: 18px 88px 18px 90px;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    border: none;
+    color: #fff;
+    font-size: 18px;
+    width: 100%;
+}
+
+
+button.search-button {
+    border-radius: 30px !important;
+    background: transparent !important;
+    color: #ff5722 !important;
+    border: 1px solid #ff5722 !important;
+}
+
+button.professional {
+    background: #cfcfcf99 !important;
+    color: #ff5722 !important;
+}
