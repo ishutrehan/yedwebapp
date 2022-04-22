@@ -25,6 +25,7 @@ export class LoginComponent implements OnInit {
     if(this.utility.getStorage('isLogin')){
       window.location.href = '';
     }
+    document.body.scrollTop = document.documentElement.scrollTop = 0;
   }
   defaultValue(){
     this.userPayload = {

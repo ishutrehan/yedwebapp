@@ -10,6 +10,7 @@ export class JoinComponent implements OnInit {
   constructor(private router: Router) { }
 
   ngOnInit(): void {
+    document.body.scrollTop = document.documentElement.scrollTop = 0;
   }
   goToLink(link:any, userRole = ''){
     localStorage.setItem('userRole', userRole);

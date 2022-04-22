@@ -12,6 +12,7 @@ export class HeaderComponent implements OnInit {
   showHeader: boolean;
   profiledetails: any;
   loading: boolean;
+  showContact: boolean;
   constructor(public utility: UtilityProvider, public router: Router,public auth: ApiProvider) { 
     this.getProfileData()
    }
@@ -19,6 +20,7 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     if(this.utility.getStorage('isLogin')){
       this.showHeader = true;
+      this.showContact = true;
     }else{
       this.router.events.subscribe((event: Event) => {
         if (event instanceof NavigationEnd ) {
@@ -26,7 +28,7 @@ export class HeaderComponent implements OnInit {
         }
         
       });
-      
+      this.showContact = false;
     }
   }
 

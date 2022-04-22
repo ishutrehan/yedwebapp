@@ -13,6 +13,7 @@ export class LandingComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    document.body.scrollTop = document.documentElement.scrollTop = 0;
   }
   goToLink(link:any){
     if(link == 'listings')
