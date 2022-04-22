@@ -30,6 +30,8 @@ import {
   FacebookLoginProvider
 } from '@abacritt/angularx-social-login';
 import { FooterComponent } from './common/footer/footer.component';
+import { PublishComponent } from './pages/publish/publish.component';
+import { GooglePlaceModule } from "ngx-google-places-autocomplete";
 
 
 @NgModule({
@@ -48,6 +50,7 @@ import { FooterComponent } from './common/footer/footer.component';
     MypropertiesComponent,
     ProfileComponent,
     FooterComponent,
+    PublishComponent,
   ],
   imports: [
     BrowserModule,
@@ -58,7 +61,8 @@ import { FooterComponent } from './common/footer/footer.component';
     ReactiveFormsModule,
     NgxPaginationModule,
     IvyCarouselModule,
-    GoogleMapsModule
+    GoogleMapsModule,
+    GooglePlaceModule
   ],
   providers: [
     ApiProvider,

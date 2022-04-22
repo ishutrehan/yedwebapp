@@ -27,6 +27,25 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
     
   }
+  onchange(event){
+    
+    var file = event.target.files[0];
+    var reader = new FileReader();
+    var base64String:any = '' ;
+      
+    reader.onload =  () =>  {
+        base64String = reader.result;
+            //.replace(/^.+,/, "");
+        if(base64String){
+          this.userPayload.imageUpdate = true;
+          this.userPayload.profile_image = base64String;
+        }else{
+          this.userPayload.imageUpdate = false;
+        }
+        this.updateUserData();
+    }
+    reader.readAsDataURL(file);
+  }
 getProfile() {
     this.auth.getPrfile()
       .then((result: any) => {

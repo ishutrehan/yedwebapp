@@ -42,8 +42,9 @@
             </div>
             <h5 class="heading ">Localisation</h5>				  
             <div class="search "> 
-                <i class="fa fa-search"></i> 
-                <input type="text" class="form-control" [(ngModel)]="searchParams.location">
+                <input type="text" class="form-control" [(ngModel)]="searchParams.location" ngx-google-places-autocomplete [options]='options' #placesRef="ngx-places"
+                    (onAddressChange)="handleAddressChange($event)">
+        
             </div>
             <h5 class="heading">Rayon de Localisation</h5>	
             <select class="form-control" [(ngModel)]="searchParams.distance">
@@ -104,6 +105,18 @@
                 <div class="col-md-12 surfacemax">					 
                     <input type="number" class="form-control" [(ngModel)]="searchParams.number_of_bathrooms">	
                 </div>	
+            </div>
+            <h5 class="heading ">Nom d'utilisateur</h5>
+            <div class="row Surface">
+                <div class="col-md-12 surfacemax">
+                    <input type="text" class="form-control" [(ngModel)]="searchParams.name">
+                </div>
+            </div>
+            <h5 class="heading ">Mots-clés de localisation</h5>
+            <div class="row Surface">
+                <div class="col-md-12 surfacemax">
+                    <input type="text" class="form-control" [(ngModel)]="searchParams.location_tags">
+                </div>
             </div>
             <br>  
             <button class="louer un-bien" (click)="getPropertyList(searchParams)">Reinitialiser La Recherche</button>

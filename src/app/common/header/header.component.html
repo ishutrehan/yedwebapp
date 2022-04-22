@@ -37,11 +37,13 @@
               <i class="fa fa-spinner fa-spin" *ngIf="loading"></i>
               <div class="dropdown" *ngIf="!loading">
                 <button class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"><img class="rounded-circle" width="40px" [attr.src]="profiledetails.profile_image" />
-                <span class="user">{{ profiledetails.name }}</span></button>
+                <span class="user"> {{ profiledetails.name }}</span></button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <li><a class="dropdown-item" href="myfavorites">Publier</a></li>
+
                   <li><a class="dropdown-item" href="myfavorites">Mes Favoris</a></li>
                   <li><a class="dropdown-item" href="myproperties">Mes Biens</a></li>
-                  <li><a class="dropdown-item" href="#">Mon Compte</a></li>
+                  <li><a class="dropdown-item" href="profile">Mon Compte</a></li>
                   <li><a class="dropdown-item" (click)="logout()">Se déconnecter</a></li>
 
                 </ul>

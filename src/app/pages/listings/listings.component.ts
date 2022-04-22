@@ -40,6 +40,7 @@ export class ListingsComponent implements OnInit {
     totalItems: this.total,
   };
   payload:any = {};
+  options:any =   {};
   constructor(public utility:UtilityProvider, public auth:ApiProvider, private router: Router, private activatedRoute: ActivatedRoute) {
     this.dateFormat = this.utility.getDateFormat;
     this.offset_value = this.utility.getStorage('offset') ? this.utility.getStorage('offset') :0;
@@ -162,7 +163,11 @@ export class ListingsComponent implements OnInit {
     }, err => {
     })
   }
+  handleAddressChange(address) {
+    this.searchParams.latitude = address.geometry.location.lat();
+    this.searchParams.longitude = address.geometry.location.lng();
 
+  }
   SubString(text) {
     return text = text == null ? '' : text.substring(0, 100) + '..';
   }

@@ -1,22 +1,25 @@
-<div class="container-fluid mx-auto full-height">
+<div class="container-fluid mx-auto full-height profile">
     <div class="card card0 border-0 full-height">
         <div class="row d-flex full-height">
             <div class="col-lg-5 full-height">
                 <div class="card1 pb-5"></div>
             </div>
             <div class="col-lg-7 profilebox">
-                <div class="card border-0 px-4 px-sm-5 mt-5" style="padding-top: 100px;">
+                <div class="card border-0 px-4 px-sm-5 mt-5">
                     <div class="profile-pic" [ngStyle]="{ 'background-image': 'url('+userPayload.profile_image+ ')'}">
                         <div class="edit">
-                            <input type="file" class="profile_image" />
+                            <input type="file" class="profile_image" (change)="onchange($event)" />
                             <i class="fa fa-pencil fa-lg"></i>
                         </div>
                     </div>
                     <div class="mb-1">
-                        Adresse e-mail<input type="text" class="form-control" disabled [(ngModel)]="userPayload.email">
+                        <label>Adresse e-mail</label>
+                        <input type="text" class="form-control" disabled [(ngModel)]="userPayload.email">
                         
-                        Nom ou Pseudo<input type="text" id="name" class="form-control" [(ngModel)]="userPayload.name">
-                        Votre numéro de téléphone <input type="text" class="form-control" [(ngModel)]="userPayload.phone">
+                        <label>Nom ou Pseudo</label>
+                        <input type="text" id="name" class="form-control" [(ngModel)]="userPayload.name">
+                        <label>Votre numéro de téléphone</label>
+                         <input type="text" class="form-control" [(ngModel)]="userPayload.phone">
                     </div>
                    
                     <button class="louer un-bien" (click)=" updateUserData()"> Mettre à jour<i class="fa fa-spinner fa-spin" *ngIf="loading" ></i></button>

@@ -11,6 +11,7 @@ import { ContactComponent } from './pages/contact/contact.component';
 import { MyfavoritesComponent } from './pages/myfavorites/myfavorites.component';
 import { MypropertiesComponent } from './pages/myproperties/myproperties.component';
 import { ProfileComponent } from './pages/profile/profile.component';
+import { PublishComponent } from './pages/publish/publish.component';
 
 
 
@@ -27,8 +28,7 @@ const routes: Routes = [
   { path: 'myfavorites', component: MyfavoritesComponent },
   { path: 'myproperties', component: MypropertiesComponent },
   { path: 'profile', component: ProfileComponent },
-
-
+  { path: 'publish', component: PublishComponent },
 ];
 
 @NgModule({
