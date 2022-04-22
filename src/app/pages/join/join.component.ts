@@ -13,6 +13,9 @@ export class JoinComponent implements OnInit {
   }
   goToLink(link:any, userRole = ''){
     localStorage.setItem('userRole', userRole);
-    this.router.navigate([link]);
+    if(link == 'listings')
+      this.router.navigate([link, '']);
+    else
+      this.router.navigate([link]);
   }
 }

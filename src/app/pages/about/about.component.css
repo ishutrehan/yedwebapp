@@ -2,7 +2,6 @@
 .aboutus{
     background-image: url(../../../assets/images/ban1.jpg);
     height: 400px;
-    margin-top: 100px;
     background-position: center;
     background-size: cover;
     display: flex;

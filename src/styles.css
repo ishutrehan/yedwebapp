@@ -150,3 +150,29 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
         transform: translate3d(30%, 0, 0)
     }
 }
+@media only screen and (max-width: 768px) {
+   .left-image .col-lg-5{
+       padding-right: 0;
+   }
+   .left-image .col-lg-5.full-height{
+       height: 50%;
+   }
+   .left-image h2{
+        margin-top: 0 !important;
+    }
+   .left-image .right-box{
+        margin-top: 0  !important;
+        padding-left: 1.5rem;
+    }
+    .full-width{
+        width: 100%;
+    }
+    .overlay{
+        font-size: 52px !important;
+        line-height: 1 !important;
+    }
+    p{
+        margin-left: 3rem !important;
+        margin-right: 3rem !important;
+    }
+  }

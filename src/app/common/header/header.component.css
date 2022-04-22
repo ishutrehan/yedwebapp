@@ -34,18 +34,9 @@ background-color:transparent;
   .spacer {
     flex: 1;
   }
-  .toolbar {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 100px;
-    display: flex;
-    align-items: center;
+  .header {
     background-color: #FC4E05;
     color: white;
-    font-weight: 600;
-    z-index: 1;
   }
 
   .toolbar img {

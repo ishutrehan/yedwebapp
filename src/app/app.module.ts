@@ -24,6 +24,11 @@ import { MypropertiesComponent } from './pages/myproperties/myproperties.compone
 import {IvyCarouselModule} from 'angular-responsive-carousel';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { ProfileComponent } from './pages/profile/profile.component';
+import { SocialLoginModule, SocialAuthServiceConfig } from '@abacritt/angularx-social-login';
+import {
+  GoogleLoginProvider,
+  FacebookLoginProvider
+} from '@abacritt/angularx-social-login';
 
 
 @NgModule({
@@ -55,7 +60,28 @@ import { ProfileComponent } from './pages/profile/profile.component';
   ],
   providers: [
     ApiProvider,
-    UtilityProvider
+    UtilityProvider,
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider(
+              '742972245089-hkki2v7inokvf40fjqmolg450ig49k3g.apps.googleusercontent.com'
+            )
+          },
+          {
+            id: FacebookLoginProvider.PROVIDER_ID,
+            provider: new FacebookLoginProvider('clientId')
+          }
+        ],
+        onError: (err) => {
+          console.error(err);
+        }
+      } as SocialAuthServiceConfig,
+    }
    
   ],
   bootstrap: [AppComponent]

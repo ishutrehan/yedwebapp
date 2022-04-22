@@ -1,8 +1,16 @@
-html,
-.full-height {
+html{
     height: 100%;
 }
-
+.full-height{
+    height: 100%;
+    max-height: 100%;
+}
+.right-box{
+    overflow-y: scroll;
+}
+::-webkit-scrollbar { 
+    display: none;  /* Safari and Chrome */
+}
 body {
     color: #000;
     overflow-x: hidden;

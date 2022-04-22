@@ -1,12 +1,12 @@
-<div class="container-fluid mx-auto full-height">
+<div class="left-image container-fluid mx-auto full-height">
     <div class="card card0 border-0 full-height">
         <div class="row d-flex full-height">
             <div class="col-lg-5 full-height">
                 <div class="card1 pb-5"></div>
             </div>
-            <div class="col-lg-7">
-                <div class="card border-0 px-4 px-sm-5 mt-5" style="padding-top: 15px;">
-                    <h2 class="mt-5">Nouveau sur YED Immobilier?</h2>
+            <div class="col-lg-7 full-height right-box">
+                <div class="card border-0 px-4 px-sm-5" style="padding-top: 15px;">
+                    <h2 class="mt-2">Nouveau sur YED Immobilier?</h2>
                      <span class="medium-font" ion-text color="gray" text-center>Inscrivez-vous en remplissant le formulaire
                         ci-dessous.</span>
                     <div class="btn-group mt-4" role="group" aria-label="Basic radio toggle button">
@@ -19,18 +19,18 @@
                     <label class="btn btn-outline-primary" for="agent">Agent</label>
                 </div>
                 <div class="mb-1">
-                        <input type="text" [(ngModel)]="userPayload.phone" class="form-control" id="Votre numéro de téléphone"
-                            class="form-control" placeholder="Votre numéro de téléphone">
-                        <input type="text" [(ngModel)]="userPayload.name" class="form-control" id="Nom ou Pseudo" class="form-control" placeholder="Nom ou Pseudo">
-                        <input type="text" [(ngModel)]="userPayload.email" id="Adresse e-mail" class="form-control" placeholder="Adresse e-mail">
-                        <input type="text" [(ngModel)]="userPayload.password" id="Mot de passe" class="form-control" placeholder="Mot de passe">
-                    </div>
-                <div class="form-check">
+                    <input type="text" [(ngModel)]="userPayload.phone" class="form-control" id="Votre numéro de téléphone"
+                        class="form-control" placeholder="Votre numéro de téléphone">
+                    <input type="text" [(ngModel)]="userPayload.name" class="form-control" id="Nom ou Pseudo" class="form-control" placeholder="Nom ou Pseudo">
+                    <input type="text" [(ngModel)]="userPayload.email" id="Adresse e-mail" class="form-control" placeholder="Adresse e-mail">
+                    <input type="text" [(ngModel)]="userPayload.password" id="Mot de passe" class="form-control" placeholder="Mot de passe">
+                </div>
+                <div class="form-check mb-1">
                     <input type="checkbox" [(ngModel)]="userPayload.terms" class="form-check-input" id="check1" name="option1" value="something" checked>
                     <label class="form-check-label" for="check1">En vous inscrivant, vous autorisez YED IMMOBILIER à utiliser les données remplies dans ce formulaire pour le bon
                     fonctionnement de l'application.</label>
                 </div>
-                <button class="louer un-bien" (click)="signUp()"> S'inscrire <i class="fa fa-spinner fa-spin" *ngIf="loading"></i></button>
+                <button class="louer un-bien mt-1" (click)="signUp()"> S'inscrire <i class="fa fa-spinner fa-spin" *ngIf="loading"></i></button>
                 <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="errormessage">
                     {{ errormessage }}
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
