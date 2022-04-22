@@ -29,6 +29,7 @@ import {
   GoogleLoginProvider,
   FacebookLoginProvider
 } from '@abacritt/angularx-social-login';
+import { FooterComponent } from './common/footer/footer.component';
 
 
 @NgModule({
@@ -46,6 +47,7 @@ import {
     MyfavoritesComponent,
     MypropertiesComponent,
     ProfileComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,

@@ -19,12 +19,12 @@ export class ListingsComponent implements OnInit {
   searchParams : any;
   distanceOptions : any;
   currentPayload : any = {};
-  offset_value : number;
+  offset_value : any;
   sort_name:any = "recent";
   propertyList:any = [];
   loading: boolean;
   placeholderCount: any;
-  page: number = 1;
+  page: any = 1;
   total: number = 50;
   typesList:any = [];
   rentalsList:any = [];
@@ -42,7 +42,7 @@ export class ListingsComponent implements OnInit {
   payload:any = {};
   constructor(public utility:UtilityProvider, public auth:ApiProvider, private router: Router, private activatedRoute: ActivatedRoute) {
     this.dateFormat = this.utility.getDateFormat;
-    this.offset_value = 0;
+    this.offset_value = this.utility.getStorage('offset') ? this.utility.getStorage('offset') :0;
     this.placeholderCount = 10;
     this.getTypes(); 
     this.getRentalTypes();
@@ -52,6 +52,7 @@ export class ListingsComponent implements OnInit {
     }else{
       this.showSingle = false;
     }
+    this.config.currentPage = this.utility.getStorage('offset') ? this.utility.getStorage('offset') : this.page;
   }
 
   ngOnInit(): void {
@@ -77,13 +78,15 @@ export class ListingsComponent implements OnInit {
     ];
  
     this.payload.sort_by = this.searchParams.sort_by == 'reset'?"": this.searchParams.sort_by;
-    this.payload.offset = this.offset_value;
+    this.payload.offset = this.utility.getStorage('offset') ? this.utility.getStorage('offset') : this.offset_value;
     this.getPropertyList(this.payload);
   }
 
   onPageChange(number: number) {
     this.config.currentPage = number;
-    this.offset_value = (number - 1) * this.config.itemsPerPage; 
+    localStorage.setItem('offset', ''+number);
+    this.offset_value = (number - 1) * this.config.itemsPerPage
+     
     this.payload.offset = this.offset_value;
     this.getPropertyList(this.payload);
     document.body.scrollTop = document.documentElement.scrollTop = 0;
@@ -114,7 +117,6 @@ export class ListingsComponent implements OnInit {
                   path: image.url
               });
           });
-          console.log(this.singleItem)
         }
         this.loading = false;
         
@@ -149,16 +151,16 @@ export class ListingsComponent implements OnInit {
         //console.log("err", err);
       })
   }
-getRentalTypes(){
-        this.auth.getRentals()
-        .then((type: any) => {
-          //console.log("rental types",type)
-        type.forEach(checkbox_ => {
-            checkbox_.checked = false;
-        });
-        this.rentalsList = type;
-        }, err => {
-        })
+  getRentalTypes(){
+    this.auth.getRentals()
+    .then((type: any) => {
+      //console.log("rental types",type)
+    type.forEach(checkbox_ => {
+        checkbox_.checked = false;
+    });
+    this.rentalsList = type;
+    }, err => {
+    })
   }
 
   SubString(text) {

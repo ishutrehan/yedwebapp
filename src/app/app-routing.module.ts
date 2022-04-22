@@ -16,6 +16,7 @@ import { ProfileComponent } from './pages/profile/profile.component';
 
 const routes: Routes = [
   { path: '', component: localStorage.getItem('isLogin') ? ListingsComponent : LandingComponent },
+  { path: 'listings', component: ListingsComponent },
   { path: 'listings/:id', component: ListingsComponent },
   { path: 'join-us', component: JoinComponent },
   { path: 'register', component: RegisterComponent },

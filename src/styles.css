@@ -140,6 +140,12 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
         transform: translate3d(30%, 0, 0)
     }
 }
+li.current{
+    background: #ff5722 !important;
+}
+pagination-controls{
+    justify-content: right !important;
+}
 
 @keyframes phAnimation {
     0% {
