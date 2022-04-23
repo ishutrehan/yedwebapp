@@ -330,6 +330,9 @@ button.louer.un-bien {
     color: #fff;
     font-size: 18px;
 }
+.listing-colum{
+    cursor: pointer !important;
+}
 
 
 button.search-button {
@@ -354,6 +357,9 @@ button.like-button {
     color: #ff5722;
     font-size: 22px;
     border: none;
+}
+.tags-input__tag{
+    background-color: #ff5722;
 }
 @keyframes phAnimation {
     0% {

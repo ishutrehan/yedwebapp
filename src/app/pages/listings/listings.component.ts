@@ -29,7 +29,7 @@ export class ListingsComponent implements OnInit {
   typesList:any = [];
   rentalsList:any = [];
   propertyid: any;
-  singleItem: any;
+  singleItem: any = {};
   showSingle: boolean;
   imagesObject: any = [];
   dateFormat: any;
@@ -43,17 +43,18 @@ export class ListingsComponent implements OnInit {
   options:any =   {};
   constructor(public utility:UtilityProvider, public auth:ApiProvider, private router: Router, private activatedRoute: ActivatedRoute) {
     this.dateFormat = this.utility.getDateFormat;
-    this.offset_value = this.utility.getStorage('offset') ? this.utility.getStorage('offset') :0;
+    this.offset_value = 0;
     this.placeholderCount = 10;
     this.getTypes(); 
     this.getRentalTypes();
     this.propertyid = this.activatedRoute.snapshot.params.id ? this.activatedRoute.snapshot.params.id : '';
-    if(this.propertyid){
+    if(this.propertyid){      
+      this.getProperty(this.propertyid);
       this.showSingle = true;
     }else{
       this.showSingle = false;
     }
-    this.config.currentPage = this.utility.getStorage('offset') ? this.utility.getStorage('offset') : this.page;
+    this.config.currentPage = this.page;
   }
 
   ngOnInit(): void {
@@ -79,13 +80,12 @@ export class ListingsComponent implements OnInit {
     ];
  
     this.payload.sort_by = this.searchParams.sort_by == 'reset'?"": this.searchParams.sort_by;
-    this.payload.offset = this.utility.getStorage('offset') ? this.utility.getStorage('offset') : this.offset_value;
+    this.payload.offset = this.offset_value;
     this.getPropertyList(this.payload);
+    document.body.scrollTop = document.documentElement.scrollTop = 0;
   }
-
   onPageChange(number: number) {
     this.config.currentPage = number;
-    localStorage.setItem('offset', ''+number);
     this.offset_value = (number - 1) * this.config.itemsPerPage
      
     this.payload.offset = this.offset_value;
@@ -110,9 +110,23 @@ export class ListingsComponent implements OnInit {
       .then((result: any) => {
         this.config.totalItems = result.totalResults;
         this.propertyList = result.properties;
-        if(this.propertyid){
-          this.singleItem = this.propertyList.filter((item) => { return item.id == this.propertyid });
-          this.singleItem = this.singleItem[0];
+        this.loading = false;
+        
+      }, err => {
+        //console.log("err", err);
+        if(err[0] == 'error') { 
+        }
+      })
+  }
+  getProperty(propertyID){
+    this.loading = true;
+    let payload = {
+      id : propertyID
+    };
+    this.auth.getProperty(payload)
+      .then((result: any) => {
+        this.singleItem = result.details;
+        if(this.singleItem.image){
           this.singleItem.image.forEach((image) => {
             this.imagesObject.push({
                   path: image.url
@@ -120,18 +134,7 @@ export class ListingsComponent implements OnInit {
           });
         }
         this.loading = false;
-        
-      }, err => {
-        //console.log("err", err);
-        if(err[0] == 'error') { //user deleted or session expired
-          // this.utility.removeStorage("isLogin");
-          // this.utility.removeStorage('refreshToen');
-          // this.utility.removeStorage('token');
-          // this.utility.showToast('Votre session a expiré ou votre compte est peut-être supprimé');
-          // this.navCtrl.setRoot(LandingPage);
-        }
-       // this.utility.stopLoading();
-      })
+    })
   }
   showIcon(){
     if(this.utility.getStorage('isLogin')){
@@ -183,20 +186,6 @@ export class ListingsComponent implements OnInit {
     })
   }
   goToLink(link:any, id = ''){
-      
-    if(id){
-      this.showSingle = true;
-       this.singleItem = this.propertyList.filter((item) => { return item.id == id });
-      this.singleItem = this.singleItem[0];
-      this.singleItem.image.forEach((image) => {
-        this.imagesObject.push({
-              path: image.url
-          });
-      });
-    }else{
-      this.showSingle = false;
-    }
     this.router.navigate([link, id]); 
-    
   }
 }

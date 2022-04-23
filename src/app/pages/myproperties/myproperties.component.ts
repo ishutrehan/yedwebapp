@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UtilityProvider } from '../../../providers/utilities/utility';
 import { ApiProvider } from '../../../providers/auth/auth';
 import { PaginationInstance } from 'ngx-pagination/dist/ngx-pagination.module';
-
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-myproperties',
@@ -28,7 +28,7 @@ public config: PaginationInstance = {
     currentPage: this.page,
     totalItems: this.total
   };
-  constructor(public utility:UtilityProvider, public auth:ApiProvider) { 
+  constructor(public utility:UtilityProvider, public auth:ApiProvider, public router: Router) { 
     this.getPropertieslist();
   }
 
@@ -97,7 +97,11 @@ getPropertieslist() {
       })
   }
   
-SubString(text) {
+  SubString(text) {
     return text = text == null ? '' : text.substring(0, 100) + '..';
   }
+  goToLink(link:any, id = ''){
+    this.router.navigate([link, id]); 
+  }
+  
 }

@@ -69,7 +69,17 @@ export class ApiProvider {
     });
   }
   // contact us Api  
-   contact(payload) {
+  contact(payload) {
+    return new Promise((resolve, reject) => {
+      this.http.post(this.baseUrl + '/user/webcontact', payload).subscribe(data => {
+        resolve(data);
+      }, err => {
+        reject(err);
+        //console.log("ERER:", err);
+      });
+    });
+  }
+  getProperty(payload) {
     return new Promise((resolve, reject) => {
       this.getHeaders()
         .then((token: any) => {
@@ -77,11 +87,10 @@ export class ApiProvider {
           let headers = new HttpHeaders({
             'Authorization': token
           });
-          this.http.post(this.baseUrl + '/user/contact', payload, { headers: headers }).subscribe(data => {
+          this.http.post(this.baseUrl + '/property/getproperty', payload, { headers: headers }).subscribe(data => {
             resolve(data);
           }, err => {
             reject(err);
-            //console.log("ERER:", err);
           });
         });
     });
