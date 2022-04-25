@@ -41,9 +41,11 @@ export class ListingsComponent implements OnInit {
   };
   payload:any = {};
   options:any =   {};
+  displayStyle: any;
   constructor(public utility:UtilityProvider, public auth:ApiProvider, private router: Router, private activatedRoute: ActivatedRoute) {
     this.dateFormat = this.utility.getDateFormat;
     this.offset_value = 0;
+    this.displayStyle = 'none';
     this.placeholderCount = 10;
     this.getTypes(); 
     this.getRentalTypes();
@@ -187,5 +189,25 @@ export class ListingsComponent implements OnInit {
   }
   goToLink(link:any, id = ''){
     this.router.navigate([link, id]); 
+  }
+  cancelpopup(){
+    this.displayStyle = "none";
+  }
+  startDelete(){
+    this.displayStyle = "block";
+  }
+  async deleteProperty(property_id) {
+    var payload = {
+      "property_id": parseInt(property_id)
+    }
+    this.loading = true;
+    this.auth.deleteProperty(payload)
+    .then((result: any) => {
+    this.loading = false;
+
+      window.location.href = 'myproperties';
+    }, err => {
+      //console.log("err", err);
+    })
   }
 }

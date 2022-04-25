@@ -22,6 +22,8 @@ export class MyfavoritesComponent implements OnInit {
   page: number = 1;
   total: number = 50;
   payload: any;
+  dateFormat: any;
+
 public config: PaginationInstance = {
     id: 'server',
     itemsPerPage: 10,
@@ -29,7 +31,7 @@ public config: PaginationInstance = {
     totalItems: this.total
   };
   constructor(public utility:UtilityProvider, public auth:ApiProvider, public router: Router) {
-    
+    this.dateFormat = this.utility.getDateFormat;
     this.offset_value = 0;
     this.placeholderCount = 10;
     this.getFavlist();

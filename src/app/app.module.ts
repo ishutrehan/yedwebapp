@@ -32,6 +32,10 @@ import {
 import { FooterComponent } from './common/footer/footer.component';
 import { PublishComponent } from './pages/publish/publish.component';
 import { GooglePlaceModule } from "ngx-google-places-autocomplete";
+import { NgxTagsInputModule } from 'ngx-tags-input';
+import { NgxDropzoneModule } from 'ngx-dropzone';
+import { UpdatepropertyComponent } from './pages/updateproperty/updateproperty.component';
+
 
 
 
@@ -52,6 +56,7 @@ import { GooglePlaceModule } from "ngx-google-places-autocomplete";
     ProfileComponent,
     FooterComponent,
     PublishComponent,
+    UpdatepropertyComponent,
   ],
   imports: [
     BrowserModule,
@@ -63,7 +68,9 @@ import { GooglePlaceModule } from "ngx-google-places-autocomplete";
     NgxPaginationModule,
     IvyCarouselModule,
     GoogleMapsModule,
-    GooglePlaceModule
+    GooglePlaceModule,
+    NgxTagsInputModule,
+    NgxDropzoneModule
   ],
   providers: [
     ApiProvider,

@@ -12,6 +12,7 @@ import { MyfavoritesComponent } from './pages/myfavorites/myfavorites.component'
 import { MypropertiesComponent } from './pages/myproperties/myproperties.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { PublishComponent } from './pages/publish/publish.component';
+import { UpdatepropertyComponent } from './pages/updateproperty/updateproperty.component';
 
 
 
@@ -29,6 +30,8 @@ const routes: Routes = [
   { path: 'myproperties', component: MypropertiesComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'publish', component: PublishComponent },
+  { path: 'updateproperty/:id', component: UpdatepropertyComponent },
+  
 ];
 
 @NgModule({

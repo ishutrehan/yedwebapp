@@ -150,7 +150,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-6 listing-colum" *ngFor="let property of propertyList | paginate: { itemsPerPage: this.config.itemsPerPage, currentPage: config.currentPage, totalItems: config.totalItems}; let i = index;" [hidden]="loading" (click)="goToLink('listings', property.id)">
+                <div class="col-md-6 listing-colum" *ngFor="let property of propertyList | paginate: { itemsPerPage: this.config.itemsPerPage, currentPage: config.currentPage, totalItems: config.totalItems}; let i = index;" [hidden]="loading">
                         
                     <div class="p-3">
                         <div class="listing-image" [ngStyle]="{ 'background-image': 'url('+property.featured+ ')'}">
@@ -175,7 +175,7 @@
                         </div>
                         
                         <div class="title card-title card-title-md">
-                            <span class="primary-heading">{{ property.title }}</span>
+                            <span class="primary-heading" (click)="goToLink('listings', property.id)">{{ property.title }}</span>
                         </div>
                         <div class="detail card-title card-title-md">
                             {{SubString(property.description) }}
@@ -236,11 +236,15 @@
         </div>
     </div>
     <div class="row mb-5" *ngIf="!loading">
+        <div class="col-12 mb-5" style="text-align: right;">
+            <button type="button" class="btn btn-md btn-success" (click)="goToLink('updateproperty', singleItem.id)"><i class="fa fa-pencil"></i> Edit</button> &nbsp;&nbsp;
+            <button type="button" class="btn btn-md btn-danger" (click)="startDelete()"><i class="fa fa-trash"></i> Delete</button>
+        </div>
         <carousel [images]="imagesObject" [height]="400" [objectFit]="'cover'" [cellWidth]="'100%'" [arrowsOutside]="true" [dots]="true" [loop]="true">
         </carousel>
         <div class="space"></div>
         <div class="col-5">
-            <span class="id-badge text text-md"> {{singleItem.id}}</span>
+            <span class="id-badge text text-md">#{{singleItem.id}}</span>
         
             <span class="id-badge text text-md"> {{singleItem.username}}</span>
         </div>
@@ -249,17 +253,45 @@
             <span>{{ singleItem.viewCount }}</span>
         </div>
         <div class="col-4 a-vendra">
-            <button class="vendra">{{ singleItem.purpose }}</button>
+            <button class="vendra">{{ singleItem.purposeName }}</button>
         </div>
         
         <div class="title card-title card-title-md">
-            <span class="primary-heading">{{ singleItem.title }}</span>
+            <div style="color:green; text-align:right; float:left; width:100%;" *ngIf="singleItem.approve">Vérifié par YED Immobilier</div>
+            <p><strong><span  class="primary-heading">{{ singleItem.title }}</span></strong></p>
         </div>
-        <div class="detail card-title card-title-md">
-            {{singleItem.description }}
+        <div class="col-12">
+            <h4 class="subheading">Description</h4>
+            <p>{{singleItem.description }}</p>
         </div>
-        <span class="id-badge text text-md"> {{ singleItem.price }} {{singleItem.currency}}</span><br>
-        <span class="id-badge text text-md" ion-text="">{{ dateFormat(singleItem.created_at)}}</span>
+        <div class="col-12"> 
+            <h4 class="subheading">Prix</h4>
+            <p>{{ singleItem.price }} {{ singleItem.price_per_month }} {{singleItem.currency}}</p>
+        </div>
+        <div class="col-12">
+            <h4 class="subheading">Date</h4>
+            <p>{{ dateFormat(singleItem.created_at)}}</p>
+        </div>
+        <div class="col-12">
+            <h4 class="subheading">Superficie(m2)</h4>
+            <p>{{ singleItem.area }}</p>
+        </div>
+        <div class="col-12" *ngIf="singleItem.number_of_bedrooms">
+            <h4 class="subheading">Nb de chambres</h4>
+            <p>{{ singleItem.number_of_bedrooms }}</p>
+        </div>
+        <div class="col-12" *ngIf="singleItem.number_of_bathrooms">
+            <h4 class="subheading">Nb de salles de bain</h4>
+            <p>{{ singleItem.number_of_bedrooms }}</p>
+        </div>
+        <div class="col-12" *ngIf="singleItem.number_of_rooms">
+            <h4 class="subheading">Nbre de pièces</h4>
+            <p>{{ singleItem.number_of_rooms }}</p>
+        </div>
+        <div class="col-12" *ngIf="singleItem.number_of_toilets">
+            <h4 class="subheading">Nbre de toilettes</h4>
+            <p>{{ singleItem.number_of_toilets }}</p>
+        </div>
         <div class="row" style="justify-content: center;">
             <a href="mailto:{{singleItem.contact_email}}" class="contact button-inner col-md-5">
                 <i class="fa fa-envelope" aria-hidden="true"></i>
@@ -276,5 +308,25 @@
     </div>
     
 </div>
-
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':displayStyle}">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Confirmer la suppression de la propriété</h5>
+             
+            </div>
+            <div class="modal-body">
+                <p>Voulez-vous vraiment supprimer cette propriété?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" (click)="cancelpopup()">
+                    Non
+                </button>
+                <button type="button" class="btn btn-danger" (click)="deleteProperty(singleItem.id)">
+                    Oui<i class="fa fa-spinner fa-spin" *ngIf="loading"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 <app-footer></app-footer>

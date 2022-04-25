@@ -34,7 +34,7 @@
             </div>
         </div>
         <div class="row mt-5">
-            <div class="col-md-4 listing-colum" *ngFor="let property of propertyList | paginate: { itemsPerPage: config.itemsPerPage, currentPage: config.currentPage, totalItems: config.totalItems}; let i = index;" [hidden]="loading" (click)="goToLink('listings', property.id)">
+            <div class="col-md-4 listing-colum" *ngFor="let property of propertyList | paginate: { itemsPerPage: config.itemsPerPage, currentPage: config.currentPage, totalItems: config.totalItems}; let i = index;" [hidden]="loading">
                 <div class="overlay-loader" *ngIf="overlay"><i class="fa fa-spinner fa-spin"></i></div>
                 <div class="p-3">
                     <div class="listing-image" [ngStyle]="{ 'background-image': 'url('+property.featured+ ')'}">
@@ -45,7 +45,7 @@
                     </div>
                     <div class="row">
                         <div class="col-5">
-                            <span class="id-badge text text-md"> {{property.id}}</span>
+                            <span class="id-badge text text-md"> #{{property.id}}</span>
 
                             <span class="id-badge text text-md"> {{property.username}}</span>
                         </div>
@@ -59,22 +59,26 @@
                     </div>
 
                     <div class="title card-title card-title-md">
-                        <span class="primary-heading">{{ property.title }}</span>
+                        <span class="primary-heading" (click)="goToLink('listings', property.id)">{{ property.title }}</span>
                     </div>
                     <div class="detail card-title card-title-md">
                         {{SubString(property.description) }}
                     </div>
-                    <span class="id-badge text text-md"> 13 000 000 FCFA</span>
-                    <span class="id-badge text text-md" ion-text="">Jan 12, 2022</span>
+                    <div class="col-md-4">
+                        <p>{{ property.price }} {{ property.price_per_month }} {{property.currency}}</p>
+                    </div>
+                    <div class="col-md-4">
+                        <p>{{ dateFormat(property.created_at)}}</p>
+                    </div>
 
-                    <div class="row">
-                        <a href="#" class="contact button-inner col-md-5">
-                            <i class="fa fa-envelope" aria-hidden="true"></i>
-                            Contacter
+                    <div class="row" style="justify-content: center;">
+                        <a href="mailto:{{property.contact_email}}" class="contact button-inner col-md-5">
+                                        <i class="fa fa-envelope" aria-hidden="true"></i>
+                                        Contacter
                         </a>
-                        <a href="#" class="Telephone button-inner-1 col-md-5">
-                            <i class="fa fa-phone" aria-hidden="true" style="color:#ff5722;"></i>
-                            Telephone
+                        <a href="tel:{{property.contact_phone}}" class="Telephone button-inner-1 col-md-5">
+                                        <i class="fa fa-phone" aria-hidden="true" style="color:#ff5722;"></i>
+                                        Telephone
                         </a>
                     </div>
 

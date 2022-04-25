@@ -22,6 +22,8 @@ searchParams : any;
   page: number = 1;
   total: number = 50;
   payload: any;
+  dateFormat: any;
+
 public config: PaginationInstance = {
     id: 'server',
     itemsPerPage: 12,
@@ -30,6 +32,8 @@ public config: PaginationInstance = {
   };
   constructor(public utility:UtilityProvider, public auth:ApiProvider, public router: Router) { 
     this.getPropertieslist();
+    this.dateFormat = this.utility.getDateFormat;
+
   }
 
   ngOnInit(): void {

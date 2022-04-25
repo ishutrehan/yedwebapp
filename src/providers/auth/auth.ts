@@ -188,6 +188,78 @@ export class ApiProvider {
       });
     });
   }
+  // add property  Api  
+  addProperty(payload) {
+    return new Promise((resolve, reject) => {
+      this.getHeaders()
+        .then((token: any) => {
+          if(!token) return reject(['error']);
+          let headers = new HttpHeaders({
+            'Authorization': token
+          });
+          this.http.post(this.baseUrl + '/property/add', payload, { headers: headers }).subscribe(data => {
+            resolve(data);
+          }, err => {
+            reject(err);
+           // console.log("ERER:", err);
+          });
+        });
+    });
+  }
+  // status us Api  
+  userPhoneStatus(payload) {
+    return new Promise((resolve, reject) => {
+      this.getHeaders()
+        .then((token: any) => {
+          if(!token) return reject(['error']);
+          let headers = new HttpHeaders({
+            'Authorization': token
+          });
+          this.http.post(this.baseUrl + '/user/checkphone', payload, { headers: headers }).subscribe(data => {
+            resolve(data);
+          }, err => {
+            reject(err);
+           // console.log("ERER:", err);
+          });
+        });
+    });
+  }
+  // delete property api  
+  deleteProperty(payload) {
+    return new Promise((resolve, reject) => {
+      this.getHeaders()
+        .then((token: any) => {
+          if(!token) return reject(['error']);
+          let headers = new HttpHeaders({
+            'Authorization': token
+          });
+          this.http.post(this.baseUrl + '/property/delete', payload, { headers: headers }).subscribe(data => {
+            resolve(data);
+          }, err => {
+            reject(err);
+            //console.log("ERER:", err);
+          });
+        });
+    });
+  }
+
+  // get amenities 
+  getAmenities() {
+    return new Promise((resolve, reject) => {
+      // this.getHeaders()
+      //   .then((token: any) => {
+      //     let headers = new HttpHeaders({
+      //       'Authorization': token
+      //     });
+      return this.http.get(this.baseUrl + '/property/amenities',).subscribe(data => {
+        resolve(data);
+      }, err => {
+        reject(err);
+       // console.log("ERER:", err);
+      });
+    });
+    // });
+  }
   // update profile  Api  
   updateProfile(payload) {
     return new Promise((resolve, reject) => {
@@ -198,6 +270,24 @@ export class ApiProvider {
             'Authorization': token
           });
           this.http.post(this.baseUrl + '/user/update', payload, { headers: headers }).subscribe(data => {
+            resolve(data);
+          }, err => {
+            reject(err);
+           // console.log("ERER:", err);
+          });
+        });
+    });
+  }
+  //update propery API
+  updateProperty(payload) {
+    return new Promise((resolve, reject) => {
+      this.getHeaders()
+        .then((token: any) => {
+          if(!token) return reject(['error']);
+          let headers = new HttpHeaders({
+            'Authorization': token
+          });
+          this.http.post(this.baseUrl + '/property/update', payload, { headers: headers }).subscribe(data => {
             resolve(data);
           }, err => {
             reject(err);

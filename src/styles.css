@@ -143,6 +143,13 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 li.current{
     background: #ff5722 !important;
 }
+.subheading{
+    color: #ff5722;
+}
+.modal {
+    z-index: 1;
+    background-color: #0000006b;
+}
 pagination-controls{
     justify-content: right !important;
 }
