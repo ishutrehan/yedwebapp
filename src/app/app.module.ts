@@ -25,18 +25,13 @@ import {IvyCarouselModule} from 'angular-responsive-carousel';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { SocialLoginModule, SocialAuthServiceConfig } from '@abacritt/angularx-social-login';
-import {
-  GoogleLoginProvider,
-  FacebookLoginProvider
-} from '@abacritt/angularx-social-login';
+import { GoogleLoginProvider, FacebookLoginProvider} from '@abacritt/angularx-social-login';
 import { FooterComponent } from './common/footer/footer.component';
 import { PublishComponent } from './pages/publish/publish.component';
 import { GooglePlaceModule } from "ngx-google-places-autocomplete";
 import { NgxTagsInputModule } from 'ngx-tags-input';
 import { NgxDropzoneModule } from 'ngx-dropzone';
 import { UpdatepropertyComponent } from './pages/updateproperty/updateproperty.component';
-
-
 
 
 @NgModule({
@@ -56,7 +51,7 @@ import { UpdatepropertyComponent } from './pages/updateproperty/updateproperty.c
     ProfileComponent,
     FooterComponent,
     PublishComponent,
-    UpdatepropertyComponent,
+    UpdatepropertyComponent
   ],
   imports: [
     BrowserModule,
@@ -69,8 +64,10 @@ import { UpdatepropertyComponent } from './pages/updateproperty/updateproperty.c
     IvyCarouselModule,
     GoogleMapsModule,
     GooglePlaceModule,
+    SocialLoginModule,
     NgxTagsInputModule,
-    NgxDropzoneModule
+    NgxDropzoneModule,
+    
   ],
   providers: [
     ApiProvider,
@@ -88,7 +85,7 @@ import { UpdatepropertyComponent } from './pages/updateproperty/updateproperty.c
           },
           {
             id: FacebookLoginProvider.PROVIDER_ID,
-            provider: new FacebookLoginProvider('clientId')
+            provider: new FacebookLoginProvider('268489871289180')
           }
         ],
         onError: (err) => {

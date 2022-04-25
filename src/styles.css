@@ -177,7 +177,11 @@ pagination-controls{
     background-color: transparent;
     border: none;
     text-align: left;
-    width: 15%;
+    padding: 6px;
+    background: #fff;
+    box-shadow: 2px 2px 2px 2px #cfcfcf;
+    border-radius: 3px;
+    width: 50px;
 }
 .socialbutton img{
     width: 100%;

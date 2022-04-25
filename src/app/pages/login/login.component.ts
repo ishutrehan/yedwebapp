@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import { UtilityProvider } from '../../../providers/utilities/utility';
 import { ApiProvider } from '../../../providers/auth/auth';
+import { SocialAuthService } from "@abacritt/angularx-social-login";
+import { FacebookLoginProvider, GoogleLoginProvider } from "@abacritt/angularx-social-login";
 
 
 @Component({
@@ -14,7 +16,7 @@ export class LoginComponent implements OnInit {
   loading: boolean;
   errormessage: any = "";
   successmessage:any  = "";
-  constructor(private router: Router, public utility:UtilityProvider, public auth:ApiProvider) { 
+  constructor(private router: Router, public utility:UtilityProvider, public auth:ApiProvider, private authService: SocialAuthService) { 
      this.userPayload = {
       "email": null,
       "password": null,
@@ -60,8 +62,19 @@ export class LoginComponent implements OnInit {
       })
       
   }
-socialSignIn(socialPlatform : string) {
-    
+  signInWithGoogle(): void {
+    this.authService.signIn(GoogleLoginProvider.PROVIDER_ID).then((results)=>{
+      console.log(results);
+    }).catch((errors) => {
+      console.log(errors);
+    });
+  }
+  signInWithFB(): void {
+    this.authService.signIn(FacebookLoginProvider.PROVIDER_ID).then((results)=>{
+      console.log(results);
+    }).catch((errors) => {
+      console.log(errors);
+    });;
   }
 }
  
