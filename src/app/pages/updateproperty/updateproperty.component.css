@@ -1,0 +1,273 @@
+.aboutus {
+    background-image: url(../../../assets/images/ban1.jpg);
+    height: 400px;
+    background-position: center;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+input .md-form {
+    border: none !important;
+}
+
+.publish {
+    padding-bottom: 30px;
+}
+
+.overlay {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #4d2d17a3;
+    color: #ff5722;
+    text-shadow: 2px 2px 2px #000000;
+    font-size: 72px;
+}
+
+.row {
+    margin-top: 20px;
+    margin-left: 25%;
+    margin-right: 25%;
+}
+
+.types,
+.location {
+    background-color: transparent;
+    color: #000000;
+    text-align: right;
+}
+
+h5.heading {
+    margin-top: 1rem !important;
+    font-size: 23px;
+    color: #e85d19;
+    font-size: medium;
+}
+
+.form-control {
+    margin-top: 12px;
+    margin-bottom: 12px;
+}
+
+.sort-radio {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 3px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.checkmark {
+    position: absolute;
+    top: 3px;
+    left: 0;
+    height: 16px;
+    width: 16px;
+    border: 2px solid;
+    border-radius: 50%;
+}
+
+.property-button,
+.btn-check:active+.btn-outline-primary,
+.btn-check:checked+.btn-outline-primary {
+    background-color: #e85d19;
+    border: none;
+    color: #fff;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.btn-group {
+    width: 100%;
+}
+
+.btn-outline-primary {
+    color: #e85d19;
+    border-color: #e85d19;
+}
+
+.btn-check:checked+.btn-outline-primary:focus {
+    box-shadow: none;
+    outline: none;
+}
+
+.btn-outline-primary:focus {
+    box-shadow: none !important;
+}
+
+.btn-outline-primary:hover {
+    color: #fff;
+    background-color: #e85d19;
+}
+
+.sort-radio {
+    opacity: 0;
+}
+
+.sort-radio input:checked~.checkmark {
+    background-color: #e85d18;
+}
+
+.listing-colum {
+    cursor: pointer;
+}
+
+.carousel {
+    height: 300px;
+}
+
+.listing-colum .p-3 {
+    margin-bottom: 34px;
+    background: #fbf1f15c;
+    border-radius: 16px;
+    box-shadow: 0px 3px #00000026;
+}
+
+.listing-image {
+    background-size: cover;
+    height: 251px;
+    border-radius: 11px;
+    margin-bottom: 16px;
+    width: 100%;
+    position: relative;
+}
+
+button.like-button {
+    border: none;
+    position: absolute;
+    right: 5px;
+    top: 8px;
+    background: transparent;
+    border-radius: 91%;
+    color: #ff5722;
+    font-size: 22px;
+    border: none;
+}
+
+span.id-badge.text.text-md {
+    font-weight: 500;
+}
+
+.col-4.a-vendra {
+    text-align: right;
+}
+
+button.vendra {
+    background: #ebeb33d1;
+    border: none;
+    padding: 2px 7px 3px 8px;
+    border-radius: 7px;
+}
+
+span.primary-heading {
+    color: #ff5722;
+    font-weight: 400;
+    font-size: 16px;
+}
+
+.button-inner.col-md-5 {
+    background: #ff5722;
+    text-align: center;
+    padding: 13px;
+    /* padding: 11px 7px 14px 42px; */
+    border-radius: 14px;
+    color: #fff;
+    margin-top: 7px;
+    margin-left: 14px;
+    margin-right: 27px;
+}
+
+.button-inner-1.col-md-5 {
+    background: #e5e5e5;
+    text-align: center;
+    padding: 13px;
+    border-radius: 14px;
+    color: #ff5722;
+    margin-top: 7px;
+    box-shadow: 2px 3px #0000004d;
+}
+
+.space {
+    padding-top: 22px;
+}
+
+.col-md-6.right,
+.col-md.right-1 {
+    padding-right: 21px;
+    padding-left: 21px;
+}
+
+a {
+    text-decoration: none !important;
+}
+
+.reset {
+    text-align: right;
+    width: 100%;
+    text-decoration: none;
+}
+
+.search {
+    position: relative;
+}
+
+.search .fa-search {
+    position: absolute;
+    top: 26px;
+    left: 16px
+}
+
+.ngx-pagination a:hover {
+    background-color: none;
+    color: #fff;
+}
+
+button.louer.un-bien {
+    background-color: #e85d19;
+    border: none;
+    color: #fff;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+    width: 100%;
+    border-radius: 3px;
+    margin-top: 10px;
+}
+
+.md-form {
+    border-style: none !important;
+    border-bottom: gray;
+    outline: none;
+}
+
+.ngx-pagination li.current {
+    background: #ff5722 !important;
+    color: #ffffff;
+    cursor: default;
+}
+
+pagination-controls {
+    justify-content: center;
+    padding: 15px;
+    border-radius: 29px;
+    display: flex;
+    box-sizing: border-box;
+    list-style: none;
+    padding-bottom: 0%;
+}
