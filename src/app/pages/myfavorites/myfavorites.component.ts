@@ -104,7 +104,10 @@ getFavlist() {
   
   
   SubString(text) {
-    return text = text == null ? '' : text.substring(0, 100) + '..';
+    return text = text == null ? '' : text.substring(0, 30) + '..';
+  }
+  SubStringName(text) {
+    return text = text == null ? '' : text.substring(0, 10) + '..';
   }
   goToLink(link:any, id = ''){
     this.router.navigate([link, id]); 

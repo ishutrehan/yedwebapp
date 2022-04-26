@@ -10,9 +10,13 @@
                 <div class="col-lg-6">
                     <h2>S'identifier</h2>
                 <div class="mb-3">
-                    <input type="email" [(ngModel)]="userPayload.email" class="form-control" id="Email" class="form-control"
+                    <div class="form-group">
+                        <input type="email" [(ngModel)]="userPayload.email" class="form-control" id="Email" class="form-control"
                         placeholder="Email">
-                    <input type="password" [(ngModel)]="userPayload.password" id="Mot de passe" class="form-control" placeholder="Mot de passe">
+                    </div>
+                    <div class="form-group">                        
+                        <input type="password" [(ngModel)]="userPayload.password" id="Mot de passe" class="form-control" placeholder="Mot de passe">
+                    </div>
                 </div>
                 <div class="text">
                     <h3>Mot de passe oublié ?</h3>

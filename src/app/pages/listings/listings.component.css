@@ -1,8 +1,29 @@
-.col-md-4.sidebar {
+.sidebar {
     padding-right: 21px;
     padding-left: 21px;
     background-color: #f3f3f3;
-    margin-bottom: 138px;
+}
+label.control-label{
+    font-weight: 600;
+}
+.box-header>.fa, .box-header>.glyphicon, .box-header>.ion, .box-header .box-title {
+    display: inline-block;
+    font-size: 18px;
+    margin: 0;
+    line-height: 1;
+}
+.box-header>.fa, .box-header>.glyphicon, .box-header>.ion {
+    margin-right: 5px;
+}
+.box-header.with-border {
+    border-bottom: 1px solid #f4f4f4;
+}
+
+.box-header {
+    color: #444;
+    display: block;
+    padding: 10px;
+    position: relative;
 }
 h5.heading {
     margin-top: 1rem!important;
@@ -32,7 +53,6 @@ h5.heading {
     background-color: #e85d19;
     border: none;
     color: #fff;
-    padding: 10px 20px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
@@ -47,8 +67,12 @@ h5.heading {
     border-color: #e85d19;
 }
 .btn-check:checked+.btn-outline-primary:focus{
-    box-shadow: none;
-    outline: none;
+    box-shadow: none !important;
+    outline: none !important;
+}
+.btn-check:focus+.btn-outline-primary{
+    box-shadow: none !important;
+    outline: none !important;
 }
 .btn-outline-primary:focus{
     box-shadow: none !important;
@@ -71,7 +95,7 @@ h5.heading {
 }
 .listing-colum .p-3 {
     margin-bottom: 34px;
-    background: #fbf1f15c;
+    background: #ffffff;
     border-radius: 16px;
     box-shadow: 0px 3px #00000026;
 }
@@ -141,17 +165,7 @@ span.primary-heading {
 a{
     text-decoration: none !important;
 }
-input[type=text], input[type=submit], select {
-    width: 100%;
-    padding: 12px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-}
 .reset{
-    text-align: right;
-    width: 100%;
     text-decoration: none;
 }
 .search{
@@ -171,12 +185,13 @@ button.louer.un-bien{
     background-color: #e85d19;
     border: none;
     color: #fff;
-    padding: 10px 20px;
+    padding: 10px 10px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     cursor: pointer;
     width: 100%;
+    font-size: 16px;
     border-radius: 3px;
 }
 

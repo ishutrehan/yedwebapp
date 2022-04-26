@@ -3,6 +3,7 @@ import { UtilityProvider } from '../../../providers/utilities/utility';
 import { ApiProvider } from '../../../providers/auth/auth';
 import { PaginationInstance } from 'ngx-pagination/dist/ngx-pagination.module';
 import {Router, ActivatedRoute} from '@angular/router';
+import { IDropdownSettings } from 'ng-multiselect-dropdown';
 
 
 export interface MarkerOptions { 
@@ -16,7 +17,7 @@ export interface MarkerOptions {
   styleUrls: ['./listings.component.css']
 })
 export class ListingsComponent implements OnInit {
-  searchParams : any;
+  searchParams : any = {};
   distanceOptions : any;
   currentPayload : any = {};
   offset_value : any;
@@ -39,9 +40,27 @@ export class ListingsComponent implements OnInit {
     currentPage: this.page,
     totalItems: this.total,
   };
+  dropdownSettings:IDropdownSettings = {
+    singleSelection: false,
+    idField: 'id',
+    textField: 'name',
+    selectAllText: 'Select All',
+    unSelectAllText: 'UnSelect All',
+    allowSearchFilter: true
+  };
+  dropdownSettingsSingle:IDropdownSettings = {
+    singleSelection: true,
+    idField: 'value',
+    textField: 'name',
+    closeDropDownOnSelection: true,
+    allowSearchFilter: true
+  };
   payload:any = {};
   options:any =   {};
   displayStyle: any;
+  selectedTypes:any = [];
+  selectedRentals: any = [];
+  selectedDistance:any = [];
   constructor(public utility:UtilityProvider, public auth:ApiProvider, private router: Router, private activatedRoute: ActivatedRoute) {
     this.dateFormat = this.utility.getDateFormat;
     this.offset_value = 0;
@@ -63,9 +82,19 @@ export class ListingsComponent implements OnInit {
     this.searchParams = {
       sort_by: "recent",
       distance: "",
-      types: [],
-      rentals: []
+      purpose: "",
+      user_role: "",
+      location: '',
+      name: '',
+      location_tags: '',
+      surface_min: '',
+      surface_max: '',
+      price_min: '',
+      price_max: '',
+      number_of_bedrooms: '',
+      number_of_bathrooms: ''
     };
+    
 
     this.distanceOptions = [
       { name: "2km", value: "2" },
@@ -84,7 +113,7 @@ export class ListingsComponent implements OnInit {
     this.payload.sort_by = this.searchParams.sort_by == 'reset'?"": this.searchParams.sort_by;
     this.payload.offset = this.offset_value;
     this.getPropertyList(this.payload);
-    document.body.scrollTop = document.documentElement.scrollTop = 0;
+   
   }
   onPageChange(number: number) {
     this.config.currentPage = number;
@@ -92,28 +121,81 @@ export class ListingsComponent implements OnInit {
      
     this.payload.offset = this.offset_value;
     this.getPropertyList(this.payload);
-    document.body.scrollTop = document.documentElement.scrollTop = 0;
   }
 
   onPageBoundsCorrection(number: number) {
     this.config.currentPage = number;
   }
+  resetForm(){
+    this.searchParams = {
+      sort_by: "recent",
+      distance: "",
+      types: [],
+      purpose: "",
+      user_role: "",
+      rentals: [],
+      location: '',
+      name: '',
+      location_tags: '',
+      surface_min: '',
+      surface_max: '',
+      price_min: '',
+      price_max: '',
+      number_of_bedrooms: '',
+      number_of_bathrooms: ''
+    };
+    this.selectedRentals = [];
+    this.selectedTypes = [];
+    this.getPropertyList(this.searchParams);
+  }
   getPropertyList(payload:any ) {
-    this.loading = true;
+    this.loading = true;   
     this.currentPayload = payload;
-    this.typesList.forEach(type => {
-      if(type.checked) this.searchParams.types.push(type.id)
+    this.searchParams.types = [];
+    this.searchParams.rentals = [];
+    this.selectedTypes.forEach(type => {
+      this.searchParams.types.push(type.id)
     });
-    this.rentalsList.forEach(rental => {
-      if(rental.checked) this.searchParams.rentals.push(rental.id)
+    this.selectedRentals.forEach(rental => {
+      this.searchParams.rentals.push(rental.id)
     });
-    
+    this.selectedDistance.forEach(distance => {
+      this.searchParams.distance = distance.value;
+    });
+
+    // this.activatedRoute.queryParams
+    //   .subscribe(params => {
+    //     for(let i in this.searchParams){
+    //       if(i == 'types'){
+    //         this.selectedTypes = this.typesList.filter((type) =>{
+    //           return params[i].includes(type.id);
+    //         });
+    //       }else{
+    //         this.searchParams[i] = params[i] ? params[i]: this.searchParams[i]
+    //       }
+    //     }
+    //   }
+    // );
+    // params.sort_by = this.searchParams.sort_by ? this.searchParams.sort_by : 'recent';
+    // params.location = this.searchParams.location ? this.searchParams.location : '';
+    // params.purpose = this.searchParams.purpose ? this.searchParams.purpose : '';
+    // params.user_role = this.searchParams.user_role ? this.searchParams.user_role : '';
+    // params.type = this.searchParams.type ? this.searchParams.type : '';
+    // params.name = this.searchParams.name ? this.searchParams.name : '';
+    // params.location_tags = this.searchParams.location_tags ? this.searchParams.location_tags : '';
+    // params.surface_min = this.searchParams.surface_min ? this.searchParams.surface_min : '';
+    // params.surface_max = this.searchParams.surface_max ? this.searchParams.surface_max : '';
+    // params.price_min = this.searchParams.price_min ? this.searchParams.price_min : '';
+    // params.price_max = this.searchParams.price_max ? this.searchParams.price_max : '';
+    this.router.navigate(
+      ['/listings'],
+      { queryParams: this.searchParams }
+    );
     this.auth.getPropertyList(payload)
       .then((result: any) => {
         this.config.totalItems = result.totalResults;
         this.propertyList = result.properties;
         this.loading = false;
-        
       }, err => {
         //console.log("err", err);
         if(err[0] == 'error') { 
@@ -174,7 +256,10 @@ export class ListingsComponent implements OnInit {
 
   }
   SubString(text) {
-    return text = text == null ? '' : text.substring(0, 100) + '..';
+    return text = text == null ? '' : text.substring(0, 30) + '..';
+  }
+  SubStringName(text) {
+    return text = text == null ? '' : text.substring(0, 10) + '..';
   }
   getTypes(){
     this.auth.getTypes()

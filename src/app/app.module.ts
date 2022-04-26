@@ -32,6 +32,8 @@ import { GooglePlaceModule } from "ngx-google-places-autocomplete";
 import { NgxTagsInputModule } from 'ngx-tags-input';
 import { NgxDropzoneModule } from 'ngx-dropzone';
 import { UpdatepropertyComponent } from './pages/updateproperty/updateproperty.component';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { TooltipModule } from 'ng2-tooltip-directive';
 
 
 @NgModule({
@@ -67,7 +69,8 @@ import { UpdatepropertyComponent } from './pages/updateproperty/updateproperty.c
     SocialLoginModule,
     NgxTagsInputModule,
     NgxDropzoneModule,
-    
+    NgMultiSelectDropDownModule.forRoot(),
+    TooltipModule
   ],
   providers: [
     ApiProvider,

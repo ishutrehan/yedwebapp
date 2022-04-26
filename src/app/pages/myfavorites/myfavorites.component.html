@@ -47,7 +47,7 @@
                         <div class="col-5">
                             <span class="id-badge text text-md"> #{{property.id}}</span>
 
-                            <span class="id-badge text text-md"> {{property.username}}</span>
+                            <span class="id-badge text text-md" tooltip="{{property.username}}" placement="bottom"> {{ SubStringName(property.username)}}</span>
                         </div>
                         <div class="col-3 eye">
                             <i class="fa fa-eye" style="font-size:18px"></i>
@@ -59,7 +59,7 @@
                     </div>
 
                     <div class="title card-title card-title-md">
-                        <span class="primary-heading" (click)="goToLink('listings', property.id)">{{ property.title }}</span>
+                        <span class="primary-heading" tooltip="{{property.title}}" placement="bottom" (click)="goToLink('listings', property.id)">{{ SubString(property.title) }}</span>
                     </div>
                     <div class="detail card-title card-title-md">
                         {{SubString(property.description) }}

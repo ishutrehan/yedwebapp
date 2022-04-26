@@ -156,6 +156,9 @@ pagination-controls{
 .profile label{
     font-weight: 600 !important;
 }
+body{
+    background-color: #ecf0f5;
+}
 
 .overlay {
     position: absolute;
@@ -172,7 +175,18 @@ pagination-controls{
     text-shadow: 2px 2px 2px #000000;
     font-size: 72px;
 }
-
+.form-check-input{
+    width: 1.3em;
+    height: 1.3em;
+    border-radius: 0 !important;
+}
+.form-check-input:focus{
+    box-shadow: none !important;
+}
+.btn-check:focus+.btn-outline-primary{
+    box-shadow: none !important;
+    outline: none !important;
+}
 .socialbutton{
     background-color: transparent;
     border: none;
@@ -206,6 +220,9 @@ a {
     text-align: center;
 }
 
+.form-group{
+    margin-bottom: 20px;
+}
 
 
 .card1 {
@@ -278,10 +295,6 @@ h3{
     cursor: pointer
 }
 
-.form-control {
-    margin-top: 20px;
-    margin-bottom: 20px;
-}
 
 .form-control:hover {
     border-color: #ff5722;
@@ -321,8 +334,13 @@ label.btn.btn-outline-primary {
 }
 
 .box {
+    position: relative;
+    border-radius: 3px;
+    background: #ffffff;
+    border-top: 3px solid #d2d6de;
+    margin-bottom: 20px;
     width: 100%;
-    padding: 100px 0px;
+    box-shadow: 0 1px 1px rgb(0 0 0 / 10%);
 }
 
 h1 {
@@ -371,6 +389,16 @@ button.like-button {
 }
 .tags-input__tag{
     background-color: #ff5722;
+}
+.multiselect-dropdown .selected-item{
+    border: 1px solid #e85d19 !important;
+    background: #e85d19 !important;
+}
+.multiselect-item-checkbox input[type=checkbox] + div:before{
+    border: 2px solid #e85d19 !important;
+}
+.multiselect-item-checkbox input[type=checkbox]:checked + div:before{
+    background: #e85d19 !important;
 }
 @keyframes phAnimation {
     0% {

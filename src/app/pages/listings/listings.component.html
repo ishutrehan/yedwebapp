@@ -1,129 +1,154 @@
 <div class="container" *ngIf="!showSingle">
-    <div class="row listing pt-5">
-        
-        <pagination-controls (pageChange)="onPageChange($event)"
-        (pageBoundsCorrection)="onPageBoundsCorrection($event)" [directionLinks]="true"
-        [autoHide]="true" [responsive]="true" previousLabel="Prev" nextLabel="Next"
-        screenReaderPaginationLabel="Pagination" screenReaderPageLabel="page" screenReaderCurrentLabel="You're on page">
-    </pagination-controls>
-        <div class="col-md-4 sidebar pt-5">
-            <button type="button" class="btn btn-link reset">Lancer La Recherche</button>
-
-             <h5 class="heading">Trier par</h5>
-            <label class="sort-radio" for="recent">Plus récent
-                <input type="radio" [(ngModel)]="searchParams.sort_by" checked="checked" name="sorting" id="recent" value="recent">
-                <span class="checkmark"></span>
-            </label>
-            <label class="sort-radio" for="low_price">Prix : du Moins au Plus Cher
-                <input type="radio" [(ngModel)]="searchParams.sort_by" name="sorting" value="low_price" id="low_price">
-                <span class="checkmark"></span>
-            </label>
-            <label class="sort-radio" for="high_price">Prix : du Plus au Moins Cher
-                <input type="radio" [(ngModel)]="searchParams.sort_by" name="sorting" value="high_price" id="high_price">
-                <span class="checkmark"></span>
-            </label>
-            <label class="sort-radio" for="reset">Réinitialiser
-                <input type="radio" [(ngModel)]="searchParams.sort_by" name="sorting" value="reset" id="reset">
-                <span class="checkmark"></span>
-            </label>
-            <div class="btn-group mt-4" role="group" aria-label="Basic radio toggle button">
-                <input type="radio" [(ngModel)]="searchParams.purpose" class="btn-check mt-4" name="sale" id="sale" autocomplete="off" value="sale">
-                <label class="btn btn-outline-primary" for="sale">À vendre</label>
-                
-                <input type="radio" [(ngModel)]="searchParams.purpose" class="btn-check" name="rent" id="rent" autocomplete="off" value="rent">
-                <label class="btn btn-outline-primary" for="rent">À louer</label>
+    <form (ngSubmit)="getPropertyList(searchParams)">
+        <div class="box mt-5 mb-5 p-2">
+            <div class="box-header with-border">
+                <i class="fa fa-search"></i>
+                <h3 class="box-title">Paramètres de recherche </h3>
             </div>
-            <div class="btn-group mt-4" role="group" aria-label="Basic radio toggle button">
-                <input type="radio" [(ngModel)]="searchParams.user_role" class="btn-check mt-4" name="individual" id="individual" autocomplete="off" value="individual">
-                <label class="btn btn-outline-primary" for="individual">Particulier</label>
-                
-                <input type="radio" [(ngModel)]="searchParams.user_role" class="btn-check" name="agent" id="agent" autocomplete="off" value="agent">
-                <label class="btn btn-outline-primary" for="agent">Professionnel</label>
-            </div>
-            <h5 class="heading ">Localisation</h5>				  
-            <div class="search "> 
-                <input type="text" class="form-control" [(ngModel)]="searchParams.location" ngx-google-places-autocomplete [options]='options' #placesRef="ngx-places"
-                    (onAddressChange)="handleAddressChange($event)">
-        
-            </div>
-            <h5 class="heading">Rayon de Localisation</h5>	
-            <select class="form-control" [(ngModel)]="searchParams.distance">
-                <option value="">-- Select --</option>
-                <option *ngFor="let distance of distanceOptions; let i = index;" value="{{distance.value}}">{{ distance.name }}</option>
-            </select>
-            <h5 class="heading">Types de bien</h5>
-            <div class="row">
-                <div class="col-md-8">
-                    <div class="form-check" *ngFor="let type of typesList;let i = index;">
-                        <input class="form-check-input" id="{{type.id}}" type="checkbox" [(ngModel)]="type.checked">
-                        <label class="form-check-label" for="{{type.id}}">
-                            {{type.name}}
-                        </label>
+            <div class="box-body p-2">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="control-label">Trier par</label>
+                            <select class="form-control" name="sort_by" [(ngModel)]="searchParams.sort_by" [ngModelOptions]="{standalone: true}">
+                                <option name="sort_by" id="recent" value="recent">Plus récent</option>
+                                <option name="sort_by" id="low_price" value="low_price">Prix : du Moins au Plus Cher</option>
+                                <option name="sort_by" id="high_price" value="high_price">Prix : du Plus au Moins Cher</option>
+                                <option name="sort_by" id="reset" value="reset">Réinitialiser</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-4">
+                        <label class="control-label">Localisation</label>
+                        <div class="form-group"> 
+                            <input type="text" class="form-control" [(ngModel)]="searchParams.location" ngx-google-places-autocomplete [options]='options' #placesRef="ngx-places" (onAddressChange)="handleAddressChange($event)" name="location" [ngModelOptions]="{standalone: true}">
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <label class="control-label">Statut</label>
+                        <select class="form-control" [(ngModel)]="searchParams.purpose" [ngModelOptions]="{standalone: true}" name="purpose">
+                            <option value="">-- Select --</option>
+                            <option value="sale">À vendre</option>
+                            <option value="rent">À louer</option>
+                        </select>
+                    </div>  
+                    <div class="col-md-3">
+                        <label class="control-label">Types de bien</label>
+                        <div class="form-group"> 
+                            <ng-multiselect-dropdown
+                            [placeholder]="'Sélectionnez types de bien'"
+                            [settings]="dropdownSettings"
+                            [data]="typesList" [(ngModel)]="selectedTypes" [ngModelOptions]="{standalone: true}"
+                            >
+                            </ng-multiselect-dropdown>
+                        </div>
+                    </div>               
+                    <div class="col-md-4">
+                        <label class="control-label">Nom d'utilisateur</label>
+                        <div class="form-group"> 					 
+                            <input type="text" class="form-control" [(ngModel)]="searchParams.name" [ngModelOptions]="{standalone: true}" name="name">
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-4">
+                        <label class="control-label">Répertorié par</label>
+                        <select class="form-control" [(ngModel)]="searchParams.user_role" [ngModelOptions]="{standalone: true}" name="user_role">
+                            <option value="">-- Select --</option>
+                            <option value="individual">Particulier</option>
+                            <option value="agent">Professionnel</option>
+                        </select>
+                    </div>
+                    
+                    <div class="col-md-4">
+                        <label class="control-label">Mots-clés de localisation</label>
+                        <div class="form-group"> 					 
+                            <input type="text" class="form-control" [(ngModel)]="searchParams.location_tags" [ngModelOptions]="{standalone: true}" name="tags">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="control-label">Surface m2</label>
+                        <div class="form-group"> 
+                            <div class="row">	
+                                <div class="col-md-6 surfacemax">	
+                                <input type="text" class="form-control" placeholder="Surface min" [(ngModel)]="searchParams.area_min" [ngModelOptions]="{standalone: true}" name="area_min">	
+                                </div>
+                                <div class="col-md-6 surfacemax">
+                                    <input type="text" class="form-control" placeholder="surface max" [(ngModel)]="searchParams.area_max" [ngModelOptions]="{standalone: true}" name="area_max">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="control-label">Budget</label>
+                        <div class="form-group"> 
+                            <div class="row Surface">	
+                                <div class="col-md-6 surfacemax">
+                                <input type="text" class="form-control" placeholder="prix min" [(ngModel)]="searchParams.price_min" [ngModelOptions]="{standalone: true}" name="price_min">	
+                                </div>
+                                <div class="col-md-6 surfacemax">
+                                <input type="text" class="form-control" placeholder="prix max" [(ngModel)]="searchParams.price_max" [ngModelOptions]="{standalone: true}" name="price_max">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="control-label">Nombres De Chambres</label>
+                        <div class="form-group"> 					 
+                            <input type="number" class="form-control" [(ngModel)]="searchParams.number_of_bedrooms" [ngModelOptions]="{standalone: true}" name="chambers">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="control-label">Nombres Salles De Pieces Bains</label>
+                        <div class="form-group"> 					 
+                            <input type="number" class="form-control" [(ngModel)]="searchParams.number_of_bathrooms" [ngModelOptions]="{standalone: true}" name="bains">
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    
+                    <div class="col-md-4">
+                        
+                        <label class="control-label">Rayon de Localisation</label>
+                        <div class="form-group"> 
+                            <ng-multiselect-dropdown
+                                [placeholder]="'Rayon de Localisation'"
+                                [settings]="dropdownSettingsSingle"
+                                [data]="distanceOptions" [(ngModel)]="selectedDistance" [ngModelOptions]="{standalone: true}"
+                                >
+                                </ng-multiselect-dropdown>
+                        </div>
+                    </div>   
+                    <div class="col-md-6" *ngIf="searchParams.purpose == 'rent'">
+                        <label class="control-label">Type de location</label>
+                        <div class="form-group"> 
+                            <div class="row">
+                                <ng-multiselect-dropdown
+                                [placeholder]="'Sélectionnez type de location'"
+                                [settings]="dropdownSettings"
+                                [data]="rentalsList" [(ngModel)]="selectedRentals" [ngModelOptions]="{standalone: true}"
+                                >
+                                </ng-multiselect-dropdown>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="col-md-6"></div>
+                    <div class="col-md-3" style="text-align: right;">
+                        <button class="louer un-bien">Reinitialiser La Recherche</button>
+                    </div>
+                    <div class="col-md-3" style="text-align: left;">
+                        <button type="button" class="btn btn-link reset" (click)="resetForm()">Lancer La Recherche</button>
                     </div>
                 </div>
-            </div>	
-            <h5 class="heading" *ngIf="searchParams.purpose == 'rent'">Type de location</h5>
-            <div class="row" *ngIf="searchParams.purpose == 'rent'">
-                <div class="col-md-8">
-                    <div class="form-check" *ngFor="let rental of rentalsList;let i = index;">
-                        <input class="form-check-input" id="{{rental.id}}" type="checkbox" [(ngModel)]="rental.checked">
-                        <label class="form-check-label" for="{{rental.id}}">
-                            {{rental.name}}
-                        </label>
-                    </div>
-                </div>
             </div>
-            
-            <h5 class="heading">Surface m2</h5>
-            <div class="row">	
-                <div class="col-md-6 surfacemax">	
-                <input type="text" class="form-control" placeholder="Surface min" [(ngModel)]="searchParams.area_min">	
-                </div>
-                <div class="col-md-6 surfacemax">
-                    <input type="text" class="form-control" placeholder="surface max" [(ngModel)]="searchParams.area_max">
-                </div>
-            </div>
-        
-            <h5 class="heading">Budget</h5>
-            <div class="row Surface">	
-                <div class="col-md-6 surfacemax">
-                <input type="text" class="form-control" placeholder="prix min" [(ngModel)]="searchParams.price_min">	
-                </div>
-                <div class="col-md-6 surfacemax">
-                <input type="text" class="form-control" placeholder="prix max" [(ngModel)]="searchParams.price_max">
-                </div>
-            </div>
-                
-            <h5 class="heading ">Nombres De Chambres</h5>
-            <div class="row Surface">	
-                <div class="col-md-12 surfacemax">					 
-                    <input type="number" class="form-control" [(ngModel)]="searchParams.number_of_bedrooms">	
-                </div>				
-            </div>
-            <h5 class="heading ">Nombres Salles De Pieces Bains</h5>
-            <div class="row Surface">	
-                <div class="col-md-12 surfacemax">					 
-                    <input type="number" class="form-control" [(ngModel)]="searchParams.number_of_bathrooms">	
-                </div>	
-            </div>
-            <h5 class="heading ">Nom d'utilisateur</h5>
-            <div class="row Surface">
-                <div class="col-md-12 surfacemax">
-                    <input type="text" class="form-control" [(ngModel)]="searchParams.name">
-                </div>
-            </div>
-            <h5 class="heading ">Mots-clés de localisation</h5>
-            <div class="row Surface">
-                <div class="col-md-12 surfacemax">
-                    <input type="text" class="form-control" [(ngModel)]="searchParams.location_tags">
-                </div>
-            </div>
-            <br>  
-            <button class="louer un-bien" (click)="getPropertyList(searchParams)">Reinitialiser La Recherche</button>
-        </div>	 
-        <div class="col-md-8">
+        </div>
+    </form>	 
+    <div class="row listing">
+        <pagination-controls (pageChange)="onPageChange($event)" (pageBoundsCorrection)="onPageBoundsCorrection($event)" [directionLinks]="true" [autoHide]="true" [responsive]="true" previousLabel="Prev" nextLabel="Next"        screenReaderPaginationLabel="Pagination" screenReaderPageLabel="page" screenReaderCurrentLabel="You're on page">
+        </pagination-controls>
+        <div class="col-md-12">
             <div class="row" [hidden]="!loading">
-                <div class="col-12 col-sm-6" *ngFor="let i of [].constructor(10);">
+                <div class="col-12 col-sm-4" *ngFor="let i of [].constructor(10);">
                     <div class="ph-item">
                         <div class="ph-col-12">
                             <div class="ph-picture"></div>
@@ -146,11 +171,10 @@
                             </div>
                         </div>
                     </div>
-            
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-6 listing-colum" *ngFor="let property of propertyList | paginate: { itemsPerPage: this.config.itemsPerPage, currentPage: config.currentPage, totalItems: config.totalItems}; let i = index;" [hidden]="loading">
+                <div class="col-md-4 listing-colum" *ngFor="let property of propertyList | paginate: { itemsPerPage: this.config.itemsPerPage, currentPage: config.currentPage, totalItems: config.totalItems}; let i = index;" [hidden]="loading">
                         
                     <div class="p-3">
                         <div class="listing-image" [ngStyle]="{ 'background-image': 'url('+property.featured+ ')'}">
@@ -161,9 +185,9 @@
                         </div>
                         <div class="row">
                             <div class="col-5">
-                                <span class="id-badge text text-md"> {{property.id}}</span>
+                                <span class="id-badge text text-md"> #{{property.id}}</span>
                         
-                                <span class="id-badge text text-md"> {{property.username}}</span>
+                                <span class="id-badge text text-md" tooltip="{{property.username}}" placement="bottom"> {{SubStringName(property.username)}}</span>
                             </div>
                             <div class="col-3 eye">
                                 <i class="fa fa-eye" style="font-size:18px"></i>
@@ -175,7 +199,7 @@
                         </div>
                         
                         <div class="title card-title card-title-md">
-                            <span class="primary-heading" (click)="goToLink('listings', property.id)">{{ property.title }}</span>
+                            <span class="primary-heading" tooltip="{{property.title}}" placement="bottom" (click)="goToLink('listings', property.id)">{{ SubString(property.title) }}</span>
                         </div>
                         <div class="detail card-title card-title-md">
                             {{SubString(property.description) }}
