@@ -4,7 +4,7 @@
     background-color: #f3f3f3;
 }
 label.control-label{
-    font-weight: 600;
+    font-weight: 500;
 }
 .box-header>.fa, .box-header>.glyphicon, .box-header>.ion, .box-header .box-title {
     display: inline-block;

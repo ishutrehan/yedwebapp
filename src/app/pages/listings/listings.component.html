@@ -1,5 +1,5 @@
 <div class="container" *ngIf="!showSingle">
-    <form (ngSubmit)="getPropertyList(searchParams)">
+    <form class="px-5" (ngSubmit)="getPropertyList(searchParams)">
         <div class="box mt-5 mb-5 p-2">
             <div class="box-header with-border">
                 <i class="fa fa-search"></i>
@@ -146,7 +146,7 @@
     <div class="row listing">
         <pagination-controls (pageChange)="onPageChange($event)" (pageBoundsCorrection)="onPageBoundsCorrection($event)" [directionLinks]="true" [autoHide]="true" [responsive]="true" previousLabel="Prev" nextLabel="Next"        screenReaderPaginationLabel="Pagination" screenReaderPageLabel="page" screenReaderCurrentLabel="You're on page">
         </pagination-controls>
-        <div class="col-md-12">
+        <div class="col-md-12 px-5">
             <div class="row" [hidden]="!loading">
                 <div class="col-12 col-sm-4" *ngFor="let i of [].constructor(10);">
                     <div class="ph-item">

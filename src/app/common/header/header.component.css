@@ -77,13 +77,15 @@ background-color:transparent;
     margin-right: 8px;
   }
   .navbar{
+    font-size: 16px;
+    font-weight: 500;
     width: 100%;
   }
   .navbar ul li a{
     color: #fff;
   }
   .navbar-brand img{
-    width: 200px;
+    width: 100%;
   }
   .navbar-expand-lg .navbar-nav{
     margin: 0 auto;
