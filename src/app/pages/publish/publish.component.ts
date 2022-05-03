@@ -18,6 +18,7 @@ export class PublishComponent implements OnInit {
  options:any =   {};
  displayStyle: any;
  loading: boolean;
+ savephoneloader: boolean;
  userPayload:any = {};
  errormessage: any = "";
  successmessage:any  = "";
@@ -98,7 +99,6 @@ export class PublishComponent implements OnInit {
     //check if user has phone if not then show phone field popup
     this.auth.userPhoneStatus({})
     .then((result: any) => {
-      this.loading = false;
 
       if (result.phone == true) {
         this.formdata.amenities = [];
@@ -114,6 +114,7 @@ export class PublishComponent implements OnInit {
         this.formdata.location_tags = location_tags;
         this.auth.addProperty(this.formdata)
           .then((result: any) => {
+            this.loading = false;
             if(result.error){
               this.errormessage = result.message;
             }
@@ -123,12 +124,17 @@ export class PublishComponent implements OnInit {
           }
               
         }, err => {
+            this.loading = false;
         })
 
       } else {
+        
+        this.loading = false;
         this.displayStyle = "block";
       }
     }, err => {
+      
+      this.loading = false;
     });
     setTimeout(() => {
       this.errormessage = "";
@@ -142,10 +148,10 @@ export class PublishComponent implements OnInit {
   }
   
   savePhone(){
-     this.loading = true;
+     this.savephoneloader = true;
      this.auth.updateProfile(this.userPayload)
     .then((result: any) => {
-      this.loading = false;
+      this.savephoneloader = false;
       this.closepopup()
 
       //console.log("updateProfile is :", result);

@@ -83,7 +83,7 @@ import { TooltipModule } from 'ng2-tooltip-directive';
           {
             id: GoogleLoginProvider.PROVIDER_ID,
             provider: new GoogleLoginProvider(
-              '742972245089-hkki2v7inokvf40fjqmolg450ig49k3g.apps.googleusercontent.com'
+              '8832457992-92us6eda29at3hn2o36c199o1up5h9bu.apps.googleusercontent.com'
             )
           },
           {

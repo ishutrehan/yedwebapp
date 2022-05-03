@@ -34,6 +34,7 @@ export class ListingsComponent implements OnInit {
   showSingle: boolean;
   imagesObject: any = [];
   dateFormat: any;
+  amenitieslist: any = []
   public config: PaginationInstance = {
     id: 'server',
     itemsPerPage: 10,
@@ -61,7 +62,15 @@ export class ListingsComponent implements OnInit {
   selectedTypes:any = [];
   selectedRentals: any = [];
   selectedDistance:any = [];
-  constructor(public utility:UtilityProvider, public auth:ApiProvider, private router: Router, private activatedRoute: ActivatedRoute) {
+  mapOptions: google.maps.MapOptions = {
+    center: { lat: 38.9987208, lng: -77.2538699 },
+    zoom : 15
+ }
+ marker = {
+  position: { lat: 38.9987208, lng: -77.2538699 },
+}
+deleteloader: boolean;
+constructor(public utility:UtilityProvider, public auth:ApiProvider, private router: Router, private activatedRoute: ActivatedRoute) {
     this.dateFormat = this.utility.getDateFormat;
     this.offset_value = 0;
     this.displayStyle = 'none';
@@ -72,6 +81,8 @@ export class ListingsComponent implements OnInit {
     if(this.propertyid){      
       this.getProperty(this.propertyid);
       this.showSingle = true;
+      document.body.scrollTop = document.documentElement.scrollTop = 0;
+      this.getAmenities();
     }else{
       this.showSingle = false;
     }
@@ -118,7 +129,8 @@ export class ListingsComponent implements OnInit {
   onPageChange(number: number) {
     this.config.currentPage = number;
     this.offset_value = (number - 1) * this.config.itemsPerPage
-     
+    
+    this.payload = this.searchParams;
     this.payload.offset = this.offset_value;
     this.getPropertyList(this.payload);
   }
@@ -162,7 +174,7 @@ export class ListingsComponent implements OnInit {
     this.selectedDistance.forEach(distance => {
       this.searchParams.distance = distance.value;
     });
-
+    
     // this.activatedRoute.queryParams
     //   .subscribe(params => {
     //     for(let i in this.searchParams){
@@ -187,10 +199,10 @@ export class ListingsComponent implements OnInit {
     // params.surface_max = this.searchParams.surface_max ? this.searchParams.surface_max : '';
     // params.price_min = this.searchParams.price_min ? this.searchParams.price_min : '';
     // params.price_max = this.searchParams.price_max ? this.searchParams.price_max : '';
-    this.router.navigate(
-      ['/listings'],
-      { queryParams: this.searchParams }
-    );
+    // this.router.navigate(
+    //   ['/listings'],
+    //   { queryParams: this.searchParams }
+    // );
     this.auth.getPropertyList(payload)
       .then((result: any) => {
         this.config.totalItems = result.totalResults;
@@ -210,6 +222,14 @@ export class ListingsComponent implements OnInit {
     this.auth.getProperty(payload)
       .then((result: any) => {
         this.singleItem = result.details;
+        this.mapAmenities();
+        this.mapType();
+        if(this.mapOptions && this.mapOptions.center){
+          this.mapOptions.center.lat = parseFloat(this.singleItem.latitude);
+          this.mapOptions.center.lng = parseFloat(this.singleItem.longitude);
+          this.marker.position.lat = parseFloat(this.singleItem.latitude);
+          this.marker.position.lng = parseFloat(this.singleItem.longitude);
+        }
         if(this.singleItem.image){
           this.singleItem.image.forEach((image) => {
             this.imagesObject.push({
@@ -274,6 +294,7 @@ export class ListingsComponent implements OnInit {
   }
   goToLink(link:any, id = ''){
     this.router.navigate([link, id]); 
+    document.body.scrollTop = document.documentElement.scrollTop = 0;
   }
   cancelpopup(){
     this.displayStyle = "none";
@@ -285,14 +306,44 @@ export class ListingsComponent implements OnInit {
     var payload = {
       "property_id": parseInt(property_id)
     }
-    this.loading = true;
+    this.deleteloader = true;
     this.auth.deleteProperty(payload)
     .then((result: any) => {
-    this.loading = false;
+    this.deleteloader = false;
 
       window.location.href = 'myproperties';
     }, err => {
       //console.log("err", err);
     })
+  }
+  getAmenities() {
+
+    this.auth.getAmenities()
+      .then((type: any) => {
+      type.forEach(checkbox_ => {
+          checkbox_.checked = false;
+      });
+      this.amenitieslist = type;
+        
+      }, err => {
+      })
+    }
+  mapAmenities() {
+    this.amenitieslist.forEach(ammenety => {
+      let i = this.singleItem.amenities.findIndex(ammeneties_ => ammeneties_ == ammenety.id);
+      if (i != -1) {
+        this.singleItem.amenities[i] = { 'id': ammenety.id, 'name': ammenety.name };
+      }
+    });
+  }
+
+  mapType() {
+    this.typesList.forEach(type => {
+      let i = this.singleItem.type.findIndex(type_ => type_ == type.id);
+      if (i != -1) {
+        this.singleItem.type[i] = { 'id': type.id, 'name': type.name };
+      }
+    });
+
   }
 }

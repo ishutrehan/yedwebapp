@@ -1,5 +1,5 @@
 <div class="container" *ngIf="!showSingle">
-    <form class="px-5" (ngSubmit)="getPropertyList(searchParams)">
+    <form (ngSubmit)="getPropertyList(searchParams)">
         <div class="box mt-5 mb-5 p-2">
             <div class="box-header with-border">
                 <i class="fa fa-search"></i>
@@ -134,10 +134,10 @@
                     <div class="clearfix"></div>
                     <div class="col-md-6"></div>
                     <div class="col-md-3" style="text-align: right;">
-                        <button class="louer un-bien">Reinitialiser La Recherche</button>
+                        <button class="louer un-bien">Lancer La Recherche</button>
                     </div>
                     <div class="col-md-3" style="text-align: left;">
-                        <button type="button" class="btn btn-link reset" (click)="resetForm()">Lancer La Recherche</button>
+                        <button type="button" class="btn btn-link reset" (click)="resetForm()">Reinitialiser La Recherche</button>
                     </div>
                 </div>
             </div>
@@ -146,7 +146,9 @@
     <div class="row listing">
         <pagination-controls (pageChange)="onPageChange($event)" (pageBoundsCorrection)="onPageBoundsCorrection($event)" [directionLinks]="true" [autoHide]="true" [responsive]="true" previousLabel="Prev" nextLabel="Next"        screenReaderPaginationLabel="Pagination" screenReaderPageLabel="page" screenReaderCurrentLabel="You're on page">
         </pagination-controls>
-        <div class="col-md-12 px-5">
+        <div class="col-md-12">
+            
+            <p>{{config.totalItems}} résultats trouvés</p>
             <div class="row" [hidden]="!loading">
                 <div class="col-12 col-sm-4" *ngFor="let i of [].constructor(10);">
                     <div class="ph-item">
@@ -260,75 +262,90 @@
         </div>
     </div>
     <div class="row mb-5" *ngIf="!loading">
-        <div class="col-12 mb-5" style="text-align: right;">
-            <button type="button" class="btn btn-md btn-success" (click)="goToLink('updateproperty', singleItem.id)"><i class="fa fa-pencil"></i> Edit</button> &nbsp;&nbsp;
-            <button type="button" class="btn btn-md btn-danger" (click)="startDelete()"><i class="fa fa-trash"></i> Delete</button>
+        <div class="px-5">
+            <div class="col-12 mb-5" style="text-align: right;">
+                <button type="button" class="btn btn-md btn-success" (click)="goToLink('updateproperty', singleItem.id)"><i class="fa fa-pencil"></i> Edit</button> &nbsp;&nbsp;
+                <button type="button" class="btn btn-md btn-danger" (click)="startDelete()"><i class="fa fa-trash"></i> Delete</button>
+            </div>
+            <carousel [images]="imagesObject" [height]="400" [objectFit]="'cover'" [cellWidth]="'100%'" [arrowsOutside]="true" [dots]="true" [loop]="true">
+            </carousel>
+            <div class="space"></div>
+            <div class="col-md-12 listing-details p-3">
+                <div class="row">
+                    <div class="col-5">
+                        <span class="id-badge text text-md">#{{singleItem.id}}</span>
+                    
+                        <span class="id-badge text text-md"> {{singleItem.username}}</span>
+                    </div>
+                    <div class="col-3 eye">
+                        <i class="fa fa-eye" style="font-size:18px"></i>
+                        <span>{{ singleItem.viewCount }}</span>
+                    </div>
+                    <div class="col-4 a-vendra">
+                        <button class="vendra">{{ singleItem.purposeName }}</button>
+                    </div>
+                    
+                    <div class="title card-title card-title-md">
+                        <div style="color:green; text-align:right; float:left; width:100%;" *ngIf="singleItem.approve">Vérifié par YED Immobilier</div>
+                        <p><strong><span  class="primary-heading">{{ singleItem.title }}</span></strong></p>
+                    </div>
+                    <div class="col-12">
+                        <h4 class="subheading">Description</h4>
+                        <p>{{singleItem.description }}</p>
+                    </div>
+                    <div class="col-12"> 
+                        <h4 class="subheading">Prix</h4>
+                        <p>{{ singleItem.price }} {{ singleItem.price_per_month }} {{singleItem.currency}}</p>
+                    </div>
+                    <div class="col-12">
+                        <h4 class="subheading">Date</h4>
+                        <p>{{ dateFormat(singleItem.created_at)}}</p>
+                    </div>
+                    <div class="col-12">
+                        <h4 class="subheading">Superficie(m2)</h4>
+                        <p>{{ singleItem.area }}</p>
+                    </div>
+                    <div class="col-12" *ngIf="singleItem.number_of_bedrooms">
+                        <h4 class="subheading">Nb de chambres</h4>
+                        <p>{{ singleItem.number_of_bedrooms }}</p>
+                    </div>
+                    <div class="col-12" *ngIf="singleItem.number_of_bathrooms">
+                        <h4 class="subheading">Nb de salles de bain</h4>
+                        <p>{{ singleItem.number_of_bedrooms }}</p>
+                    </div>
+                    <div class="col-12" *ngIf="singleItem.number_of_rooms">
+                        <h4 class="subheading">Nbre de pièces</h4>
+                        <p>{{ singleItem.number_of_rooms }}</p>
+                    </div>
+                    <div class="col-12" *ngIf="singleItem.number_of_toilets">
+                        <h4 class="subheading">Nbre de toilettes</h4>
+                        <p>{{ singleItem.number_of_toilets }}</p>
+                    </div>
+                    <div class="col-12" *ngIf="singleItem.amenities.length">
+                        <h4 class="subheading">Commodités</h4>
+                        <div class="row" style="width: 50%;">
+                            <div class="col-md-2" *ngFor="let amenities of singleItem.amenities;let i = index;"><span class="badge bg-warning text-dark">{{amenities.name}}</span></div>
+                        </div>
+                    </div>
+                    <div class="row mt-4" style="justify-content: center;">
+                        <a href="mailto:{{singleItem.contact_email}}" class="contact button-inner col-md-5">
+                            <i class="fa fa-envelope" aria-hidden="true"></i>
+                            Contacter
+                        </a>
+                        <a href="tel:{{singleItem.contact_phone}}" class="Telephone button-inner-1 col-md-5">
+                            <i class="fa fa-phone" aria-hidden="true" style="color:#ff5722;"></i>
+                            Telephone
+                        </a>
+                    </div>
+                    <div class="col-md-1"></div>
+                    <div class="space"></div>
+                    <google-map [options]="mapOptions">
+                        <map-marker [position]="marker.position"></map-marker>
+                    </google-map>
+                </div>
+            </div>
         </div>
-        <carousel [images]="imagesObject" [height]="400" [objectFit]="'cover'" [cellWidth]="'100%'" [arrowsOutside]="true" [dots]="true" [loop]="true">
-        </carousel>
-        <div class="space"></div>
-        <div class="col-5">
-            <span class="id-badge text text-md">#{{singleItem.id}}</span>
         
-            <span class="id-badge text text-md"> {{singleItem.username}}</span>
-        </div>
-        <div class="col-3 eye">
-            <i class="fa fa-eye" style="font-size:18px"></i>
-            <span>{{ singleItem.viewCount }}</span>
-        </div>
-        <div class="col-4 a-vendra">
-            <button class="vendra">{{ singleItem.purposeName }}</button>
-        </div>
-        
-        <div class="title card-title card-title-md">
-            <div style="color:green; text-align:right; float:left; width:100%;" *ngIf="singleItem.approve">Vérifié par YED Immobilier</div>
-            <p><strong><span  class="primary-heading">{{ singleItem.title }}</span></strong></p>
-        </div>
-        <div class="col-12">
-            <h4 class="subheading">Description</h4>
-            <p>{{singleItem.description }}</p>
-        </div>
-        <div class="col-12"> 
-            <h4 class="subheading">Prix</h4>
-            <p>{{ singleItem.price }} {{ singleItem.price_per_month }} {{singleItem.currency}}</p>
-        </div>
-        <div class="col-12">
-            <h4 class="subheading">Date</h4>
-            <p>{{ dateFormat(singleItem.created_at)}}</p>
-        </div>
-        <div class="col-12">
-            <h4 class="subheading">Superficie(m2)</h4>
-            <p>{{ singleItem.area }}</p>
-        </div>
-        <div class="col-12" *ngIf="singleItem.number_of_bedrooms">
-            <h4 class="subheading">Nb de chambres</h4>
-            <p>{{ singleItem.number_of_bedrooms }}</p>
-        </div>
-        <div class="col-12" *ngIf="singleItem.number_of_bathrooms">
-            <h4 class="subheading">Nb de salles de bain</h4>
-            <p>{{ singleItem.number_of_bedrooms }}</p>
-        </div>
-        <div class="col-12" *ngIf="singleItem.number_of_rooms">
-            <h4 class="subheading">Nbre de pièces</h4>
-            <p>{{ singleItem.number_of_rooms }}</p>
-        </div>
-        <div class="col-12" *ngIf="singleItem.number_of_toilets">
-            <h4 class="subheading">Nbre de toilettes</h4>
-            <p>{{ singleItem.number_of_toilets }}</p>
-        </div>
-        <div class="row" style="justify-content: center;">
-            <a href="mailto:{{singleItem.contact_email}}" class="contact button-inner col-md-5">
-                <i class="fa fa-envelope" aria-hidden="true"></i>
-                Contacter
-            </a>
-            <a href="tel:{{singleItem.contact_phone}}" class="Telephone button-inner-1 col-md-5">
-                <i class="fa fa-phone" aria-hidden="true" style="color:#ff5722;"></i>
-                Telephone
-            </a>
-        </div>
-        <div class="col-md-1"></div>
-        <div class="space"></div>
-        <google-map></google-map>
     </div>
     
 </div>
@@ -347,7 +364,7 @@
                     Non
                 </button>
                 <button type="button" class="btn btn-danger" (click)="deleteProperty(singleItem.id)">
-                    Oui<i class="fa fa-spinner fa-spin" *ngIf="loading"></i>
+                    Oui<i class="fa fa-spinner fa-spin" *ngIf="deleteloader"></i>
                 </button>
             </div>
         </div>

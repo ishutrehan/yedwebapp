@@ -392,13 +392,27 @@ button.like-button {
 }
 .multiselect-dropdown .selected-item{
     border: 1px solid #e85d19 !important;
-    background: #e85d19 !important;
+    background: 
+    #e85d19 !important;
 }
 .multiselect-item-checkbox input[type=checkbox] + div:before{
     border: 2px solid #e85d19 !important;
 }
 .multiselect-item-checkbox input[type=checkbox]:checked + div:before{
     background: #e85d19 !important;
+}
+
+.navbar-brand img{
+    width: 100%;
+}
+.form-control, .multiselect-dropdown .dropdown-btn{
+    border-radius: 0 !important;
+}
+.right-menu .navbar-nav{
+    justify-content: right;
+}
+.map-container{
+    width: 100% !important;
 }
 @keyframes phAnimation {
     0% {
@@ -433,5 +447,8 @@ button.like-button {
     p{
         margin-left: 3rem !important;
         margin-right: 3rem !important;
+    }
+    button.louer.un-bien{
+        padding: 18px 18px 18px 18px !important;
     }
   }

@@ -84,9 +84,6 @@ background-color:transparent;
   .navbar ul li a{
     color: #fff;
   }
-  .navbar-brand img{
-    width: 100%;
-  }
   .navbar-expand-lg .navbar-nav{
     margin: 0 auto;
   }
@@ -104,4 +101,11 @@ background-color:transparent;
 .dropdown-menu li a:hover {
 background-color: #FC4E05;
 color:#fff !important;
+}
+.joinus{
+  background: #fff;
+  color: #fc4e05 !important;
+  border-radius: 0;
+  font-weight: 500;
+  padding: 10px 25px;
 }
