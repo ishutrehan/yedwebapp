@@ -427,6 +427,7 @@ button.like-button {
 @media only screen and (max-width: 768px) {
    .left-image .col-lg-5{
        padding-right: 0;
+        padding-left: 0;
    }
    .left-image .col-lg-5.full-height{
        height: 50%;
@@ -479,6 +480,7 @@ button.like-button {
     margin-left: 0px !important;
     margin-right: 0px !important;
 }
+
 .update{
     margin-bottom: 10px !important;
 }
@@ -489,5 +491,17 @@ button.like-button {
     padding-left: 15px;
     padding-right: 15px;
 }
+.navbar-brand img{
+    width: 100%;
+}
+.row.d-flex.full-height {
+    margin: 0px;
+}
+.full-height{
+    background-color: #fff;
+}
+.navbar-expand-lg .navbar-nav {
+    padding-left: 25px;
 
+}
   }

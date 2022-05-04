@@ -10,6 +10,7 @@ import {Router, ActivatedRoute} from '@angular/router';
   styleUrls: ['./updateproperty.component.css']
 })
 export class UpdatepropertyComponent implements OnInit {
+  
   updatedata: any = {};
   typesList:any = [];
   type: any;
