@@ -1,4 +1,4 @@
-<div class="container-fluid mx-auto full-height profile">
+<div class="container-fluid left-image mx-auto full-height profile">
     <div class="card card0 border-0 full-height">
         <div class="row d-flex full-height">
             <div class="col-lg-5 full-height">
@@ -26,7 +26,7 @@
                          <input type="text" class="form-control" [(ngModel)]="userPayload.phone">
                     </div>
                    
-                    <button class="louer un-bien" (click)=" updateUserData()"> Mettre à jour<i class="fa fa-spinner fa-spin" *ngIf="loading" ></i></button>
+                    <button class="louer un-bien update" (click)=" updateUserData()"> Mettre à jour<i class="fa fa-spinner fa-spin" *ngIf="loading" ></i></button>
                 <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="errormessage">
                     {{ errormessage }}
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>

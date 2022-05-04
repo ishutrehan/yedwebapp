@@ -31,6 +31,9 @@ background-color:transparent;
   padding-right: 20px;
   
 }
+.navbar-brand img{
+  width: 80%;
+}
   .spacer {
     flex: 1;
   }

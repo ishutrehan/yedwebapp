@@ -172,10 +172,7 @@ button.louer.un-bien {
     font-size: 18px;
     width: 100%;
 }
-.right-box {
-    padding-left: 10rem;
-    padding-right: 10rem;
-}
+
 button.search-button{
     border-radius: 30px !important;
     background: transparent !important;

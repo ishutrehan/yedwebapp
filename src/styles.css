@@ -237,6 +237,7 @@ a {
     text-align: left;
 }
 
+
 .form-check-input:checked {
     background-color: #ff5722;
     border-color: #ff5722;
@@ -451,4 +452,42 @@ button.like-button {
     button.louer.un-bien{
         padding: 18px 18px 18px 18px !important;
     }
+    .logo-box{
+        width: 100%;
+        text-align: center !important;
+        margin-left: 50px;
+        margin-right: 50px;
+       }
+    .mb-3, .text, .button {
+        padding-left: 20px;
+        padding-right: 20px;
+    } 
+  .col-md-6, .surfacemax{
+      margin-top: 10px;
+      margin-bottom: 10px;
+  }
+ .contact{
+     margin-left: 0px;
+ }
+ .common{
+     text-align: center;
+ }
+ .useful{
+     text-align: center;
+ }
+.publish-form {
+    margin-left: 0px !important;
+    margin-right: 0px !important;
+}
+.update{
+    margin-bottom: 10px !important;
+}
+ .left-image{
+    padding: 0 !important;
+}
+.right-box{
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
   }

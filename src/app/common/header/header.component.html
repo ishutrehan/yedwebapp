@@ -1,7 +1,7 @@
 <div class="header" role="banner">
   
     <nav class="navbar navbar-expand-lg">
-      <div class="container">
+      <div class="container-fluid">
         <div class="col-md-3 logo-box">
           <a class="navbar-brand" href="/"><img src="../../../assets/images/logo-white.png"></a>
         </div>
@@ -26,16 +26,15 @@
               <li class="nav-item">
                 <a class="nav-link" routerLink="contact">Contact</a>
               </li>
+                <li class="nav-item">
+                  <a class="btn btn-md joinus" routerLink="join-us">Rejoignez-nous</a>
+                </li>
               </ul>
             </div>
         </div>
         <div class="col-md-3 right-menu">
-          <ul class="navbar-nav mb-2 mb-lg-0" *ngIf="!islogin()">
-            <li class="nav-item">
-              <a class="btn btn-md joinus" routerLink="join-us">Rejoignez-nous</a>
-            </li>          
-          </ul>
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0" *ngIf="islogin()">
+          
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0" *ngIf="islogin()">
             <li class="nav-item">
               <i class="fa fa-spinner fa-spin" *ngIf="loading"></i>
               <div class="dropdown" *ngIf="!loading">
@@ -52,7 +51,8 @@
                 </ul>
               </div>
             </li>          
-          </ul>
+          </ul>    
+          
         </div>
       </div>
     </nav>
