@@ -34,6 +34,8 @@ import { NgxDropzoneModule } from 'ngx-dropzone';
 import { UpdatepropertyComponent } from './pages/updateproperty/updateproperty.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { TooltipModule } from 'ng2-tooltip-directive';
+import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
+import { PrivacyPolicyComponent } from './pages/privacy-policy/privacy-policy.component';
 
 
 @NgModule({
@@ -53,7 +55,9 @@ import { TooltipModule } from 'ng2-tooltip-directive';
     ProfileComponent,
     FooterComponent,
     PublishComponent,
-    UpdatepropertyComponent
+    UpdatepropertyComponent,
+    ForgotPasswordComponent,
+    PrivacyPolicyComponent
   ],
   imports: [
     BrowserModule,

@@ -13,6 +13,8 @@ import { MypropertiesComponent } from './pages/myproperties/myproperties.compone
 import { ProfileComponent } from './pages/profile/profile.component';
 import { PublishComponent } from './pages/publish/publish.component';
 import { UpdatepropertyComponent } from './pages/updateproperty/updateproperty.component';
+import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
+import { PrivacyPolicyComponent } from './pages/privacy-policy/privacy-policy.component';
 
 
 
@@ -31,7 +33,9 @@ const routes: Routes = [
   { path: 'profile', component: ProfileComponent },
   { path: 'publish', component: PublishComponent },
   { path: 'updateproperty/:id', component: UpdatepropertyComponent },
-  
+  { path: 'forgot-password', component: ForgotPasswordComponent },
+  { path: 'privacy-policy', component: PrivacyPolicyComponent },
+
 ];
 
 @NgModule({

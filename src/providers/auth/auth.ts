@@ -324,6 +324,18 @@ export class ApiProvider {
     };
 
   }
+  // forgort password Api  
+  forgotPassword(payload) {
+    return new Promise((resolve, reject) => {
+      this.http.post(this.baseUrl + '/user/passwordReset', payload).subscribe(data => {
+        resolve(data);
+      }, err => {
+        reject(err);
+       // console.log("ERER:", err);
+      });
+    });
+  }
+
   getHeaders() {
     return new Promise((resolve, reject) => {
       this.generateToken()

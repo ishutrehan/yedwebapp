@@ -5,8 +5,16 @@ html{
 .full-height {
     height:100%;
     max-height: 100%;
+    padding: 0;
+    margin: 0;
 }
-
+.forgot{
+    text-decoration: none;
+    text-align: left;
+    float: left;
+    width: 100%;
+    color: #ff5722;
+}
 ::-webkit-scrollbar { 
     display: none;  /* Safari and Chrome */
 }
@@ -30,4 +38,5 @@ button.louer {
 }
 .social-box{
     margin-bottom: 30px;
+    text-align: center;
 }
