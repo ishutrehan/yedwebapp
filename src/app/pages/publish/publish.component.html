@@ -82,7 +82,7 @@
                 <label><b>Image à la une</b></label>
                 <ngx-dropzone [multiple]="false" (change)="onSelect($event)">
                     <ngx-dropzone-label>Déposez les fichiers ici ou cliquez pour télécharger</ngx-dropzone-label>
-                    <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of featured" [removable]="true" [file]="f">
+                    <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of featured" [removable]="true" [file]="f" (removed)="onRemoveFeatured(f)">
                     </ngx-dropzone-image-preview>
                 </ngx-dropzone>
             </div>
@@ -91,7 +91,7 @@
                 <ngx-dropzone (change)="onSelectGallery($event)">
                     <ngx-dropzone-label>Déposez les fichiers ici ou cliquez pour télécharger</ngx-dropzone-label>
                     <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of gallery" [removable]="true"
-                        [file]="f">
+                        [file]="f" (removed)="onRemoveGallery(f)">
                     </ngx-dropzone-image-preview>
                 </ngx-dropzone>
             </div>

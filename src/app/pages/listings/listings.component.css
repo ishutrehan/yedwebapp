@@ -143,12 +143,7 @@ span.primary-heading {
     border-radius: 14px;
     color: #fff;
     margin-top: 7px;
-        margin-left:auto;
 }
-a {
-    margin-right: 10px;
-}
-
 .button-inner-1.col-md-5 {
     background: #e5e5e5;
     text-align: center;
@@ -167,7 +162,6 @@ a {
 }
 a{
     text-decoration: none !important;
-        margin-right: 10px;
 }
 .reset{
     text-decoration: none;

@@ -35,6 +35,7 @@ export class ListingsComponent implements OnInit {
   imagesObject: any = [];
   dateFormat: any;
   amenitieslist: any = []
+  useremail: any;
   public config: PaginationInstance = {
     id: 'server',
     itemsPerPage: 10,
@@ -71,6 +72,7 @@ export class ListingsComponent implements OnInit {
 }
 deleteloader: boolean;
 constructor(public utility:UtilityProvider, public auth:ApiProvider, private router: Router, private activatedRoute: ActivatedRoute) {
+  if(this.utility.getStorage('user_email')) this.useremail = this.utility.getStorage('user_email');
     this.dateFormat = this.utility.getDateFormat;
     this.offset_value = 0;
     this.displayStyle = 'none';

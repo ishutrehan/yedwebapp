@@ -208,7 +208,7 @@
                         </div>
                         <span class="id-badge text text-md"> {{ property.price }} {{property.currency}}</span><br>
                         <span class="id-badge text text-md" ion-text="">{{ dateFormat(property.created_at)}}</span>
-                        <div class="row">
+                        <div class="row grid-buttons">
                             <a href="mailto:{{property.contact_email}}" class="contact button-inner col-md-5">
                                 <i class="fa fa-envelope" aria-hidden="true"></i>
                                 Contacter
@@ -262,8 +262,8 @@
         </div>
     </div>
     <div class="row mb-5" *ngIf="!loading">
-        <div class="px-5">
-            <div class="col-12 mb-5" style="text-align: right;">
+        <div class="px-5 slider-page">
+            <div class="col-12 mb-5" style="text-align: right;" *ngIf="singleItem.user_email == useremail">
                 <button type="button" class="btn btn-md btn-success" (click)="goToLink('updateproperty', singleItem.id)"><i class="fa fa-pencil"></i> Edit</button> &nbsp;&nbsp;
                 <button type="button" class="btn btn-md btn-danger" (click)="startDelete()"><i class="fa fa-trash"></i> Delete</button>
             </div>
@@ -327,7 +327,7 @@
                             <div class="col-md-2" *ngFor="let amenities of singleItem.amenities;let i = index;"><span class="badge bg-warning text-dark">{{amenities.name}}</span></div>
                         </div>
                     </div>
-                    <div class="row contact" style="justify-content: center;">
+                    <div class="row contact mt-3" style="justify-content: center;">
                         <a href="mailto:{{singleItem.contact_email}}" class="contact button-inner col-md-5">
                             <i class="fa fa-envelope" aria-hidden="true"></i>
                             Contacter

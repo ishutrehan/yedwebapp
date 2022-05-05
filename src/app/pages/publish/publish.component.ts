@@ -71,7 +71,7 @@ export class PublishComponent implements OnInit {
     this.formdata.location = address.formatted_address;
 
   }
-    getTypes(){
+  getTypes(){
     this.auth.getTypes()
     .then((type: any) => {
     type.forEach(checkbox_ => {
@@ -143,8 +143,7 @@ export class PublishComponent implements OnInit {
     
   }
   closepopup(){
-  this.displayStyle = "none";
-
+    this.displayStyle = "none";
   }
   
   savePhone(){
@@ -179,6 +178,12 @@ export class PublishComponent implements OnInit {
         this.formdata.image.push(base64String);
       });         
     }
+  }
+  onRemoveFeatured(event){
+    this.featured = [];
+  }
+  onRemoveGallery(event){
+    this.gallery.splice(this.gallery.indexOf(event), 1);
   }
   fileToBase64 = (file:File):Promise<string> => {
     return new Promise<string> ((resolve,reject)=> {

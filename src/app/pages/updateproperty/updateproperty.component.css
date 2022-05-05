@@ -266,7 +266,50 @@ pagination-controls {
     padding: 15px;
     border-radius: 29px;
     display: flex;
+
     box-sizing: border-box;
     list-style: none;
     padding-bottom: 0%;
+}
+.publish-form{
+    background-color: #fff;
+}
+.uploaded_image{
+    align-items: center;
+    border-radius: 5px;
+    display: flex;
+    height: 140px;
+    justify-content: center;
+    margin: 10px;
+    min-height: 140px;
+    padding: 0px 20px;
+    position: relative;
+}
+.uploaded_image img{
+    max-height: 100%;
+    border-radius: 5px;
+    opacity: .8;
+}
+.uploaded_image span{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 22px;
+    width: 22px;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    border-radius: 50%;
+    opacity: 1 !important;
+    background-color: #fb2c2c !important;
+    color: #333;
+    cursor: pointer;
+}
+.uploaded_image span svg{
+    height: 10px;
+    width: 10px;
+}
+.uploaded_image span svg line{
+    stroke-width: 2px;
+    stroke: #fff;
 }

@@ -12,6 +12,7 @@ export class HeaderComponent implements OnInit {
   showHeader: boolean;
   profiledetails: any;
   loading: boolean;
+  navWidth: any;
   constructor(public utility: UtilityProvider, public router: Router,public auth: ApiProvider) { 
     this.getProfileData()
    }
@@ -55,5 +56,13 @@ export class HeaderComponent implements OnInit {
     this.utility.removeStorage('refreshToen');
     window.location.href = '';
   }
+  /* Set the width of the side navigation to 250px */
+  openNav() {
+    this.navWidth = "250px";
+  }
 
+  /* Set the width of the side navigation to 0 */
+  closeNav() {
+    this.navWidth = "0";
+  }
 }

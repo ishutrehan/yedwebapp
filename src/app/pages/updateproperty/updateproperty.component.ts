@@ -34,31 +34,13 @@ export class UpdatepropertyComponent implements OnInit {
   propertyid: any;
 
   constructor(public utility:UtilityProvider, public auth:ApiProvider, private activatedRoute: ActivatedRoute) {
+    this.updatedata.gallery = [];
+    this.updatedata.type = [];
+    this.updatedata.image = [];
     this.getTypes();
     this. getRentalTypes();
     this.getAmenities();
     this.displayStyle = "none";
-     this.updatedata = {
-      "id" : "",
-      "title" : "",
-      "description": "",
-      "purpose" : "",
-      "price" : "",
-      "price_per_month" : "",
-      "type" : [],
-      "area" : "",
-      "number_of_bathrooms" : "",
-      "number_of_bedrooms" : "",
-      "number_of_rooms" : "",
-      "number_of_toilets" : "",
-      "location": "",
-      "location_tags" : [],
-      "featuredImage" : "",
-      "featured" : "",
-      "image" : [],
-      "gallery" : [],
-      "amenities" : []
-    }
      this.getMetaName = (id, obj) => {
       var name = '';
       obj.forEach(function(item){
@@ -105,13 +87,16 @@ export class UpdatepropertyComponent implements OnInit {
       this.updatedata.location = result.details.location;
       this.updatedata.location_tags = result.details.location_tags;
       this.updatedata.featured_image = result.details.featured;
-      this.updatedata.gallery = result.details.image;     
-        var tags:any =  [];
-        result.details.location_tags.forEach(element => {
-          tags.push({'displayValue': element})
-        });
-        this.updatedata.location_tags = tags;
-       result.details.amenities.forEach((id)=>{
+      result.details.image.forEach((image, i) => {
+        if(i != 0)
+          this.updatedata.gallery.push(image);
+      });
+      var tags:any =  [];
+      result.details.location_tags.forEach(element => {
+        tags.push({'displayValue': element})
+      });
+      this.updatedata.location_tags = tags;
+      result.details.amenities.forEach((id)=>{
         this.amenitieslist.forEach((amenity) => {
           if(amenity.id == id) amenity.checked = true;
         });
@@ -126,26 +111,6 @@ export class UpdatepropertyComponent implements OnInit {
         this.loading = false;
     })
   } 
-  submit() {
-      this.loading = true;
-      this.updatedata.amenities = [];
-    // this.updatedata.type = [];
-      this.amenitieslist.forEach(ammeneties_ => {
-      if (ammeneties_.checked) {
-          this.updatedata.amenities.push(ammeneties_.id);
-        }
-      });
-      delete this.updatedata.featuredImage;
-      this.auth.updateProperty(this.updatedata)
-      
-      .then((result: any) => {
-      this.loading = false;
-       
-        //console.log("resp", resp);
-        
-      }, err => {
-      })
-  }
   getAmenities() {
     this.auth.getAmenities()
     .then((type: any) => {
@@ -157,13 +122,13 @@ export class UpdatepropertyComponent implements OnInit {
     }, err => {
     })
   }
-   handleAddressChange(address) {
+  handleAddressChange(address) {
     this.updatedata.latitude = address.geometry.location.lat();
     this.updatedata.longitude = address.geometry.location.lng();
     this.updatedata.location = address.formatted_address;
 
   }
-    getTypes(){
+  getTypes(){
     this.auth.getTypes()
     .then((type: any) => {
     type.forEach(checkbox_ => {
@@ -186,41 +151,30 @@ export class UpdatepropertyComponent implements OnInit {
     })
   }
   update() {
-    
-    //check if user has phone if not then show phone field popup
-    this.auth.userPhoneStatus({})
-    .then((result: any) => {
-
-      if (result.phone == true) {
-        this.updatedata.amenities = [];
-        this.amenitieslist.forEach(ammeneties_ => {
-          if (ammeneties_.checked) {
-            this.updatedata.amenities.push(ammeneties_.id);
-          }
-        });
-        var location_tags:any = [];
-        this.updatedata.location_tags.forEach(function (item) {
-          location_tags.push(item.displayValue);
-        });
-        this.updatedata.location_tags = location_tags;
-        this.auth.addProperty(this.updatedata)
-          .then((result: any) => {
-            if(result.error){
-              this.errormessage = result.message;
-            }
-          if(result.success){
-            this.successmessage = result.message;
-            window.location.href = 'myproperties';
-          }
-              
-        }, err => {
-        })
-
-      } else {
-        this.displayStyle = "block";
+    this.loading = true;
+    this.updatedata.amenities = [];
+    this.amenitieslist.forEach(ammeneties_ => {
+      if (ammeneties_.checked) {
+        this.updatedata.amenities.push(ammeneties_.id);
       }
-    }, err => {
     });
+    var location_tags:any = [];
+    this.updatedata.location_tags.forEach(function (item) {
+      location_tags.push(item.displayValue);
+    });
+    this.updatedata.location_tags = location_tags;
+    delete this.updatedata.featured_image;
+    this.auth.updateProperty(this.updatedata).then((result: any) => {
+      if(result.error){
+        this.errormessage = result.message;
+      }
+      if(result.success){
+        this.successmessage = result.message;
+        window.location.href = 'myproperties';
+      }
+      this.loading = false;
+      }, err => {
+    })
     setTimeout(() => {
       this.errormessage = "";
       this.successmessage = "";
@@ -232,20 +186,8 @@ export class UpdatepropertyComponent implements OnInit {
 
   }
  
-  savePhone(){
-     this.loading = true;
-     this.auth.updateProfile(this.userPayload)
-    .then((result: any) => {
-      this.loading = false;
-      this.closepopup()
-
-      //console.log("updateProfile is :", result);
-    }, err => {
-     // console.log("err", err);
-      
-    })
-  }
   onSelect(event) {
+    this.updatedata.featured_image = '';
     this.featured = event.addedFiles;
     this.fileToBase64(this.featured[0])
       .then(result=>{
@@ -263,6 +205,12 @@ export class UpdatepropertyComponent implements OnInit {
         this.updatedata.image.push(base64String);
       });         
     }
+  }
+  onRemoveGallery(i){
+    this.updatedata.gallery.splice(i, 1);
+  }
+  onRemoveImage(event){
+    this.gallery.splice(this.gallery.indexOf(event), 1);
   }
   fileToBase64 = (file:File):Promise<string> => {
     return new Promise<string> ((resolve,reject)=> {
