@@ -209,11 +209,11 @@
                         <span class="id-badge text text-md"> {{ property.price }} {{property.currency}}</span><br>
                         <span class="id-badge text text-md" ion-text="">{{ dateFormat(property.created_at)}}</span>
                         <div class="row grid-buttons">
-                            <a href="mailto:{{property.contact_email}}" class="contact button-inner col-md-5">
+                            <a href="mailto:{{property.contact_email}}" class="contact button-inner col-md-5 m-1">
                                 <i class="fa fa-envelope" aria-hidden="true"></i>
                                 Contacter
                             </a>
-                            <a href="tel:{{property.contact_phone}}" class="Telephone button-inner-1 col-md-5">
+                            <a href="tel:{{property.contact_phone}}" class="Telephone button-inner-1 col-md-5 m-1">
                                 <i class="fa fa-phone" aria-hidden="true" style="color:#ff5722;"></i>
                                 Telephone
                             </a>
@@ -327,12 +327,12 @@
                             <div class="col-md-2" *ngFor="let amenities of singleItem.amenities;let i = index;"><span class="badge bg-warning text-dark">{{amenities.name}}</span></div>
                         </div>
                     </div>
-                    <div class="row contact mt-3" style="justify-content: center;">
-                        <a href="mailto:{{singleItem.contact_email}}" class="contact button-inner col-md-5">
+                    <div class="row contact grid-buttons" style="justify-content: center;">
+                        <a href="mailto:{{singleItem.contact_email}}" class="contact button-inner col-md-5 m-1">
                             <i class="fa fa-envelope" aria-hidden="true"></i>
                             Contacter
                         </a>
-                        <a href="tel:{{singleItem.contact_phone}}" class="Telephone button-inner-1 col-md-5">
+                        <a href="tel:{{singleItem.contact_phone}}" class="Telephone button-inner-1 col-md-5 m-1">
                             <i class="fa fa-phone" aria-hidden="true" style="color:#ff5722;"></i>
                             Telephone
                         </a>
