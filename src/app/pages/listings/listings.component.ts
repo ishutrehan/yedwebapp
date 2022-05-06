@@ -10,7 +10,6 @@ export interface MarkerOptions {
   center: object;
   zoom: string;
 }
-
 @Component({
   selector: 'app-listings',
   templateUrl: './listings.component.html',
@@ -71,7 +70,9 @@ export class ListingsComponent implements OnInit {
   position: { lat: 38.9987208, lng: -77.2538699 },
 }
 deleteloader: boolean;
+
 constructor(public utility:UtilityProvider, public auth:ApiProvider, private router: Router, private activatedRoute: ActivatedRoute) {
+  
   if(this.utility.getStorage('user_email')) this.useremail = this.utility.getStorage('user_email');
     this.dateFormat = this.utility.getDateFormat;
     this.offset_value = 0;
@@ -89,6 +90,7 @@ constructor(public utility:UtilityProvider, public auth:ApiProvider, private rou
       this.showSingle = false;
     }
     this.config.currentPage = this.page;
+    
   }
 
   ngOnInit(): void {
@@ -129,6 +131,9 @@ constructor(public utility:UtilityProvider, public auth:ApiProvider, private rou
    
   }
   onPageChange(number: number) {
+    
+    let element = document.getElementById('result-row');
+    if(element) element.scrollIntoView();
     this.config.currentPage = number;
     this.offset_value = (number - 1) * this.config.itemsPerPage
     
@@ -164,6 +169,7 @@ constructor(public utility:UtilityProvider, public auth:ApiProvider, private rou
   }
   getPropertyList(payload:any ) {
     this.loading = true;   
+    
     this.currentPayload = payload;
     this.searchParams.types = [];
     this.searchParams.rentals = [];
@@ -177,34 +183,6 @@ constructor(public utility:UtilityProvider, public auth:ApiProvider, private rou
       this.searchParams.distance = distance.value;
     });
     
-    // this.activatedRoute.queryParams
-    //   .subscribe(params => {
-    //     for(let i in this.searchParams){
-    //       if(i == 'types'){
-    //         this.selectedTypes = this.typesList.filter((type) =>{
-    //           return params[i].includes(type.id);
-    //         });
-    //       }else{
-    //         this.searchParams[i] = params[i] ? params[i]: this.searchParams[i]
-    //       }
-    //     }
-    //   }
-    // );
-    // params.sort_by = this.searchParams.sort_by ? this.searchParams.sort_by : 'recent';
-    // params.location = this.searchParams.location ? this.searchParams.location : '';
-    // params.purpose = this.searchParams.purpose ? this.searchParams.purpose : '';
-    // params.user_role = this.searchParams.user_role ? this.searchParams.user_role : '';
-    // params.type = this.searchParams.type ? this.searchParams.type : '';
-    // params.name = this.searchParams.name ? this.searchParams.name : '';
-    // params.location_tags = this.searchParams.location_tags ? this.searchParams.location_tags : '';
-    // params.surface_min = this.searchParams.surface_min ? this.searchParams.surface_min : '';
-    // params.surface_max = this.searchParams.surface_max ? this.searchParams.surface_max : '';
-    // params.price_min = this.searchParams.price_min ? this.searchParams.price_min : '';
-    // params.price_max = this.searchParams.price_max ? this.searchParams.price_max : '';
-    // this.router.navigate(
-    //   ['/listings'],
-    //   { queryParams: this.searchParams }
-    // );
     this.auth.getPropertyList(payload)
       .then((result: any) => {
         this.config.totalItems = result.totalResults;

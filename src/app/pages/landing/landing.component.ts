@@ -17,7 +17,7 @@ export class LandingComponent implements OnInit {
   }
   goToLink(link:any){
     if(link == 'listings')
-      this.router.navigate([link, '']);
+    window.location.href = 'listings';
     else
       this.router.navigate([link]);
   }

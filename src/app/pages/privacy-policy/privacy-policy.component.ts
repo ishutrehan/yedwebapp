@@ -10,6 +10,7 @@ export class PrivacyPolicyComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    document.body.scrollTop = document.documentElement.scrollTop = 0;
   }
 
 }
