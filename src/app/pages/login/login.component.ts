@@ -16,6 +16,7 @@ export class LoginComponent implements OnInit {
   loading: boolean;
   errormessage: any = "";
   successmessage:any  = "";
+  overlayloader: boolean;
   constructor(private router: Router, public utility:UtilityProvider, public auth:ApiProvider, private authService: SocialAuthService) { 
      this.userPayload = {
       "email": null,
@@ -71,7 +72,36 @@ export class LoginComponent implements OnInit {
   }
   signInWithFB(): void {
     this.authService.signIn(FacebookLoginProvider.PROVIDER_ID).then((results)=>{
-      console.log(results);
+      var payload = {
+        'is_social': true,
+        'role': localStorage.getItem('userRole'),
+        'access_token': results.authToken
+      }
+      this.overlayloader = true;
+      this.auth.signUp(payload)
+      .then((result: any) => {
+        this.loading = false;
+        if(result.error){
+
+        }
+        if(result.success){
+          localStorage.setItem("isLogin", 'true');
+          localStorage.setItem("user_email", result.data[0].email);
+          localStorage.setItem('refreshToen', result.refresh_token);
+          localStorage.setItem('token', result.access_token);
+          this.overlayloader = false;
+          window.location.href = '';
+        }
+        setTimeout(() => {
+          this.errormessage = "";
+          this.successmessage = "";
+        }, 3000)
+        //this.utility.stopLoading();
+      }, err => {
+        this.loading = false;
+        //console.log("err", err);
+        //this.utility.stopLoading();
+      })
     }).catch((errors) => {
       console.log(errors);
     });;

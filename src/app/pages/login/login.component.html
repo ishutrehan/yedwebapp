@@ -11,6 +11,9 @@
                     <div class="col-lg-6">
                         <h2>S'identifier</h2>
                         <form (ngSubmit)="login()">
+                            <div class="overlay-loader" *ngIf="overlayloader">
+                                <i class="fa fa-spinner fa-spin"></i>
+                            </div>
                             <div class="mb-3">
                                 <div class="form-group">
                                     <input type="email" [(ngModel)]="userPayload.email" class="form-control" id="Email" class="form-control"
