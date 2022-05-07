@@ -35,6 +35,7 @@ export class ListingsComponent implements OnInit {
   dateFormat: any;
   amenitieslist: any = []
   useremail: any;
+  displayMode:any = 'grid';
   public config: PaginationInstance = {
     id: 'server',
     itemsPerPage: 10,
@@ -326,4 +327,7 @@ constructor(public utility:UtilityProvider, public auth:ApiProvider, private rou
     });
 
   }
+  onDisplayModeChange(mode= 'grid') {
+  this.displayMode = mode
+}
 }
