@@ -24,6 +24,7 @@ export class PublishComponent implements OnInit {
  successmessage:any  = "";
  featured: any = [];
  gallery: any = [];
+ error: any = {};
   constructor(public utility:UtilityProvider, public auth:ApiProvider) {
     this.getTypes();
     this. getRentalTypes();
@@ -94,8 +95,14 @@ export class PublishComponent implements OnInit {
     })
   }
   submit() {
+      if(!this.formdata.title) this.error.title = true;
+      if(!this.formdata.description) this.error.description = true;
+      if(!this.formdata.price) this.error.price = true;
+      if(!this.formdata.price_per_month) this.error.price_per_month = true;
+      if(!this.formdata.location) this.error.location = true;
+      if(!this.formdata.featured) this.error.featured = true;
+      if(Object.keys(this.error).length) return;
     this.loading = true;
-    
     //check if user has phone if not then show phone field popup
     this.auth.userPhoneStatus({})
     .then((result: any) => {

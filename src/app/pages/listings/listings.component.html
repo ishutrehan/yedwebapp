@@ -143,14 +143,8 @@
             </div>
         </div>
     </form>	 
-<<<<<<< .mine
   
     <div class="row listing grid">
-||||||| .r35
-    <div class="row listing">
-=======
-    <div class="row listing" id="result-row">
->>>>>>> .r37
         <pagination-controls (pageChange)="onPageChange($event)" (pageBoundsCorrection)="onPageBoundsCorrection($event)" [directionLinks]="true" [autoHide]="true" [responsive]="true" previousLabel="Prev" nextLabel="Next"        screenReaderPaginationLabel="Pagination" screenReaderPageLabel="page" screenReaderCurrentLabel="You're on page">
         </pagination-controls>
         <div class="col-md-12">
@@ -402,7 +396,7 @@
                         <h4 class="subheading">Nbre de toilettes</h4>
                         <p>{{ singleItem.number_of_toilets }}</p>
                     </div>
-                    <div class="col-12" *ngIf="singleItem.amenities">
+                    <div class="col-12" *ngIf="singleItem.amenities.length">
                         <h4 class="subheading">Commodités</h4>
                         <div class="row" style="width: 50%;">
                             <div class="col-md-2" *ngFor="let amenities of singleItem.amenities;let i = index;"><span class="badge bg-warning text-dark">{{amenities.name}}</span></div>

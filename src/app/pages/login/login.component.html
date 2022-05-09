@@ -18,9 +18,12 @@
                                 <div class="form-group">
                                     <input type="email" [(ngModel)]="userPayload.email" class="form-control" id="Email" class="form-control"
                                     placeholder="Email" [ngModelOptions]="{standalone: true}">
+                                    <span class="required" *ngIf="error.email"><i class="fa fa-warning"></i> Le champ email est obligatoire.</span>
                                 </div>
                                 <div class="form-group">                        
                                     <input type="password" [(ngModel)]="userPayload.password" id="Mot de passe" class="form-control" placeholder="Mot de passe" [ngModelOptions]="{standalone: true}">
+                                <span class="required" *ngIf="error.password"><i class="fa fa-warning"></i> Le champ mot de passe est obligatoire.</span>
+
                                 </div>
                             
                             </div>

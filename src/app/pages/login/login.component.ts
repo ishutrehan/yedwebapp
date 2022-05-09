@@ -17,6 +17,7 @@ export class LoginComponent implements OnInit {
   errormessage: any = "";
   successmessage:any  = "";
   overlayloader: boolean;
+  error : any = {};
   constructor(private router: Router, public utility:UtilityProvider, public auth:ApiProvider, private authService: SocialAuthService) { 
      this.userPayload = {
       "email": null,
@@ -40,6 +41,10 @@ export class LoginComponent implements OnInit {
     this.router.navigate([link]);
   }
   login() {
+    if(!this.userPayload.email) this.error.email = true;
+    if(!this.userPayload.password) this.error.password = true;
+    if(Object.keys(this.error).length) return;
+
      this.loading = true;
     this.auth.login(this.userPayload)
       .then((result: any) => {

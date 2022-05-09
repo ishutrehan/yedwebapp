@@ -12,6 +12,7 @@ export class RegisterComponent implements OnInit {
  loading: boolean;
  errormessage: any = "";
  successmessage:any  = "";
+ error : any = {};
   constructor(public utility:UtilityProvider, public auth:ApiProvider) { 
     var userrole = localStorage.getItem('userRole') ? localStorage.getItem('userRole') : 'individual';
 
@@ -44,7 +45,11 @@ export class RegisterComponent implements OnInit {
     }
   }
 signUp(){
-    
+      if(!this.userPayload.phone) this.error.phone = true;
+      if(!this.userPayload.name) this.error.name = true;
+      if(!this.userPayload.email) this.error.email = true;
+      if(!this.userPayload.password) this.error.password = true;
+      if(Object.keys(this.error).length) return;
    // this.utility.startLoading();
    this.loading = true;
     this.auth.signUp(this.userPayload)

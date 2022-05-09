@@ -106,8 +106,7 @@ a {
     cursor: pointer
 }
 .form-control{
-   margin-top: 20px;
-   margin-bottom: 20px;
+   margin-top: 15px;
 }
 .form-control:hover{
 border-color: #ff5722;

@@ -4,11 +4,11 @@
             <div class="col-lg-5 full-height">
                 <div class="card1 pb-5"></div>
             </div>
-            <div class="col-lg-7 py-5 right-box full-height" style="text-align: center;">
+            <div class="col-lg-7 py-3 right-box full-height">
                 <div class="row">
                     <div class="col-lg-3"></div>
                     <div class="col-lg-6">
-                        <div class="card border-0 px-4" style="padding-top: 15px;">
+                        <div class="card border-0 px-4" style="padding-top: 15px; padding-bottom: 15px;">
                             <h2 class="mt-2">Nouveau sur YED Immobilier?</h2>
                             <span class="medium-font" ion-text color="gray" text-center>Inscrivez-vous en remplissant le formulaire
                                 ci-dessous.</span>
@@ -22,14 +22,25 @@
                                 <label class="btn btn-outline-primary" for="agent">Agent</label>
                             </div>
                             <div class="mb-1">
-                                <input type="text" [(ngModel)]="userPayload.phone" class="form-control" id="Votre numéro de téléphone"
-                                    class="form-control" placeholder="Votre numéro de téléphone">
-                                <input type="text" [(ngModel)]="userPayload.name" class="form-control" id="Nom ou Pseudo" class="form-control"
-                                    placeholder="Nom ou Pseudo">
-                                <input type="text" [(ngModel)]="userPayload.email" id="Adresse e-mail" class="form-control"
-                                    placeholder="Adresse e-mail">
-                                <input type="text" [(ngModel)]="userPayload.password" id="Mot de passe" class="form-control"
-                                    placeholder="Mot de passe">
+                                <div class="form-group">
+                                    <input type="text" [(ngModel)]="userPayload.phone" class="form-control" id="Votre numéro de téléphone"
+                                        class="form-control" placeholder="Votre numéro de téléphone">
+                                    <span class="required" *ngIf="error.phone"><i class="fa fa-warning"></i> Le champ téléphone est obligatoire.</span>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" [(ngModel)]="userPayload.name" class="form-control" id="Nom ou Pseudo" class="form-control" placeholder="Nom ou Pseudo">
+                                    <span class="required" *ngIf="error.name"><i class="fa fa-warning"></i> Le champ nom est obligatoire.</span>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" [(ngModel)]="userPayload.email" id="Adresse e-mail" class="form-control"
+                                        placeholder="Adresse e-mail">
+                                    <span class="required" *ngIf="error.email"><i class="fa fa-warning"></i> Le champ email est obligatoire.</span>
+                                </div>
+                                <div class="form--group">
+                                    <input type="text" [(ngModel)]="userPayload.password" id="Mot de passe" class="form-control" placeholder="Mot de passe">
+                                    <span class="required" *ngIf="error.password"><i class="fa fa-warning"></i> Le champ mot de passe est
+                                        obligatoire.</span>
+                                </div>
                             </div>
                             <div class="form-check mb-1">
                                 <input type="checkbox" [(ngModel)]="userPayload.terms" class="form-check-input" id="check1" name="option1"

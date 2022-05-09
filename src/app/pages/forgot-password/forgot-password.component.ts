@@ -12,6 +12,7 @@ export class ForgotPasswordComponent implements OnInit {
   loading: boolean;
   errormessage: any = "";
   successmessage:any  = "";
+  error = [];
   constructor(public utility:UtilityProvider, public auth:ApiProvider) { 
      this.userPayload = {
       "email": null
@@ -22,6 +23,9 @@ export class ForgotPasswordComponent implements OnInit {
   }
   
 forgot() {
+    if(!this.userPayload.email) this.error['email'] = true;
+    if(this.error.length) return;
+
     var re = /\S+@\S+\.\S+/;
     if(!re.test(this.userPayload.email)){
       this.errormessage="S'il vous plaît, mettez une adresse email valide";

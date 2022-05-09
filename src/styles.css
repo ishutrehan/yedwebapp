@@ -180,7 +180,7 @@ body{
     height: 1.3em;
     border-radius: 0 !important;
 }
-.form-check-input:focus{
+.form-check-input:focus, input:focus{
     box-shadow: none !important;
 }
 .btn-check:focus+.btn-outline-primary{
@@ -459,7 +459,9 @@ ngx-dropzone-remove-badge{
     font-size: 36px;
     margin-left: 50px;
   }
-  
+  .required {
+      color: red;
+  }
   /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
   #main {
     transition: margin-left .5s;
@@ -505,6 +507,7 @@ ngx-dropzone-remove-badge{
     font-size: 16px;
     font-weight: normal;
    }
+   
    .right-menu{
        display: none;
    }
