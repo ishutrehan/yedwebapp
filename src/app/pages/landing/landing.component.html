@@ -1,24 +1,87 @@
-<div class="overlay-bg"></div>
-<div class="listing-bc">
+<div class="listing-bc container-fluid">
+        <div class="row bg pt-4">
+            <div class="col-md-6 listing"></div>
+            <div class="col-md-6 listing">
+                <div class="box">
+                    <img src="../../../assets/images/icon-2.png">
+                    <h4>Je veux un bien</h4><br>
+                    <button class="louer un-bien" (click)="goToLink('listings')"> Louer un-bien - Acheter un bien
+                    </button><br><br>
+                    <img src="../../../assets/images/icon.png">
+                    <h4>Je veux publier un bien</h4><br>
+                    <button class="louer un-bien" (click)="goToLink('join-us')"> Mettre en Location - Vendre</button>
+                </div>
+            </div>
+        
+        </div>
+</div>
+<div class="spacer"></div>
 <div class="container">
-    <div class="row bg pt-5"> 
-        <div class="col-md-6 listing">
-            <div class="box">
-                <img src="../../../assets/images/icon-2.png">
-                <h3>Je veux un bien</h3>
-                <button class="louer un-bien" (click)="goToLink('listings')"> Louer un-bien - Acheter un bien
-                </button>
-            </div>
-        </div>
-        <div class="col-md-6 listing">
-            <div class="box">	
-            <img src="../../../assets/images/icon.png">
-            <h3>Je veux publier un bien</h3>
-            <button class="louer un-bien" (click)="goToLink('join-us')"> Mettre en Location - Vendre</button>
-            </div>
-        </div>
+<div class="row">
+    <div class="col-md-4">
+        <img class="house" src="../../../assets/images/house.jpg">
+    </div>
+    <div class="col-md-8">
+        <h2>À PROPOS DE YEDIMMOBILIER</h2>
+        <p class="text">
+            Yed Expertises (promotrice de l’application YED Immobilier) est une société indépendante et citoyenne qui se positionne
+            aujourd’hui comme une entreprise incontournable dans les offres de services dans le domaine de l’immobilier et du
+            conseil; qu’il s’agisse de l’expertise immobilière, de l’investissement immobilier ou de la gestion du portefeuille
+            immobilier. Elle répond aux besoins d’une clientèle de particuliers, d’institutions et d’entreprises.</p>
+            <p>Ses activités s’articulent autour de trois pôles :</p>
+            
+            <p>➔ l’Expertise immobilière,</p>
+            <p>➔ l’investissement immobilier</p>
+            <p>➔ l’agence immobilière (Location-Vente-Gestion)</p>
+
     </div>
 </div>
+<div class="spacer"></div>
+<h2 class="heading">POURQUOI UTILISER YEDIMMOBILIER?</h2>
+<div class="spacer"></div>
 
+<div class="row">
+    <div class="col-md-4">
+        <h3 class="content">Pour les vendeurs</h3>
+        <div class="center">
+                <img class="img" src="../../../assets/images/Iconn3.png" />
+                <p>Qu'il s'agisse d'attractions locales, d'un restaurant bon marché, d'écoles de quartier ou d'un théâtre de quartier
+                que
+                vous recherchez, voici un excellent point de départ.</p>
+            </div>
+   </div>
+    <div class="col-md-4">
+        <h3 class="content">Pour les locataires</h3>
+        <div class="center">
+            <img class="img" src="../../../assets/images/Iconn2.png"/>
+            <p>Nos professionnels sont là pour vous aider à trouver la maison de vos rêves, à coordonner une entreprise de déménagement
+            et à vous faire sentir à l'aise et en sécurité.</p>
+            </div>
+    </div>
+    <div class="col-md-4">
+        <h3 class="content">Pour les acheteurs</h3>
+        <div class="center">
+            <img class="img" src="../../../assets/images/Iconn1.png" />
+            <p>Parcourez les propriétés à vendre aux côtés des propriétés qui ne le sont pas. Enregistrez les recherches clés, soyez
+        alerté lorsque des propriétés spécifiques qui vous intéressent sont chargées et plus encore.</p>
+        </div>
+    </div>
+
+</div>
+<div class="spacer"></div>
+<div class="row">
+    <div class="col-md-4">
+        <img class="imgg" src="../../../assets/images/mobile.jpg" />
+    </div>
+    <div class="col-md-4">
+        <h4>ESSAYEZ L'APPLICATION YEDIMMOBILIER</h4>
+        <p>Achetez, vendez et trouvez à peu près n'importe quoi en utilisant l'application sur votre mobile</p>
+    </div>
+    <div class="col-md-4">
+        <h6>OBTENEZ VOTRE APPLICATION AUJOURD'HUI</h6>
+        <img class="social" src="../../../assets/images/google-play.png"/>
+    </div>
+
+</div>
 </div>
 <app-footer></app-footer>
