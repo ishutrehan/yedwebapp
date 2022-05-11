@@ -25,7 +25,9 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    
+    if(!this.utility.getStorage('isLogin')){
+      window.location.href = '';
+    }
   }
   onchange(event){
     

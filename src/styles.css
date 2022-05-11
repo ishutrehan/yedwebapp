@@ -650,4 +650,33 @@ ngx-dropzone-remove-badge{
     padding-left: 25px;
 
 }
-  }
+.box{
+    width: 100% !important;
+    padding: 20px 20px !important;
+    margin-left: 6px;
+    margin-right: 10px;
+    margin-top: -30px;
+}
+.icons-image{
+    height: 80px;
+    background-position: top;
+}
+.icons-content .col-md-9, .icons-content .col-md-9 h3 {
+    text-align: center !important;
+}
+.heading-top{
+    font-size: 24px !important;
+    text-align: center;
+    padding-top: 0% !important;
+    padding-bottom: 5px !important;
+}
+.Middlehead{
+    text-align: center;
+}
+.imgg{
+    padding-bottom: 10px;
+}
+.Midhead{
+    padding-bottom: 10px;
+}
+}

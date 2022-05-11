@@ -9,7 +9,7 @@ body{
 .box{
     background: #fff;
     width: 70%;
-    padding: 40px 0px;
+    padding: 25px 0px;
     height: 400px;
     }
 .heading{
@@ -31,8 +31,7 @@ body{
     margin-top: 0px !important;
 }
 .house{
-    height: 300px !important;
-    width: 300px !important;
+    width: 100% !important;
 }
 .text{
     text-align: justify;
