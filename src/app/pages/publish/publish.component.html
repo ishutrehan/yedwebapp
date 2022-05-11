@@ -1,156 +1,159 @@
-<div class="publish">
-<div class="about">
-    <div class="aboutus">
-        <div class="overlay">
-            YED Expertises
-        </div>
-    </div>
-    <div class="container">
-        <div class="row publish-form p-3">
-            <div class="col-md-3">
+<div class="site-content">
+    <div class="publish">
+        <div class="about">
+            <div class="aboutus">
+                <div class="overlay">
+                    YED Expertises
+                </div>
             </div>
-            <div class="btn-group mt-4 mb-4" role="group" aria-label="Basic radio toggle button">
-                <input type="radio" [(ngModel)]="formdata.purpose" class="btn-check mt-4" name="sale" id="sale"
-                    autocomplete="off" value="sale">
-                <label class="btn btn-outline-primary" for="sale">À vendre</label>
+            <div class="container">
+                <div class="row publish-form p-3">
+                    <div class="col-md-3">
+                    </div>
+                    <div class="btn-group mt-4 mb-4" role="group" aria-label="Basic radio toggle button">
+                        <input type="radio" [(ngModel)]="formdata.purpose" class="btn-check mt-4" name="sale" id="sale"
+                            autocomplete="off" value="sale">
+                        <label class="btn btn-outline-primary" for="sale">À vendre</label>
+                
+                        <input type="radio" [(ngModel)]="formdata.purpose" class="btn-check" name="rent" id="rent"
+                            autocomplete="off" value="rent">
+                        <label class="btn btn-outline-primary" for="rent">À louer</label>
+                        
+                    </div>
+                    <div class="form-group">
+                        <label><b>Libellé</b></label>
+                       <input type="text" [(ngModel)]="formdata.title" class="form-control">
+                        <span class="required" *ngIf="error.title"><i class="fa fa-warning"></i> Le champ titre est obligatoire.</span>
+                    </div>
+                    <div class="form-group">
+                        <label><b>Description</b></label>
+                        <textarea [(ngModel)]="formdata.description" class="form-control"></textarea>
+                        <span class="required" *ngIf="error.description"><i class="fa fa-warning"></i> Le champ description est obligatoire.</span>
+                    </div>
+                    <div class="form-group" *ngIf="formdata.purpose == 'sale'">
+                        <label><b>Prix</b></label>
+                        <input type="text" class="form-control" [(ngModel)]="formdata.price">
+                        <span class="required" *ngIf="error.price"><i class="fa fa-warning"></i> Le champ prix est obligatoire.</span>
+                    </div>
+                    <div class="form-group" *ngIf="formdata.purpose != 'sale'">
+                        <label><b>Prix/Mois</b></label>
+                        <input type="text" class="form-control" [(ngModel)]="formdata.price_per_month">
+                        <span class="required" *ngIf="error.price_per_month"><i class="fa fa-warning"></i> Le champ prix par mois est obligatoire.</span>
+                    </div>
+                    <div class="form-group">
+                        <label><b>Type</b></label>
+                        <select class="form-control" [(ngModel)]="formdata.type[0]">
+                            <option value="">-- Select --</option>
+                            <option *ngFor="let type of typesList;let i = index;" value="{{type.id}}">{{type.name}}</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label><b>Surface terrain(m2)</b></label>
+                        <input type="text" class="form-control" [(ngModel)]="formdata.area">
+                    </div>
+                    <div class="form-group" *ngIf="getMetaName(formdata.type[0], typesList) =='Appartement' || getMetaName(formdata.type[0], typesList) =='Villa' || getMetaName(formdata.type[0], typesList) =='Duplex'">
+                        <label><b>Nb de chambres</b></label>
+                        <input type="number" class="form-control" [(ngModel)]="formdata.number_of_bedrooms">
+                    </div>
+                    <div class="form-group" *ngIf="getMetaName(formdata.type[0], typesList) =='Appartement' || getMetaName(formdata.type[0], typesList) =='Villa' || getMetaName(formdata.type[0], typesList) =='Duplex'">
+                        <label><b>Nb de salles de bain</b></label>
+                        <input type="number" class="form-control" [(ngModel)]="formdata.number_of_bathrooms">
+                    </div>
+                    <div class="form-group" *ngIf="getMetaName(formdata.type[0], typesList) =='Champ' || getMetaName(formdata.type[0], typesList) =='Magasin' || getMetaName(formdata.type[0], typesList) =='Boutique' || getMetaName(formdata.type[0], typesList) =='Bureau'">
+                        <label><b>Nbre de pièces</b></label>
+                        <input type="number" class="form-control" [(ngModel)]="formdata.number_of_rooms">
+                    </div>
+                    <div class="form-group" *ngIf="getMetaName(formdata.type[0], typesList) =='Champ' || getMetaName(formdata.type[0], typesList) =='Magasin' || getMetaName(formdata.type[0], typesList) =='Boutique' || getMetaName(formdata.type[0], typesList) =='Bureau'">
+                        <label><b>Nbre de toilettes</b></label>
+                        <input type="number" class="form-control" [(ngModel)]="formdata.number_of_toilets">
+                    </div>
+                    <div class="form-group" *ngIf="formdata.purpose == 'rent'">
+                        <label><b>Type de location</b></label>
+                        <select class="form-control" [(ngModel)]="formdata.type_of_rental">
+                            <option value="">-- Select --</option>
+                            <option *ngFor="let rental of rentalsList;let i = index;" value="{{rental.id}}">{{rental.name}}</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label><b>Localisation</b></label>
+                        <input type="text" class="form-control" [(ngModel)]="formdata.location" ngx-google-places-autocomplete [options]='options' #placesRef="ngx-places"
+                        (onAddressChange)="handleAddressChange($event)" placeholder="Saisir la localisation">
+                        <span class="required" *ngIf="error.location"><i class="fa fa-warning"></i> Le champ de localisation est obligatoire.</span>
+                    </div>
+                    <div class="form-group">
+                        <label><b>Mots-clés de localisation</b></label>
+                        <ngx-tags-input class="form-control input-lg" [(ngModel)]="formdata.location_tags" placeholder="+Mots-clés"></ngx-tags-input>
+                    </div>
+                    <div class="form-group">
+                        <label><b>Image à la une</b></label>
+                        <ngx-dropzone [multiple]="false" (change)="onSelect($event)">
+                            <ngx-dropzone-label>Déposez les fichiers ici ou cliquez pour télécharger</ngx-dropzone-label>
+                            <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of featured" [removable]="true" [file]="f" (removed)="onRemoveFeatured(f)">
+                            </ngx-dropzone-image-preview>
+                        </ngx-dropzone>
+                        <span class="required" *ngIf="error.featured"><i class="fa fa-warning"></i> Le champ image en vedette est obligatoire.</span>
+                    </div>
+                    <div class="form-group">
+                        <label><b>Images</b></label>
+                        <ngx-dropzone (change)="onSelectGallery($event)">
+                            <ngx-dropzone-label>Déposez les fichiers ici ou cliquez pour télécharger</ngx-dropzone-label>
+                            <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of gallery" [removable]="true"
+                                [file]="f" (removed)="onRemoveGallery(f)">
+                            </ngx-dropzone-image-preview>
+                        </ngx-dropzone>
+                    </div>
+                    <div class="form-group" *ngIf="getMetaName(formdata.type[0], typesList) !='Terrain'">
+                        <label><b>Commodites</b></label>
+                        <div class="form-check" *ngFor="let  amenities of  amenitieslist;let i = index;">
+                            <input class="form-check-input" id="{{ amenities.id}}" type="checkbox" [(ngModel)]=" amenities.checked">
+                            <label class="form-check-label" for="{{ amenities.id}}">
+                                {{amenities.name}}
+                            </label>
+                        </div>
+                    </div>
+                    <button type="button" class="louer un-bien" (click)="submit()">Publier<i class="fa fa-spinner fa-spin" *ngIf="loading"></i></button>
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="errormessage">
+                        {{ errormessage }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    <div class="alert alert-success alert-dismissible" *ngIf="successmessage">
+                        {{ successmessage }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                    
+                    <div class="col-md-3"></div>
+                </div>
+            </div>
+            </div>
+        </div>
+        <div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':displayStyle}">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
         
-                <input type="radio" [(ngModel)]="formdata.purpose" class="btn-check" name="rent" id="rent"
-                    autocomplete="off" value="rent">
-                <label class="btn btn-outline-primary" for="rent">À louer</label>
-                
-            </div>
-            <div class="form-group">
-                <label><b>Libellé</b></label>
-               <input type="text" [(ngModel)]="formdata.title" class="form-control">
-                <span class="required" *ngIf="error.title"><i class="fa fa-warning"></i> Le champ titre est obligatoire.</span>
-            </div>
-            <div class="form-group">
-                <label><b>Description</b></label>
-                <textarea [(ngModel)]="formdata.description" class="form-control"></textarea>
-                <span class="required" *ngIf="error.description"><i class="fa fa-warning"></i> Le champ description est obligatoire.</span>
-            </div>
-            <div class="form-group" *ngIf="formdata.purpose == 'sale'">
-                <label><b>Prix</b></label>
-                <input type="text" class="form-control" [(ngModel)]="formdata.price">
-                <span class="required" *ngIf="error.price"><i class="fa fa-warning"></i> Le champ prix est obligatoire.</span>
-            </div>
-            <div class="form-group" *ngIf="formdata.purpose != 'sale'">
-                <label><b>Prix/Mois</b></label>
-                <input type="text" class="form-control" [(ngModel)]="formdata.price_per_month">
-                <span class="required" *ngIf="error.price_per_month"><i class="fa fa-warning"></i> Le champ prix par mois est obligatoire.</span>
-            </div>
-            <div class="form-group">
-                <label><b>Type</b></label>
-                <select class="form-control" [(ngModel)]="formdata.type[0]">
-                    <option value="">-- Select --</option>
-                    <option *ngFor="let type of typesList;let i = index;" value="{{type.id}}">{{type.name}}</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label><b>Surface terrain(m2)</b></label>
-                <input type="text" class="form-control" [(ngModel)]="formdata.area">
-            </div>
-            <div class="form-group" *ngIf="getMetaName(formdata.type[0], typesList) =='Appartement' || getMetaName(formdata.type[0], typesList) =='Villa' || getMetaName(formdata.type[0], typesList) =='Duplex'">
-                <label><b>Nb de chambres</b></label>
-                <input type="number" class="form-control" [(ngModel)]="formdata.number_of_bedrooms">
-            </div>
-            <div class="form-group" *ngIf="getMetaName(formdata.type[0], typesList) =='Appartement' || getMetaName(formdata.type[0], typesList) =='Villa' || getMetaName(formdata.type[0], typesList) =='Duplex'">
-                <label><b>Nb de salles de bain</b></label>
-                <input type="number" class="form-control" [(ngModel)]="formdata.number_of_bathrooms">
-            </div>
-            <div class="form-group" *ngIf="getMetaName(formdata.type[0], typesList) =='Champ' || getMetaName(formdata.type[0], typesList) =='Magasin' || getMetaName(formdata.type[0], typesList) =='Boutique' || getMetaName(formdata.type[0], typesList) =='Bureau'">
-                <label><b>Nbre de pièces</b></label>
-                <input type="number" class="form-control" [(ngModel)]="formdata.number_of_rooms">
-            </div>
-            <div class="form-group" *ngIf="getMetaName(formdata.type[0], typesList) =='Champ' || getMetaName(formdata.type[0], typesList) =='Magasin' || getMetaName(formdata.type[0], typesList) =='Boutique' || getMetaName(formdata.type[0], typesList) =='Bureau'">
-                <label><b>Nbre de toilettes</b></label>
-                <input type="number" class="form-control" [(ngModel)]="formdata.number_of_toilets">
-            </div>
-            <div class="form-group" *ngIf="formdata.purpose == 'rent'">
-                <label><b>Type de location</b></label>
-                <select class="form-control" [(ngModel)]="formdata.type_of_rental">
-                    <option value="">-- Select --</option>
-                    <option *ngFor="let rental of rentalsList;let i = index;" value="{{rental.id}}">{{rental.name}}</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label><b>Localisation</b></label>
-                <input type="text" class="form-control" [(ngModel)]="formdata.location" ngx-google-places-autocomplete [options]='options' #placesRef="ngx-places"
-                (onAddressChange)="handleAddressChange($event)" placeholder="Saisir la localisation">
-                <span class="required" *ngIf="error.location"><i class="fa fa-warning"></i> Le champ de localisation est obligatoire.</span>
-            </div>
-            <div class="form-group">
-                <label><b>Mots-clés de localisation</b></label>
-                <ngx-tags-input class="form-control input-lg" [(ngModel)]="formdata.location_tags" placeholder="+Mots-clés"></ngx-tags-input>
-            </div>
-            <div class="form-group">
-                <label><b>Image à la une</b></label>
-                <ngx-dropzone [multiple]="false" (change)="onSelect($event)">
-                    <ngx-dropzone-label>Déposez les fichiers ici ou cliquez pour télécharger</ngx-dropzone-label>
-                    <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of featured" [removable]="true" [file]="f" (removed)="onRemoveFeatured(f)">
-                    </ngx-dropzone-image-preview>
-                </ngx-dropzone>
-                <span class="required" *ngIf="error.featured"><i class="fa fa-warning"></i> Le champ image en vedette est obligatoire.</span>
-            </div>
-            <div class="form-group">
-                <label><b>Images</b></label>
-                <ngx-dropzone (change)="onSelectGallery($event)">
-                    <ngx-dropzone-label>Déposez les fichiers ici ou cliquez pour télécharger</ngx-dropzone-label>
-                    <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of gallery" [removable]="true"
-                        [file]="f" (removed)="onRemoveGallery(f)">
-                    </ngx-dropzone-image-preview>
-                </ngx-dropzone>
-            </div>
-            <div class="form-group" *ngIf="getMetaName(formdata.type[0], typesList) !='Terrain'">
-                <label><b>Commodites</b></label>
-                <div class="form-check" *ngFor="let  amenities of  amenitieslist;let i = index;">
-                    <input class="form-check-input" id="{{ amenities.id}}" type="checkbox" [(ngModel)]=" amenities.checked">
-                    <label class="form-check-label" for="{{ amenities.id}}">
-                        {{amenities.name}}
-                    </label>
+                    <div class="modal-body">
+                    <div class="mb-1">
+                        
+                        <label>Votre numéro de téléphone</label>
+                        <input type="text" class="form-control" [(ngModel)]="userPayload.phone">
+                        <button type="button" class="louer un-bien" (click)="savePhone()">Sauvegarder<i class="fa fa-spinner fa-spin" *ngIf="savephoneloader"></i></button>
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="errormessage">
+                            {{ errormessage }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                        <div class="alert alert-success alert-dismissible" *ngIf="successmessage">
+                            {{ successmessage }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" (click)="closepopup()">
+                            Close
+                        </button>
+                    </div>
                 </div>
             </div>
-            <button type="button" class="louer un-bien" (click)="submit()">Publier<i class="fa fa-spinner fa-spin" *ngIf="loading"></i></button>
-            <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="errormessage">
-                {{ errormessage }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-            <div class="alert alert-success alert-dismissible" *ngIf="successmessage">
-                {{ successmessage }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-            </div>
-            
-            <div class="col-md-3"></div>
         </div>
-    </div>
-    </div>
 </div>
-<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':displayStyle}">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
 
-            <div class="modal-body">
-            <div class="mb-1">
-                
-                <label>Votre numéro de téléphone</label>
-                <input type="text" class="form-control" [(ngModel)]="userPayload.phone">
-                <button type="button" class="louer un-bien" (click)="savePhone()">Sauvegarder<i class="fa fa-spinner fa-spin" *ngIf="savephoneloader"></i></button>
-                <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="errormessage">
-                    {{ errormessage }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-                <div class="alert alert-success alert-dismissible" *ngIf="successmessage">
-                    {{ successmessage }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                </div>
-            </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger" (click)="closepopup()">
-                    Close
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
 <app-footer></app-footer>

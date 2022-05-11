@@ -3,13 +3,17 @@
             <div class="col-md-6 listing"></div>
             <div class="col-md-6 listing">
                 <div class="box">
-                    <img src="../../../assets/images/icon-2.png">
-                    <h4>Je veux un bien</h4><br>
-                    <button class="louer un-bien" (click)="goToLink('listings')"> Louer un-bien - Acheter un bien
-                    </button><br><br>
-                    <img src="../../../assets/images/icon.png">
-                    <h4>Je veux publier un bien</h4><br>
-                    <button class="louer un-bien" (click)="goToLink('join-us')"> Mettre en Location - Vendre</button>
+                    <div style="float: left; width:100%;">
+                        <img src="../../../assets/images/icon-2.png">
+                        <h4>Je veux un bien</h4>
+                        <button class="louer un-bien" (click)="goToLink('listings')"> Louer un-bien - Acheter un bien
+                        </button>
+                    </div>
+                    <div style="float: left; width:100%;">
+                        <img src="../../../assets/images/icon.png">
+                        <h4>Je veux publier un bien</h4>
+                        <button class="louer un-bien" (click)="goToLink('join-us')"> Mettre en Location - Vendre</button>
+                    </div>
                 </div>
             </div>
         
@@ -42,46 +46,54 @@
 
 <div class="row">
     <div class="col-md-4">
-        <h3 class="content">Pour les vendeurs</h3>
-        <div class="center">
-                <img class="img" src="../../../assets/images/Iconn3.png" />
-                <p>Qu'il s'agisse d'attractions locales, d'un restaurant bon marché, d'écoles de quartier ou d'un théâtre de quartier
-                que
-                vous recherchez, voici un excellent point de départ.</p>
+        <div class="row icons-content">
+            <div class="icons-image icons-image-1 col-md-3" style="background-image: url('../../../assets/images/Iconn3.png');" ></div>
+            <div class="col-md-9">
+                <h3 class="content">Pour les vendeurs</h3>
+                <p>Qu'il s'agisse d'attractions locales, d'un restaurant bon marché, d'écoles de quartier ou d'un théâtre de quartier que vous recherchez, voici un excellent point de départ.</p>
             </div>
+        </div>
    </div>
     <div class="col-md-4">
-        <h3 class="content">Pour les locataires</h3>
-        <div class="center">
-            <img class="img" src="../../../assets/images/Iconn2.png"/>
-            <p>Nos professionnels sont là pour vous aider à trouver la maison de vos rêves, à coordonner une entreprise de déménagement
-            et à vous faire sentir à l'aise et en sécurité.</p>
+        <div class="row icons-content">
+            <div class="icons-image icons-image-2 col-md-3" style="background-image: url('../../../assets/images/Iconn2.png');" ></div>
+            <div class="col-md-9">
+                <h3 class="content">Pour les locataires</h3>
+                <p>Nos professionnels sont là pour vous aider à trouver la maison de vos rêves, à coordonner une entreprise de déménagement
+                et à vous faire sentir à l'aise et en sécurité.</p>
             </div>
+        </div>
     </div>
     <div class="col-md-4">
-        <h3 class="content">Pour les acheteurs</h3>
-        <div class="center">
-            <img class="img" src="../../../assets/images/Iconn1.png" />
-            <p>Parcourez les propriétés à vendre aux côtés des propriétés qui ne le sont pas. Enregistrez les recherches clés, soyez
-        alerté lorsque des propriétés spécifiques qui vous intéressent sont chargées et plus encore.</p>
+        <div class="row icons-content">
+            <div class="icons-image icons-image-3 col-md-3" style="background-image: url('../../../assets/images/Iconn1.png');" ></div>
+            <div class="col-md-9">
+                <h3 class="content">Pour les acheteurs</h3>
+                <p>Parcourez les propriétés à vendre aux côtés des propriétés qui ne le sont pas. Enregistrez les recherches clés, soyez alerté lorsque des propriétés spécifiques qui vous intéressent sont chargées et plus encore.</p>
+            </div>
         </div>
     </div>
 
 </div>
-<div class="spacer"></div>
-<div class="row">
-    <div class="col-md-4">
-        <img class="imgg" src="../../../assets/images/mobile.jpg" />
-    </div>
-    <div class="col-md-4">
-        <h4>ESSAYEZ L'APPLICATION YEDIMMOBILIER</h4>
-        <p>Achetez, vendez et trouvez à peu près n'importe quoi en utilisant l'application sur votre mobile</p>
-    </div>
-    <div class="col-md-4">
-        <h6>OBTENEZ VOTRE APPLICATION AUJOURD'HUI</h6>
-        <img class="social" src="../../../assets/images/google-play.png"/>
-    </div>
-
 </div>
+
+<div class="spacer"></div>
+<div class="clearfix"></div>
+<div class="container-fluid">
+    <div class="row px-4" style="background-color: #f2f2f2;">
+        <div class="col-md-4">
+            <img class="imgg" src="../../../assets/images/mobile.jpg" style="width: 100%;"/>
+        </div>
+        <div class="col-md-4 pt-3">
+            <h4>ESSAYEZ L'APPLICATION YEDIMMOBILIER</h4>
+            <p>Achetez, vendez et trouvez à peu près n'importe quoi en utilisant l'application sur votre mobile</p>
+        </div>
+        <div class="col-md-4 pt-3">
+            <h6>OBTENEZ VOTRE APPLICATION AUJOURD'HUI</h6>
+           <a href="https://play.google.com/store/apps/details?id=com.xpertises.app" target="_blank">
+            <img class="playstore-image" src="../../../assets/images/google-play.png"/>
+           </a> 
+        </div>
+    </div>
 </div>
 <app-footer></app-footer>

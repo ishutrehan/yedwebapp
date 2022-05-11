@@ -189,8 +189,24 @@ pagination-controls{
 .profile label{
     font-weight: 600 !important;
 }
-body{
+.site-content{
     background-color: #ecf0f5;
+    float: left;
+    width: 100%;
+    padding-bottom: 50px;
+}
+.icons-image{
+    background-repeat: no-repeat;
+    background-position: bottom 45px right 0px;
+}
+.icons-image-1{
+    background-position: bottom 79px right 0px;
+}
+.icons-image-2{
+    background-position: bottom 59px right 0px;
+}
+.icons-image-3{
+    background-position: bottom 103px right 0px;
 }
 
 .overlay {
@@ -229,6 +245,12 @@ body{
     box-shadow: 2px 2px 2px 2px #cfcfcf;
     border-radius: 3px;
     width: 50px;
+}
+
+.spacer{
+    float:left;
+    width: 100%;
+    height: 50px;
 }
 .socialbutton img{
     width: 100%;
@@ -494,6 +516,10 @@ ngx-dropzone-remove-badge{
   }
   .required {
       color: red;
+  }
+  footer{
+      float: left;
+      width: 100%;
   }
   /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
   #main {

@@ -1,448 +1,450 @@
-<div class="container" *ngIf="!showSingle">
-    <form (ngSubmit)="getPropertyList(searchParams)">
-        <div class="box mt-5 mb-5 p-2">
-            <div class="box-header with-border">
-                <i class="fa fa-search"></i>
-                <h3 class="box-title">Paramètres de recherche </h3>
-            </div>
-            <div class="box-body p-2">
-                <div class="row">
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label class="control-label">Trier par</label>
-                            <select class="form-control" name="sort_by" [(ngModel)]="searchParams.sort_by" [ngModelOptions]="{standalone: true}">
-                                <option name="sort_by" id="recent" value="recent">Plus récent</option>
-                                <option name="sort_by" id="low_price" value="low_price">Prix : du Moins au Plus Cher</option>
-                                <option name="sort_by" id="high_price" value="high_price">Prix : du Plus au Moins Cher</option>
-                                <option name="sort_by" id="reset" value="reset">Réinitialiser</option>
+<div class="site-content">
+    <div class="container" *ngIf="!showSingle">
+        <form (ngSubmit)="getPropertyList(searchParams)">
+            <div class="box mt-5 mb-5 p-2">
+                <div class="box-header with-border">
+                    <i class="fa fa-search"></i>
+                    <h3 class="box-title">Paramètres de recherche </h3>
+                </div>
+                <div class="box-body p-2">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">Trier par</label>
+                                <select class="form-control" name="sort_by" [(ngModel)]="searchParams.sort_by" [ngModelOptions]="{standalone: true}">
+                                    <option name="sort_by" id="recent" value="recent">Plus récent</option>
+                                    <option name="sort_by" id="low_price" value="low_price">Prix : du Moins au Plus Cher</option>
+                                    <option name="sort_by" id="high_price" value="high_price">Prix : du Plus au Moins Cher</option>
+                                    <option name="sort_by" id="reset" value="reset">Réinitialiser</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-4">
+                            <label class="control-label">Localisation</label>
+                            <div class="form-group"> 
+                                <input type="text" class="form-control" [(ngModel)]="searchParams.location" ngx-google-places-autocomplete [options]='options' #placesRef="ngx-places" (onAddressChange)="handleAddressChange($event)" name="location" [ngModelOptions]="{standalone: true}">
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <label class="control-label">Statut</label>
+                            <select class="form-control" [(ngModel)]="searchParams.purpose" [ngModelOptions]="{standalone: true}" name="purpose">
+                                <option value="">-- Select --</option>
+                                <option value="sale">À vendre</option>
+                                <option value="rent">À louer</option>
+                            </select>
+                        </div>  
+                        <div class="col-md-3">
+                            <label class="control-label">Types de bien</label>
+                            <div class="form-group"> 
+                                <ng-multiselect-dropdown
+                                [placeholder]="'Sélectionnez types de bien'"
+                                [settings]="dropdownSettings"
+                                [data]="typesList" [(ngModel)]="selectedTypes" [ngModelOptions]="{standalone: true}"
+                                >
+                                </ng-multiselect-dropdown>
+                            </div>
+                        </div>               
+                        <div class="col-md-4">
+                            <label class="control-label">Nom d'utilisateur</label>
+                            <div class="form-group"> 					 
+                                <input type="text" class="form-control" [(ngModel)]="searchParams.name" [ngModelOptions]="{standalone: true}" name="name">
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-4">
+                            <label class="control-label">Répertorié par</label>
+                            <select class="form-control" [(ngModel)]="searchParams.user_role" [ngModelOptions]="{standalone: true}" name="user_role">
+                                <option value="">-- Select --</option>
+                                <option value="individual">Particulier</option>
+                                <option value="agent">Professionnel</option>
                             </select>
                         </div>
-                    </div>
-                    
-                    <div class="col-md-4">
-                        <label class="control-label">Localisation</label>
-                        <div class="form-group"> 
-                            <input type="text" class="form-control" [(ngModel)]="searchParams.location" ngx-google-places-autocomplete [options]='options' #placesRef="ngx-places" (onAddressChange)="handleAddressChange($event)" name="location" [ngModelOptions]="{standalone: true}">
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <label class="control-label">Statut</label>
-                        <select class="form-control" [(ngModel)]="searchParams.purpose" [ngModelOptions]="{standalone: true}" name="purpose">
-                            <option value="">-- Select --</option>
-                            <option value="sale">À vendre</option>
-                            <option value="rent">À louer</option>
-                        </select>
-                    </div>  
-                    <div class="col-md-3">
-                        <label class="control-label">Types de bien</label>
-                        <div class="form-group"> 
-                            <ng-multiselect-dropdown
-                            [placeholder]="'Sélectionnez types de bien'"
-                            [settings]="dropdownSettings"
-                            [data]="typesList" [(ngModel)]="selectedTypes" [ngModelOptions]="{standalone: true}"
-                            >
-                            </ng-multiselect-dropdown>
-                        </div>
-                    </div>               
-                    <div class="col-md-4">
-                        <label class="control-label">Nom d'utilisateur</label>
-                        <div class="form-group"> 					 
-                            <input type="text" class="form-control" [(ngModel)]="searchParams.name" [ngModelOptions]="{standalone: true}" name="name">
-                        </div>
-                    </div>
-                    
-                    <div class="col-md-4">
-                        <label class="control-label">Répertorié par</label>
-                        <select class="form-control" [(ngModel)]="searchParams.user_role" [ngModelOptions]="{standalone: true}" name="user_role">
-                            <option value="">-- Select --</option>
-                            <option value="individual">Particulier</option>
-                            <option value="agent">Professionnel</option>
-                        </select>
-                    </div>
-                    
-                    <div class="col-md-4">
-                        <label class="control-label">Mots-clés de localisation</label>
-                        <div class="form-group"> 					 
-                            <input type="text" class="form-control" [(ngModel)]="searchParams.location_tags" [ngModelOptions]="{standalone: true}" name="tags">
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <label class="control-label">Surface m2</label>
-                        <div class="form-group"> 
-                            <div class="row">	
-                                <div class="col-md-6 surfacemax">	
-                                <input type="text" class="form-control" placeholder="Surface min" [(ngModel)]="searchParams.area_min" [ngModelOptions]="{standalone: true}" name="area_min">	
-                                </div>
-                                <div class="col-md-6 surfacemax">
-                                    <input type="text" class="form-control" placeholder="surface max" [(ngModel)]="searchParams.area_max" [ngModelOptions]="{standalone: true}" name="area_max">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <label class="control-label">Budget</label>
-                        <div class="form-group"> 
-                            <div class="row Surface">	
-                                <div class="col-md-6 surfacemax">
-                                <input type="text" class="form-control" placeholder="prix min" [(ngModel)]="searchParams.price_min" [ngModelOptions]="{standalone: true}" name="price_min">	
-                                </div>
-                                <div class="col-md-6 surfacemax">
-                                <input type="text" class="form-control" placeholder="prix max" [(ngModel)]="searchParams.price_max" [ngModelOptions]="{standalone: true}" name="price_max">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <label class="control-label">Nombres De Chambres</label>
-                        <div class="form-group"> 					 
-                            <input type="number" class="form-control" [(ngModel)]="searchParams.number_of_bedrooms" [ngModelOptions]="{standalone: true}" name="chambers">
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <label class="control-label">Nombres Salles De Pieces Bains</label>
-                        <div class="form-group"> 					 
-                            <input type="number" class="form-control" [(ngModel)]="searchParams.number_of_bathrooms" [ngModelOptions]="{standalone: true}" name="bains">
-                        </div>
-                    </div>
-                    <div class="clearfix"></div>
-                    
-                    <div class="col-md-4">
                         
-                        <label class="control-label">Rayon de Localisation</label>
-                        <div class="form-group"> 
-                            <ng-multiselect-dropdown
-                                [placeholder]="'Rayon de Localisation'"
-                                [settings]="dropdownSettingsSingle"
-                                [data]="distanceOptions" [(ngModel)]="selectedDistance" [ngModelOptions]="{standalone: true}"
-                                >
-                                </ng-multiselect-dropdown>
+                        <div class="col-md-4">
+                            <label class="control-label">Mots-clés de localisation</label>
+                            <div class="form-group"> 					 
+                                <input type="text" class="form-control" [(ngModel)]="searchParams.location_tags" [ngModelOptions]="{standalone: true}" name="tags">
+                            </div>
                         </div>
-                    </div>   
-                    <div class="col-md-6" *ngIf="searchParams.purpose == 'rent'">
-                        <label class="control-label">Type de location</label>
-                        <div class="form-group"> 
-                            <div class="row">
+                        <div class="col-md-3">
+                            <label class="control-label">Surface m2</label>
+                            <div class="form-group"> 
+                                <div class="row">	
+                                    <div class="col-md-6 surfacemax">	
+                                    <input type="text" class="form-control" placeholder="Surface min" [(ngModel)]="searchParams.area_min" [ngModelOptions]="{standalone: true}" name="area_min">	
+                                    </div>
+                                    <div class="col-md-6 surfacemax">
+                                        <input type="text" class="form-control" placeholder="surface max" [(ngModel)]="searchParams.area_max" [ngModelOptions]="{standalone: true}" name="area_max">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="control-label">Budget</label>
+                            <div class="form-group"> 
+                                <div class="row Surface">	
+                                    <div class="col-md-6 surfacemax">
+                                    <input type="text" class="form-control" placeholder="prix min" [(ngModel)]="searchParams.price_min" [ngModelOptions]="{standalone: true}" name="price_min">	
+                                    </div>
+                                    <div class="col-md-6 surfacemax">
+                                    <input type="text" class="form-control" placeholder="prix max" [(ngModel)]="searchParams.price_max" [ngModelOptions]="{standalone: true}" name="price_max">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="control-label">Nombres De Chambres</label>
+                            <div class="form-group"> 					 
+                                <input type="number" class="form-control" [(ngModel)]="searchParams.number_of_bedrooms" [ngModelOptions]="{standalone: true}" name="chambers">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="control-label">Nombres Salles De Pieces Bains</label>
+                            <div class="form-group"> 					 
+                                <input type="number" class="form-control" [(ngModel)]="searchParams.number_of_bathrooms" [ngModelOptions]="{standalone: true}" name="bains">
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        
+                        <div class="col-md-4">
+                            
+                            <label class="control-label">Rayon de Localisation</label>
+                            <div class="form-group"> 
                                 <ng-multiselect-dropdown
-                                [placeholder]="'Sélectionnez type de location'"
-                                [settings]="dropdownSettings"
-                                [data]="rentalsList" [(ngModel)]="selectedRentals" [ngModelOptions]="{standalone: true}"
-                                >
-                                </ng-multiselect-dropdown>
+                                    [placeholder]="'Rayon de Localisation'"
+                                    [settings]="dropdownSettingsSingle"
+                                    [data]="distanceOptions" [(ngModel)]="selectedDistance" [ngModelOptions]="{standalone: true}"
+                                    >
+                                    </ng-multiselect-dropdown>
+                            </div>
+                        </div>   
+                        <div class="col-md-6" *ngIf="searchParams.purpose == 'rent'">
+                            <label class="control-label">Type de location</label>
+                            <div class="form-group"> 
+                                <div class="row">
+                                    <ng-multiselect-dropdown
+                                    [placeholder]="'Sélectionnez type de location'"
+                                    [settings]="dropdownSettings"
+                                    [data]="rentalsList" [(ngModel)]="selectedRentals" [ngModelOptions]="{standalone: true}"
+                                    >
+                                    </ng-multiselect-dropdown>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="col-md-6"></div>
+                        <div class="col-md-3" style="text-align: right;">
+                            <button class="louer un-bien">Lancer La Recherche</button>
+                        </div>
+                        <div class="col-md-3" style="text-align: left;">
+                            <button type="button" class="btn btn-link reset" (click)="resetForm()">Reinitialiser La Recherche</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>	 
+      
+        <div class="row listing grid">
+            <pagination-controls (pageChange)="onPageChange($event)" (pageBoundsCorrection)="onPageBoundsCorrection($event)" [directionLinks]="true" [autoHide]="true" [responsive]="true" previousLabel="Prev" nextLabel="Next"        screenReaderPaginationLabel="Pagination" screenReaderPageLabel="page" screenReaderCurrentLabel="You're on page">
+            </pagination-controls>
+            <div class="col-md-12">
+                <p>{{config.totalItems}} résultats trouvés</p>
+                <div class="grid-mode" style="text-align: right;">
+                    <button class="btn" [ngClass]="{'active-grid': displayMode == 'list'}" (click)="onDisplayModeChange('list')"><i class="fa fa-list"></i></button>
+                    <button class="btn" [ngClass]="{'active-grid': displayMode == 'grid'}" (click)="onDisplayModeChange('grid')"><i class="fa fa-th-large"></i></button>
+                </div>
+               <div class="row" [hidden]="!loading">
+                    <div class="col-12 col-sm-4" *ngFor="let i of [].constructor(10);">
+                        <div class="ph-item">
+                            <div class="ph-col-12">
+                                <div class="ph-picture"></div>
+                                <div class="ph-row">
+                                    <div class="ph-col-4"></div>
+                                    <div class="ph-col-8 empty"></div>
+                                    <div class="ph-col-12"></div>
+                                </div>
+                            </div>
+                            <div class="ph-col-2">
+                                <div class="ph-avatar"></div>
+                            </div>
+                            <div>
+                                <div class="ph-row">
+                                    <div class="ph-col-12"></div>
+                                    <div class="ph-col-2"></div>
+                                    <div class="ph-col-10 empty"></div>
+                                    <div class="ph-col-8 big"></div>
+                                    <div class="ph-col-4 big empty"></div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="clearfix"></div>
-                    <div class="col-md-6"></div>
-                    <div class="col-md-3" style="text-align: right;">
-                        <button class="louer un-bien">Lancer La Recherche</button>
+                </div>
+                <div class="row" *ngIf="displayMode == 'grid'">
+                    <div class="col-md-4 listing-colum" *ngFor="let property of propertyList | paginate: { itemsPerPage: this.config.itemsPerPage, currentPage: config.currentPage, totalItems: config.totalItems}; let i = index;" [hidden]="loading">
+                        
+                            
+                        <div class="p-3">
+                            <div class="listing-image" [ngStyle]="{ 'background-image': 'url('+property.featured+ ')'}">
+                                <button class="like-button" *ngIf="showIcon()" (click)="likeDislike(property)">
+                                    <i class="fa fa-heart" *ngIf="property.favorite"></i>
+                                    <i class="fa fa-heart-o" *ngIf="!property.favorite"></i>
+                                </button>
+                            </div>
+                            <div class="row">
+                                <div class="col-5">
+                                    <span class="id-badge text text-md"> #{{property.id}}</span>
+                            
+                                    <span class="id-badge text text-md" tooltip="{{property.username}}" placement="bottom"> {{SubStringName(property.username)}}</span>
+                                </div>
+                                <div class="col-3 eye">
+                                    <i class="fa fa-eye" style="font-size:18px"></i>
+                                    <span>{{ property.viewCount }}</span>
+                                </div>
+                                <div class="col-4 a-vendra">
+                                    <button class="vendra">{{ property.purpose }}</button>
+                                </div>
+                            </div>
+                            
+                            <div class="title card-title card-title-md">
+                                <span class="primary-heading" tooltip="{{property.title}}" placement="bottom" (click)="goToLink('listings', property.id)">{{ SubString(property.title) }}</span>
+                            </div>
+                            <div class="detail card-title card-title-md">
+                                {{SubString(property.description) }}
+                            </div>
+                            <span class="id-badge text text-md"> {{ property.price }} {{property.currency}}</span><br>
+                            <span class="id-badge text text-md" ion-text="">{{ dateFormat(property.created_at)}}</span>
+                            <div class="row grid-buttons">
+                                <a href="mailto:{{property.contact_email}}" class="contact button-inner col-md-5 m-1">
+                                    <i class="fa fa-envelope" aria-hidden="true"></i>
+                                    Contacter
+                                </a>
+                                <a href="tel:{{property.contact_phone}}" class="Telephone button-inner-1 col-md-5 m-1">
+                                    <i class="fa fa-phone" aria-hidden="true" style="color:#ff5722;"></i>
+                                    Telephone
+                                </a>
+                            </div>
+                            
+                            <div class="col-md-1"></div>
+                            <div class="space"></div>
+                        </div>
+                        
+                    </div> 
+                    <div class="col-md-12">										
+                    <pagination-controls (pageChange)="onPageChange($event)"
+                        (pageBoundsCorrection)="onPageBoundsCorrection($event)" [directionLinks]="true"
+                        [autoHide]="true" [responsive]="true" previousLabel="Prev" nextLabel="Next"
+                        screenReaderPaginationLabel="Pagination" screenReaderPageLabel="page" screenReaderCurrentLabel="You're on page">
+                    </pagination-controls>
+                    </div>	
+                </div>
+                <div class="row" *ngIf="displayMode == 'list'">
+                    <div class="row col-md-12 listing-colum"
+                        *ngFor="let property of propertyList | paginate: { itemsPerPage: this.config.itemsPerPage, currentPage: config.currentPage, totalItems: config.totalItems}; let i = index;"
+                        [hidden]="loading">
+                    
+                        <div class="p-3 col-md-4">
+                            <div class="listing-image" [ngStyle]="{ 'background-image': 'url('+property.featured+ ')'}">
+                                <button class="like-button" *ngIf="showIcon()" (click)="likeDislike(property)">
+                                    <i class="fa fa-heart" *ngIf="property.favorite"></i>
+                                    <i class="fa fa-heart-o" *ngIf="!property.favorite"></i>
+                                </button>
+                            </div>
+                    
+                        </div>
+                        <div class="p-3 col-md-8 text">
+                            <div class="row mt-4">
+                                <div class="col-md-4">
+                                    <span class="id-badge text text-md"> #{{property.id}}</span>
+                    
+                                    <span class="id-badge text text-md" tooltip="{{property.username}}" placement="bottom">
+                                        {{SubStringName(property.username)}}</span>
+                                </div>
+                                <div class="col-md-4 eye">
+                                    <i class="fa fa-eye" style="font-size:18px"></i>
+                                    <span>{{ property.viewCount }}</span>
+                                </div>
+                                <div class="col-md-4 a-vendra">
+                                    <button class="vendra">{{ property.purpose }}</button>
+                                </div>
+                            </div>
+                    
+                            <div class="title card-title card-title-md col-md-8">
+                                <span class="primary-heading" tooltip="{{property.title}}" placement="bottom"
+                                    (click)="goToLink('listings', property.id)">{{ SubString(property.title) }}</span>
+                            </div>
+                            <div class="detail card-title card-title-md">
+                                {{SubString(property.description) }}
+                            </div>
+                            <span class="id-badge text text-md"> {{ property.price }} {{property.currency}}</span><br>
+                            <span class="id-badge text text-md" ion-text="">{{ dateFormat(property.created_at)}}</span>
+                            <div class="row grid-buttons mt-4">
+                                <a href="mailto:{{property.contact_email}}" class="contact button-inner col-md-5 m-1">
+                                    <i class="fa fa-envelope" aria-hidden="true"></i>
+                                    Contacter
+                                </a>
+                                <a href="tel:{{property.contact_phone}}" class="Telephone button-inner-1 col-md-5 m-1">
+                                    <i class="fa fa-phone" aria-hidden="true" style="color:#ff5722;"></i>
+                                    Telephone
+                                </a>
+                            </div>
+                    
+                            <div class="col-md-1"></div>
+                            <div class="space"></div>
+                        </div>
+                       
                     </div>
-                    <div class="col-md-3" style="text-align: left;">
-                        <button type="button" class="btn btn-link reset" (click)="resetForm()">Reinitialiser La Recherche</button>
+                    <div class="col-md-12">
+                        <pagination-controls (pageChange)="onPageChange($event)" (pageBoundsCorrection)="onPageBoundsCorrection($event)"
+                            [directionLinks]="true" [autoHide]="true" [responsive]="true" previousLabel="Prev" nextLabel="Next"
+                            screenReaderPaginationLabel="Pagination" screenReaderPageLabel="page" screenReaderCurrentLabel="You're on page">
+                        </pagination-controls>
+                    </div>
+                </div>
+               
+            </div>
+        </div>								
+    </div>
+    
+    
+    
+    
+    
+    <div class="container mt-5" *ngIf="showSingle">
+        <div class="row" [hidden]="!loading">
+            <div class="col-12 col-sm-12" *ngFor="let i of [].constructor(1);">
+                <div class="ph-item">
+                    <div class="ph-col-12">
+                        <div class="ph-picture"></div>
+                        <div class="ph-row">
+                            <div class="ph-col-4"></div>
+                            <div class="ph-col-8 empty"></div>
+                            <div class="ph-col-12"></div>
+                        </div>
+                    </div>
+                    <div class="ph-col-2">
+                        <div class="ph-avatar"></div>
+                    </div>
+                    <div>
+                        <div class="ph-row">
+                            <div class="ph-col-12"></div>
+                            <div class="ph-col-2"></div>
+                            <div class="ph-col-10 empty"></div>
+                            <div class="ph-col-8 big"></div>
+                            <div class="ph-col-4 big empty"></div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </form>	 
-  
-    <div class="row listing grid">
-        <pagination-controls (pageChange)="onPageChange($event)" (pageBoundsCorrection)="onPageBoundsCorrection($event)" [directionLinks]="true" [autoHide]="true" [responsive]="true" previousLabel="Prev" nextLabel="Next"        screenReaderPaginationLabel="Pagination" screenReaderPageLabel="page" screenReaderCurrentLabel="You're on page">
-        </pagination-controls>
-        <div class="col-md-12">
-            <p>{{config.totalItems}} résultats trouvés</p>
-            <div class="grid-mode" style="text-align: right;">
-                <button class="btn" [ngClass]="{'active-grid': displayMode == 'list'}" (click)="onDisplayModeChange('list')"><i class="fa fa-list"></i></button>
-                <button class="btn" [ngClass]="{'active-grid': displayMode == 'grid'}" (click)="onDisplayModeChange('grid')"><i class="fa fa-th-large"></i></button>
-            </div>
-           <div class="row" [hidden]="!loading">
-                <div class="col-12 col-sm-4" *ngFor="let i of [].constructor(10);">
-                    <div class="ph-item">
-                        <div class="ph-col-12">
-                            <div class="ph-picture"></div>
-                            <div class="ph-row">
-                                <div class="ph-col-4"></div>
-                                <div class="ph-col-8 empty"></div>
-                                <div class="ph-col-12"></div>
-                            </div>
-                        </div>
-                        <div class="ph-col-2">
-                            <div class="ph-avatar"></div>
-                        </div>
-                        <div>
-                            <div class="ph-row">
-                                <div class="ph-col-12"></div>
-                                <div class="ph-col-2"></div>
-                                <div class="ph-col-10 empty"></div>
-                                <div class="ph-col-8 big"></div>
-                                <div class="ph-col-4 big empty"></div>
-                            </div>
-                        </div>
-                    </div>
+        <div class="row mb-5" *ngIf="!loading">
+            <div class="px-5 slider-page">
+                <div class="col-12 mb-5" style="text-align: right;" *ngIf="singleItem.user_email == useremail">
+                    <button type="button" class="btn btn-md btn-success" (click)="goToLink('updateproperty', singleItem.id)"><i class="fa fa-pencil"></i> Edit</button> &nbsp;&nbsp;
+                    <button type="button" class="btn btn-md btn-danger" (click)="startDelete()"><i class="fa fa-trash"></i> Delete</button>
                 </div>
-            </div>
-            <div class="row" *ngIf="displayMode == 'grid'">
-                <div class="col-md-4 listing-colum" *ngFor="let property of propertyList | paginate: { itemsPerPage: this.config.itemsPerPage, currentPage: config.currentPage, totalItems: config.totalItems}; let i = index;" [hidden]="loading">
-                    
+                <carousel [images]="imagesObject" [height]="400" [objectFit]="'cover'" [cellWidth]="'100%'" [arrowsOutside]="true" [dots]="true" [loop]="true">
+                </carousel>
+                <div class="space"></div>
+                <div class="col-md-12 listing-details p-3">
+                    <div class="row">
+                        <div class="col-5">
+                            <span class="id-badge text text-md">#{{singleItem.id}}</span>
                         
-                    <div class="p-3">
-                        <div class="listing-image" [ngStyle]="{ 'background-image': 'url('+property.featured+ ')'}">
-                            <button class="like-button" *ngIf="showIcon()" (click)="likeDislike(property)">
-                                <i class="fa fa-heart" *ngIf="property.favorite"></i>
-                                <i class="fa fa-heart-o" *ngIf="!property.favorite"></i>
-                            </button>
+                            <span class="id-badge text text-md"> {{singleItem.username}}</span>
                         </div>
-                        <div class="row">
-                            <div class="col-5">
-                                <span class="id-badge text text-md"> #{{property.id}}</span>
-                        
-                                <span class="id-badge text text-md" tooltip="{{property.username}}" placement="bottom"> {{SubStringName(property.username)}}</span>
-                            </div>
-                            <div class="col-3 eye">
-                                <i class="fa fa-eye" style="font-size:18px"></i>
-                                <span>{{ property.viewCount }}</span>
-                            </div>
-                            <div class="col-4 a-vendra">
-                                <button class="vendra">{{ property.purpose }}</button>
-                            </div>
+                        <div class="col-3 eye">
+                            <i class="fa fa-eye" style="font-size:18px"></i>
+                            <span>{{ singleItem.viewCount }}</span>
+                        </div>
+                        <div class="col-4 a-vendra">
+                            <button class="vendra">{{ singleItem.purposeName }}</button>
                         </div>
                         
                         <div class="title card-title card-title-md">
-                            <span class="primary-heading" tooltip="{{property.title}}" placement="bottom" (click)="goToLink('listings', property.id)">{{ SubString(property.title) }}</span>
+                            <div style="color:green; text-align:right; float:left; width:100%;" *ngIf="singleItem.approve">Vérifié par YED Immobilier</div>
+                            <p><strong><span  class="primary-heading">{{ singleItem.title }}</span></strong></p>
                         </div>
-                        <div class="detail card-title card-title-md">
-                            {{SubString(property.description) }}
+                        <div class="col-12">
+                            <h4 class="subheading">Description</h4>
+                            <p>{{singleItem.description }}</p>
                         </div>
-                        <span class="id-badge text text-md"> {{ property.price }} {{property.currency}}</span><br>
-                        <span class="id-badge text text-md" ion-text="">{{ dateFormat(property.created_at)}}</span>
-                        <div class="row grid-buttons">
-                            <a href="mailto:{{property.contact_email}}" class="contact button-inner col-md-5 m-1">
+                        <div class="col-12"> 
+                            <h4 class="subheading">Prix</h4>
+                            <p>{{ singleItem.price }} {{ singleItem.price_per_month }} {{singleItem.currency}}</p>
+                        </div>
+                        <div class="col-12">
+                            <h4 class="subheading">Date</h4>
+                            <p>{{ dateFormat(singleItem.created_at)}}</p>
+                        </div>
+                        <div class="col-12">
+                            <h4 class="subheading">Superficie(m2)</h4>
+                            <p>{{ singleItem.area }}</p>
+                        </div>
+                        <div class="col-12" *ngIf="singleItem.number_of_bedrooms">
+                            <h4 class="subheading">Nb de chambres</h4>
+                            <p>{{ singleItem.number_of_bedrooms }}</p>
+                        </div>
+                        <div class="col-12" *ngIf="singleItem.number_of_bathrooms">
+                            <h4 class="subheading">Nb de salles de bain</h4>
+                            <p>{{ singleItem.number_of_bedrooms }}</p>
+                        </div>
+                        <div class="col-12" *ngIf="singleItem.number_of_rooms">
+                            <h4 class="subheading">Nbre de pièces</h4>
+                            <p>{{ singleItem.number_of_rooms }}</p>
+                        </div>
+                        <div class="col-12" *ngIf="singleItem.number_of_toilets">
+                            <h4 class="subheading">Nbre de toilettes</h4>
+                            <p>{{ singleItem.number_of_toilets }}</p>
+                        </div>
+                        <div class="col-12" *ngIf="singleItem.amenities.length">
+                            <h4 class="subheading">Commodités</h4>
+                            <div class="row" style="width: 50%;">
+                                <div class="col-md-2" *ngFor="let amenities of singleItem.amenities;let i = index;"><span class="badge bg-warning text-dark">{{amenities.name}}</span></div>
+                            </div>
+                        </div>
+                        <div class="row contact grid-buttons" style="justify-content: center;">
+                            <a href="mailto:{{singleItem.contact_email}}" class="contact button-inner col-md-5 m-1">
                                 <i class="fa fa-envelope" aria-hidden="true"></i>
                                 Contacter
                             </a>
-                            <a href="tel:{{property.contact_phone}}" class="Telephone button-inner-1 col-md-5 m-1">
+                            <a href="tel:{{singleItem.contact_phone}}" class="Telephone button-inner-1 col-md-5 m-1">
                                 <i class="fa fa-phone" aria-hidden="true" style="color:#ff5722;"></i>
                                 Telephone
                             </a>
                         </div>
-                        
                         <div class="col-md-1"></div>
                         <div class="space"></div>
-                    </div>
-                    
-                </div> 
-                <div class="col-md-12">										
-                <pagination-controls (pageChange)="onPageChange($event)"
-                    (pageBoundsCorrection)="onPageBoundsCorrection($event)" [directionLinks]="true"
-                    [autoHide]="true" [responsive]="true" previousLabel="Prev" nextLabel="Next"
-                    screenReaderPaginationLabel="Pagination" screenReaderPageLabel="page" screenReaderCurrentLabel="You're on page">
-                </pagination-controls>
-                </div>	
-            </div>
-            <div class="row" *ngIf="displayMode == 'list'">
-                <div class="row col-md-12 listing-colum"
-                    *ngFor="let property of propertyList | paginate: { itemsPerPage: this.config.itemsPerPage, currentPage: config.currentPage, totalItems: config.totalItems}; let i = index;"
-                    [hidden]="loading">
-                
-                    <div class="p-3 col-md-4">
-                        <div class="listing-image" [ngStyle]="{ 'background-image': 'url('+property.featured+ ')'}">
-                            <button class="like-button" *ngIf="showIcon()" (click)="likeDislike(property)">
-                                <i class="fa fa-heart" *ngIf="property.favorite"></i>
-                                <i class="fa fa-heart-o" *ngIf="!property.favorite"></i>
-                            </button>
-                        </div>
-                
-                    </div>
-                    <div class="p-3 col-md-8 text">
-                        <div class="row mt-4">
-                            <div class="col-md-4">
-                                <span class="id-badge text text-md"> #{{property.id}}</span>
-                
-                                <span class="id-badge text text-md" tooltip="{{property.username}}" placement="bottom">
-                                    {{SubStringName(property.username)}}</span>
-                            </div>
-                            <div class="col-md-4 eye">
-                                <i class="fa fa-eye" style="font-size:18px"></i>
-                                <span>{{ property.viewCount }}</span>
-                            </div>
-                            <div class="col-md-4 a-vendra">
-                                <button class="vendra">{{ property.purpose }}</button>
-                            </div>
-                        </div>
-                
-                        <div class="title card-title card-title-md col-md-8">
-                            <span class="primary-heading" tooltip="{{property.title}}" placement="bottom"
-                                (click)="goToLink('listings', property.id)">{{ SubString(property.title) }}</span>
-                        </div>
-                        <div class="detail card-title card-title-md">
-                            {{SubString(property.description) }}
-                        </div>
-                        <span class="id-badge text text-md"> {{ property.price }} {{property.currency}}</span><br>
-                        <span class="id-badge text text-md" ion-text="">{{ dateFormat(property.created_at)}}</span>
-                        <div class="row grid-buttons mt-4">
-                            <a href="mailto:{{property.contact_email}}" class="contact button-inner col-md-5 m-1">
-                                <i class="fa fa-envelope" aria-hidden="true"></i>
-                                Contacter
-                            </a>
-                            <a href="tel:{{property.contact_phone}}" class="Telephone button-inner-1 col-md-5 m-1">
-                                <i class="fa fa-phone" aria-hidden="true" style="color:#ff5722;"></i>
-                                Telephone
-                            </a>
-                        </div>
-                
-                        <div class="col-md-1"></div>
-                        <div class="space"></div>
-                    </div>
-                   
-                </div>
-                <div class="col-md-12">
-                    <pagination-controls (pageChange)="onPageChange($event)" (pageBoundsCorrection)="onPageBoundsCorrection($event)"
-                        [directionLinks]="true" [autoHide]="true" [responsive]="true" previousLabel="Prev" nextLabel="Next"
-                        screenReaderPaginationLabel="Pagination" screenReaderPageLabel="page" screenReaderCurrentLabel="You're on page">
-                    </pagination-controls>
-                </div>
-            </div>
-           
-        </div>
-    </div>								
-</div>
-
-
-
-
-
-<div class="container mt-5" *ngIf="showSingle">
-    <div class="row" [hidden]="!loading">
-        <div class="col-12 col-sm-12" *ngFor="let i of [].constructor(1);">
-            <div class="ph-item">
-                <div class="ph-col-12">
-                    <div class="ph-picture"></div>
-                    <div class="ph-row">
-                        <div class="ph-col-4"></div>
-                        <div class="ph-col-8 empty"></div>
-                        <div class="ph-col-12"></div>
-                    </div>
-                </div>
-                <div class="ph-col-2">
-                    <div class="ph-avatar"></div>
-                </div>
-                <div>
-                    <div class="ph-row">
-                        <div class="ph-col-12"></div>
-                        <div class="ph-col-2"></div>
-                        <div class="ph-col-10 empty"></div>
-                        <div class="ph-col-8 big"></div>
-                        <div class="ph-col-4 big empty"></div>
+                        <google-map [options]="mapOptions">
+                            <map-marker [position]="marker.position"></map-marker>
+                        </google-map>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="row mb-5" *ngIf="!loading">
-        <div class="px-5 slider-page">
-            <div class="col-12 mb-5" style="text-align: right;" *ngIf="singleItem.user_email == useremail">
-                <button type="button" class="btn btn-md btn-success" (click)="goToLink('updateproperty', singleItem.id)"><i class="fa fa-pencil"></i> Edit</button> &nbsp;&nbsp;
-                <button type="button" class="btn btn-md btn-danger" (click)="startDelete()"><i class="fa fa-trash"></i> Delete</button>
-            </div>
-            <carousel [images]="imagesObject" [height]="400" [objectFit]="'cover'" [cellWidth]="'100%'" [arrowsOutside]="true" [dots]="true" [loop]="true">
-            </carousel>
-            <div class="space"></div>
-            <div class="col-md-12 listing-details p-3">
-                <div class="row">
-                    <div class="col-5">
-                        <span class="id-badge text text-md">#{{singleItem.id}}</span>
-                    
-                        <span class="id-badge text text-md"> {{singleItem.username}}</span>
-                    </div>
-                    <div class="col-3 eye">
-                        <i class="fa fa-eye" style="font-size:18px"></i>
-                        <span>{{ singleItem.viewCount }}</span>
-                    </div>
-                    <div class="col-4 a-vendra">
-                        <button class="vendra">{{ singleItem.purposeName }}</button>
-                    </div>
-                    
-                    <div class="title card-title card-title-md">
-                        <div style="color:green; text-align:right; float:left; width:100%;" *ngIf="singleItem.approve">Vérifié par YED Immobilier</div>
-                        <p><strong><span  class="primary-heading">{{ singleItem.title }}</span></strong></p>
-                    </div>
-                    <div class="col-12">
-                        <h4 class="subheading">Description</h4>
-                        <p>{{singleItem.description }}</p>
-                    </div>
-                    <div class="col-12"> 
-                        <h4 class="subheading">Prix</h4>
-                        <p>{{ singleItem.price }} {{ singleItem.price_per_month }} {{singleItem.currency}}</p>
-                    </div>
-                    <div class="col-12">
-                        <h4 class="subheading">Date</h4>
-                        <p>{{ dateFormat(singleItem.created_at)}}</p>
-                    </div>
-                    <div class="col-12">
-                        <h4 class="subheading">Superficie(m2)</h4>
-                        <p>{{ singleItem.area }}</p>
-                    </div>
-                    <div class="col-12" *ngIf="singleItem.number_of_bedrooms">
-                        <h4 class="subheading">Nb de chambres</h4>
-                        <p>{{ singleItem.number_of_bedrooms }}</p>
-                    </div>
-                    <div class="col-12" *ngIf="singleItem.number_of_bathrooms">
-                        <h4 class="subheading">Nb de salles de bain</h4>
-                        <p>{{ singleItem.number_of_bedrooms }}</p>
-                    </div>
-                    <div class="col-12" *ngIf="singleItem.number_of_rooms">
-                        <h4 class="subheading">Nbre de pièces</h4>
-                        <p>{{ singleItem.number_of_rooms }}</p>
-                    </div>
-                    <div class="col-12" *ngIf="singleItem.number_of_toilets">
-                        <h4 class="subheading">Nbre de toilettes</h4>
-                        <p>{{ singleItem.number_of_toilets }}</p>
-                    </div>
-                    <div class="col-12" *ngIf="singleItem.amenities.length">
-                        <h4 class="subheading">Commodités</h4>
-                        <div class="row" style="width: 50%;">
-                            <div class="col-md-2" *ngFor="let amenities of singleItem.amenities;let i = index;"><span class="badge bg-warning text-dark">{{amenities.name}}</span></div>
-                        </div>
-                    </div>
-                    <div class="row contact grid-buttons" style="justify-content: center;">
-                        <a href="mailto:{{singleItem.contact_email}}" class="contact button-inner col-md-5 m-1">
-                            <i class="fa fa-envelope" aria-hidden="true"></i>
-                            Contacter
-                        </a>
-                        <a href="tel:{{singleItem.contact_phone}}" class="Telephone button-inner-1 col-md-5 m-1">
-                            <i class="fa fa-phone" aria-hidden="true" style="color:#ff5722;"></i>
-                            Telephone
-                        </a>
-                    </div>
-                    <div class="col-md-1"></div>
-                    <div class="space"></div>
-                    <google-map [options]="mapOptions">
-                        <map-marker [position]="marker.position"></map-marker>
-                    </google-map>
-                </div>
-            </div>
+            
         </div>
         
     </div>
-    
-</div>
-<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':displayStyle}">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Confirmer la suppression de la propriété</h5>
-             
+    <div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':displayStyle}">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Confirmer la suppression de la propriété</h5>
+                 
+                </div>
+                <div class="modal-body">
+                    <p>Voulez-vous vraiment supprimer cette propriété?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" (click)="cancelpopup()">
+                        Non
+                    </button>
+                    <button type="button" class="btn btn-danger" (click)="deleteProperty(singleItem.id)">
+                        Oui<i class="fa fa-spinner fa-spin" *ngIf="deleteloader"></i>
+                    </button>
+                </div>
+              
             </div>
-            <div class="modal-body">
-                <p>Voulez-vous vraiment supprimer cette propriété?</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger" (click)="cancelpopup()">
-                    Non
-                </button>
-                <button type="button" class="btn btn-danger" (click)="deleteProperty(singleItem.id)">
-                    Oui<i class="fa fa-spinner fa-spin" *ngIf="deleteloader"></i>
-                </button>
-            </div>
-          
         </div>
     </div>
 </div>
