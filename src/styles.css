@@ -679,4 +679,7 @@ ngx-dropzone-remove-badge{
 .Midhead{
     padding-bottom: 10px;
 }
+button.louer.un-bien{
+    font-size: 16px !important;
+}
 }
