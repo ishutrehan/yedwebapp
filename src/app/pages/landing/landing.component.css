@@ -10,8 +10,8 @@ body{
 .box{
     background: #fff;
     width: 70%;
-    padding: 25px 0px;
-    height: 400px;
+    float: left;
+    padding-bottom: 20px;
     }
 .heading{
     text-align: center;
@@ -19,12 +19,6 @@ body{
 .image{
     height: 100px;
     width: 50%;
-}
-.box img {
-    align-items: center;
-    justify-content: center;
-    margin: auto;
-    width: 20%;
 }
 
 .playstore-image {
@@ -48,12 +42,8 @@ body{
 }
 button.louer.un-bien {
     background: #ff5722;
-    padding: 195px;
     border-radius: 5px;
     padding: 15px 35px 15px 39px;
-    align-items: center;
-    justify-content: center;
-    margin: auto;
     border: none;
     color: #fff;
     font-size: 18px;

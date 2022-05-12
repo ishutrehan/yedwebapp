@@ -70,7 +70,37 @@ export class LoginComponent implements OnInit {
   }
   signInWithGoogle(): void {
     this.authService.signIn(GoogleLoginProvider.PROVIDER_ID).then((results)=>{
-      console.log(results);
+      var payload = {
+        'is_social': true,
+        'role': localStorage.getItem('userRole'),
+        'email': results.email,
+        'name' : results.name
+      }
+      this.overlayloader = true;
+      this.auth.signUp(payload)
+      .then((result: any) => {
+        this.loading = false;
+        if(result.error){
+
+        }
+        if(result.success){
+          localStorage.setItem("isLogin", 'true');
+          localStorage.setItem("user_email", result.data[0].email);
+          localStorage.setItem('refreshToen', result.refresh_token);
+          localStorage.setItem('token', result.access_token);
+          this.overlayloader = false;
+          window.location.href = '';
+        }
+        setTimeout(() => {
+          this.errormessage = "";
+          this.successmessage = "";
+        }, 3000)
+        //this.utility.stopLoading();
+      }, err => {
+        this.loading = false;
+        //console.log("err", err);
+        //this.utility.stopLoading();
+      })
     }).catch((errors) => {
       console.log(errors);
     });
