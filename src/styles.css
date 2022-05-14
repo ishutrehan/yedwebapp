@@ -196,16 +196,7 @@ pagination-controls{
 }
 .icons-image{
     background-repeat: no-repeat;
-    background-position: bottom 45px right 0px;
-}
-.icons-image-1{
-    background-position: bottom 79px right 0px;
-}
-.icons-image-2{
-    background-position: bottom 59px right 0px;
-}
-.icons-image-3{
-    background-position: bottom 103px right 0px;
+    background-position: bottom 100% right 0px;
 }
 
 .overlay {
