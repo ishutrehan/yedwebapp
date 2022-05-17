@@ -430,10 +430,6 @@ button.like-button {
     color: #ff5722;
     font-size: 22px;
     text-align: left;
-    padding-right: 0;
-}
-.eye{
-    padding-left: 0;
 }
 .tags-input__tag{
     background-color: #ff5722;
@@ -535,6 +531,7 @@ ngx-dropzone-remove-badge{
     }
 }
 @media only screen and (max-width: 768px) {
+    
     .grid-mode{
         display: none !important;
     }

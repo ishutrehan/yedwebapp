@@ -41,12 +41,12 @@
                         <div class="listing-image" [ngStyle]="{ 'background-image': 'url('+property.featured+ ')'}" (click)="goToLink('listings', property.id)">
                         </div>
                         <div class="row">
-                            <button class="like-button col-2" *ngIf="showIcon()" (click)="likeDislike(property, i)">
+                            <button class="like-button col-4" *ngIf="showIcon()" (click)="likeDislike(property, i)">
                                 <i class="fa fa-heart" *ngIf="property.favorite"></i>
                                 <i class="fa fa-heart-o" *ngIf="!property.favorite"></i>
                             </button>
                             
-                            <div class="col-6 eye">
+                            <div class="col-4 eye">
                                 <i class="fa fa-eye" style="font-size:18px"></i> <span> {{ property.viewCount }}</span>
                             </div>
                             
