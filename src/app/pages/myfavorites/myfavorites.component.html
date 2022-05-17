@@ -35,31 +35,33 @@
                 </div>
             </div>
             <div class="row mt-5">
-                <div class="col-md-4 listing-colum" *ngFor="let property of propertyList | paginate: { itemsPerPage: config.itemsPerPage, currentPage: config.currentPage, totalItems: config.totalItems}; let i = index;" [hidden]="loading" (click)="goToLink('listings', property.id)">
+                <div class="col-md-4 listing-colum" *ngFor="let property of propertyList | paginate: { itemsPerPage: config.itemsPerPage, currentPage: config.currentPage, totalItems: config.totalItems}; let i = index;" [hidden]="loading">
                     <div class="overlay-loader" *ngIf="overlay"><i class="fa fa-spinner fa-spin"></i></div>
                     <div class="p-3">
-                        <div class="listing-image" [ngStyle]="{ 'background-image': 'url('+property.featured+ ')'}">
-                            <button class="like-button" *ngIf="showIcon()" (click)="likeDislike(property, i)">
+                        <div class="listing-image" [ngStyle]="{ 'background-image': 'url('+property.featured+ ')'}" (click)="goToLink('listings', property.id)"></div>
+                        <div class="row">
+                            <button class="like-button col-2" *ngIf="showIcon()" (click)="likeDislike(property, i)">
                                 <i class="fa fa-heart" *ngIf="property.favorite"></i>
                                 <i class="fa fa-heart-o" *ngIf="!property.favorite"></i>
                             </button>
-                        </div>
-                        <div class="row">
-                            <div class="col-5">
-                                <span class="id-badge text text-md"> #{{property.id}}</span>
-    
-                                <span class="id-badge text text-md" tooltip="{{property.username}}" placement="bottom"> {{ SubStringName(property.username)}}</span>
+                            
+                            <div class="col-6 eye">
+                                <i class="fa fa-eye" style="font-size:18px"></i> <span> {{ property.viewCount }}</span>
                             </div>
-                            <div class="col-3 eye">
-                                <i class="fa fa-eye" style="font-size:18px"></i>
-                                <span>{{ property.viewCount }}</span>
-                            </div>
+                            
                             <div class="col-4 a-vendra">
                                 <button class="vendra">{{ property.purpose }}</button>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <span class="id-badge text text-md"> #{{property.id}}</span>
     
-                        <div class="title card-title card-title-md">
+                                <span class="id-badge text text-md" tooltip="{{property.username}}" placement="bottom"> {{ property.username}}</span>
+                            </div>
+                        </div>
+    
+                        <div class="title card-title card-title-md" (click)="goToLink('listings', property.id)">
                             <span class="primary-heading" tooltip="{{property.title}}" placement="bottom">{{ SubString(property.title) }}</span>
                         </div>
                         <div class="detail card-title card-title-md">
@@ -74,12 +76,12 @@
     
                         <div class="row contact grid-buttons">
                             <a href="mailto:{{property.contact_email}}" class="contact button-inner col-md-5">
-                                            <i class="fa fa-envelope" aria-hidden="true"></i>
-                                            Contacter
+                            <i class="fa fa-envelope" aria-hidden="true"></i>
+                                Contacter
                             </a>
                             <a href="tel:{{property.contact_phone}}" class="Telephone button-inner-1 col-md-5">
-                                            <i class="fa fa-phone" aria-hidden="true" style="color:#ff5722;"></i>
-                                            Telephone
+                            <i class="fa fa-phone" aria-hidden="true" style="color:#ff5722;"></i>
+                                Telephone
                             </a>
                         </div>
     

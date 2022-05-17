@@ -13,7 +13,8 @@
                 <div style="float: left; width:100%;">
                     <img src="../../../assets/images/icon.png">
                     <h4>Je veux publier un bien</h4>
-                    <button class="louer un-bien" (click)="goToLink('join-us')"> Mettre en Location - Vendre</button>
+                    <button class="louer un-bien" *ngIf="!isLogin" (click)="goToLink('join-us')"> Mettre en Location - Vendre</button>
+                    <button class="louer un-bien" *ngIf="isLogin" (click)="goToLink('publish')"> Mettre en Location - Vendre</button>
                 </div>
             </div>
         </div>

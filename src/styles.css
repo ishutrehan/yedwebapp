@@ -422,16 +422,18 @@ button.professional {
     color: #ff5722 !important;
 }
 
+
 button.like-button {
     border: none;
-    position: absolute;
-    right: 5px;
-    top: 8px;
     background: transparent;
     border-radius: 91%;
     color: #ff5722;
     font-size: 22px;
-    border: none;
+    text-align: left;
+    padding-right: 0;
+}
+.eye{
+    padding-left: 0;
 }
 .tags-input__tag{
     background-color: #ff5722;
@@ -462,6 +464,7 @@ button.like-button {
 }
 .grid-buttons{
     justify-content: center;
+    margin-top: 10px;
 }
 
 ngx-dropzone-remove-badge{
@@ -532,6 +535,12 @@ ngx-dropzone-remove-badge{
     }
 }
 @media only screen and (max-width: 768px) {
+    .grid-mode{
+        display: none !important;
+    }
+    .reset-button{
+        text-align: center;
+    }
    .left-image .col-lg-5{
        padding-right: 0;
         padding-left: 0;
@@ -595,7 +604,7 @@ ngx-dropzone-remove-badge{
         margin-left: 50px;
         margin-right: 50px;
        }
-    .mb-3, .text, .button {
+    .mb-3, .button {
         padding-left: 20px;
         padding-right: 20px;
     } 

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
+import { UtilityProvider } from '../../../providers/utilities/utility';
 
 @Component({
   selector: 'app-landing',
@@ -7,12 +8,15 @@ import {Router} from '@angular/router';
   styleUrls: ['./landing.component.css']
 })
 export class LandingComponent implements OnInit {
- 
-  constructor(private router: Router) { 
+  isLogin: boolean = false;
+  constructor(private router: Router, public utility:UtilityProvider) { 
 
   }
 
   ngOnInit(): void {
+    if(this.utility.getStorage('isLogin')){
+      this.isLogin = true;
+    }
     document.body.scrollTop = document.documentElement.scrollTop = 0;
     
   }

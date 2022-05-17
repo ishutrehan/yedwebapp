@@ -12,7 +12,7 @@ export class ProfileComponent implements OnInit {
  loading: boolean;
  errormessage: any = "";
  successmessage:any  = "";
- defaultprofileimage = '../../../assets/images/logo-person.png';
+ defaultprofileimage = '../../../assets/images/person.png';
 
   constructor(public utility:UtilityProvider, public auth:ApiProvider) { 
     

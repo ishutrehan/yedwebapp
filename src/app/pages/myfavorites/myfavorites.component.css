@@ -59,17 +59,6 @@ h5.heading {
     position: relative;
 }
 
-button.like-button {
-    border: none;
-    position: absolute;
-    right: 5px;
-    top: 8px;
-    background: transparent;
-    border-radius: 91%;
-    color: #ff5722;
-    font-size: 22px;
-    border: none;
-}
 
 span.id-badge.text.text-md {
     font-weight: 500;

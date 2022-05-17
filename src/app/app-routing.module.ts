@@ -19,7 +19,7 @@ import { PrivacyPolicyComponent } from './pages/privacy-policy/privacy-policy.co
 
 
 const routes: Routes = [
-  { path: '', component: localStorage.getItem('isLogin') ? ListingsComponent : LandingComponent },
+  { path: '', component: LandingComponent },
   { path: 'listings', component: ListingsComponent },
   { path: 'listings/:id', component: ListingsComponent },
   { path: 'join-us', component: JoinComponent },

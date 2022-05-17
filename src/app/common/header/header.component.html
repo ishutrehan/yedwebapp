@@ -34,8 +34,10 @@
             <li class="nav-item">
               <i class="fa fa-spinner fa-spin" *ngIf="loading"></i>
               <div class="dropdown" *ngIf="!loading">
-                <button class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"><img class="rounded-circle" width="40px" [attr.src]="profiledetails.profile_image" />
-                <span class="user"> {{ profiledetails.name }}</span></button>
+                <button class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                  <img class="rounded-circle" width="40px" [attr.src]="profiledetails.profile_image" *ngIf="profiledetails.profile_image" />
+                  <img class="rounded-circle" width="40px" src="../../../assets/images/person.png" *ngIf="!profiledetails.profile_image"/>
+                <span> {{ profiledetails.name }}</span></button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                   <li><a class="dropdown-item" routerLink="publish">Publier</a></li>
 
@@ -55,9 +57,9 @@
               <i class="fa fa-spinner fa-spin" *ngIf="loading"></i>
               <div class="dropdown" *ngIf="!loading">
                 <button class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                  <img class="rounded-circle" width="40px" [attr.src]="profiledetails.profile_image" />
-                  <img class="rounded-circle" width="40px" src="../../../assets/images/logo-person.png" *ngIf="!profiledetails.profile_image"/>
-                <span class="user"> {{ profiledetails.name }}</span></button>
+                  <img class="rounded-circle" width="40px" [attr.src]="profiledetails.profile_image" *ngIf="profiledetails.profile_image" />
+                  <img class="rounded-circle" width="40px" src="../../../assets/images/person.png" *ngIf="!profiledetails.profile_image"/>
+                <span> {{ profiledetails.name }}</span></button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                   <li><a class="dropdown-item" routerLink="publish">Publier</a></li>
 
@@ -73,17 +75,17 @@
           <a href="javascript:void(0)" class="closebtn" (click)="closeNav()">&times;</a>
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" routerLink="">Accueil</a>
+              <a class="nav-link active" aria-current="page" routerLink="/" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }">Accueil</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" routerLink="about">A propos</a>
+              <a class="nav-link" routerLink="/about" [routerLinkActive]="['active']">A propos</a>
             </li>
             
             <li class="nav-item">
-              <a class="nav-link" routerLink="terms">Conditions générales d'utilisation</a>
+              <a class="nav-link" routerLink="/terms" [routerLinkActive]="['active']">Conditions générales d'utilisation</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" routerLink="contact">Contact</a>
+              <a class="nav-link" routerLink="/contact" [routerLinkActive]="['active']">Contact</a>
             </li>
           </ul>
         </div>

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { UtilityProvider } from '../../../providers/utilities/utility';
+
 @Component({
   selector: 'app-join',
   templateUrl: './join.component.html',
@@ -7,9 +9,12 @@ import { Router } from '@angular/router';
 })
 export class JoinComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, public utility:UtilityProvider) { }
 
   ngOnInit(): void {
+    if(this.utility.getStorage('isLogin')){
+      window.location.href = '';
+    }
     document.body.scrollTop = document.documentElement.scrollTop = 0;
   }
   goToLink(link:any, userRole = ''){
