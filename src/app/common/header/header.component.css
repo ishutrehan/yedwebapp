@@ -41,7 +41,9 @@ background-color:transparent;
     background-color: #FC4E05;
     color: white;
   }
-
+.active {
+  border-bottom: 2px solid;
+}
   .toolbar img {
     margin: 0 16px;
   }

@@ -221,3 +221,7 @@ pagination-controls{
 ul.amenities{
     list-style-type: none;
 }
+button[disabled]{
+    cursor: not-allowed !important;
+    opacity: 0.5;
+}

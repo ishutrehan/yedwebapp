@@ -150,7 +150,7 @@ constructor(public utility:UtilityProvider, public auth:ApiProvider, private rou
     this.searchParams = {
       sort_by: "recent",
       distance: "",
-      types: [],
+      type: [],
       purpose: "",
       user_role: "",
       rentals: [],
@@ -172,10 +172,10 @@ constructor(public utility:UtilityProvider, public auth:ApiProvider, private rou
     this.loading = true;   
     
     this.currentPayload = payload;
-    this.searchParams.types = [];
+    this.searchParams.type = [];
     this.searchParams.rentals = [];
     this.selectedTypes.forEach(type => {
-      this.searchParams.types.push(type.id)
+      this.searchParams.type.push(type.id)
     });
     this.selectedRentals.forEach(rental => {
       this.searchParams.rentals.push(rental.id)

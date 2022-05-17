@@ -29,6 +29,7 @@ export class HeaderComponent implements OnInit {
       });
     }
   }
+ 
 
   getProfileData() {
     this.loading = true;

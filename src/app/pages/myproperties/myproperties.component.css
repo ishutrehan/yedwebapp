@@ -122,7 +122,9 @@ select {
     border: 1px solid #ccc;
     box-sizing: border-box;
 }
-
+.like-button:active{
+    color: solid;
+}
 .listing-colum {
     position: relative;
 }
