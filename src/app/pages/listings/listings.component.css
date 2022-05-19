@@ -110,7 +110,7 @@ h5.heading {
 span.id-badge.text.text-md {
     font-weight: 500;
 }
-.col-4.a-vendra {
+.col-4.a-vendra, .col-6.a-vendra {
     text-align: right;
 }
 button.vendra {
