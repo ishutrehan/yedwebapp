@@ -23,13 +23,13 @@
                         <div class="col-md-4">
                             <label class="control-label">Localisation</label>
                             <div class="form-group"> 
-                                <input type="text" class="form-control" [(ngModel)]="searchParams.location" ngx-google-places-autocomplete [options]='options' #placesRef="ngx-places" (onAddressChange)="handleAddressChange($event)" name="location" [ngModelOptions]="{standalone: true}">
+                                <input type="text" placeholder="Choisissez un lieu"  class="form-control" [(ngModel)]="searchParams.location" ngx-google-places-autocomplete [options]='options' #placesRef="ngx-places" (onAddressChange)="handleAddressChange($event)" name="location" [ngModelOptions]="{standalone: true}">
                             </div>
                         </div>
                         <div class="col-md-2">
                             <label class="control-label">Statut</label>
                             <select class="form-control" [(ngModel)]="searchParams.purpose" [ngModelOptions]="{standalone: true}" name="purpose">
-                                <option value="">-- Select --</option>
+                                <option value="">-- Sélectionnez l'option --</option>
                                 <option value="sale">À vendre</option>
                                 <option value="rent">À louer</option>
                             </select>
@@ -55,7 +55,7 @@
                         <div class="col-md-4">
                             <label class="control-label">Particulier ou Professionnel</label>
                             <select class="form-control" [(ngModel)]="searchParams.user_role" [ngModelOptions]="{standalone: true}" name="user_role">
-                                <option value="">-- Select --</option>
+                                <option value="">-- Sélectionnez l'option --</option>
                                 <option value="individual">Particulier</option>
                                 <option value="agent">Professionnel</option>
                             </select>
@@ -72,7 +72,7 @@
                             <div class="form-group"> 
                                 <div class="row">	
                                     <div class="col-md-6 surfacemax">	
-                                    <input type="text" class="form-control" placeholder="Surface min" [(ngModel)]="searchParams.area_min" [ngModelOptions]="{standalone: true}" name="area_min">	
+                                    <input type="text" class="form-control" placeholder="surface min" [(ngModel)]="searchParams.area_min" [ngModelOptions]="{standalone: true}" name="area_min">	
                                     </div>
                                     <div class="col-md-6 surfacemax">
                                         <input type="text" class="form-control" placeholder="surface max" [(ngModel)]="searchParams.area_max" [ngModelOptions]="{standalone: true}" name="area_max">
@@ -100,7 +100,7 @@
                             </div>
                         </div>
                         <div class="col-md-3">
-                            <label class="control-label">Nombres Salles De Pieces Bains</label>
+                            <label class="control-label">Nombres de salles de bain</label>
                             <div class="form-group"> 					 
                                 <input type="number" class="form-control" [(ngModel)]="searchParams.number_of_bathrooms" [ngModelOptions]="{standalone: true}" name="bains">
                             </div>

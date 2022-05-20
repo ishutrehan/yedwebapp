@@ -43,7 +43,7 @@
                     <div class="form-group">
                         <label><b>Type</b></label>
                         <select class="form-control" [(ngModel)]="formdata.type[0]">
-                            <option value="">-- Select --</option>
+                            <option value="">-- Sélectionnez l'option --</option>
                             <option *ngFor="let type of typesList;let i = index;" value="{{type.id}}">{{type.name}}</option>
                         </select>
                     </div>
@@ -52,32 +52,32 @@
                         <input type="text" class="form-control" [(ngModel)]="formdata.area">
                     </div>
                     <div class="form-group" *ngIf="getMetaName(formdata.type[0], typesList) =='Appartement' || getMetaName(formdata.type[0], typesList) =='Villa' || getMetaName(formdata.type[0], typesList) =='Duplex'">
-                        <label><b>Nb de chambres</b></label>
+                        <label><b>Nombres de chambres</b></label>
                         <input type="number" class="form-control" [(ngModel)]="formdata.number_of_bedrooms">
                     </div>
                     <div class="form-group" *ngIf="getMetaName(formdata.type[0], typesList) =='Appartement' || getMetaName(formdata.type[0], typesList) =='Villa' || getMetaName(formdata.type[0], typesList) =='Duplex'">
-                        <label><b>Nb de salles de bain</b></label>
+                        <label><b>Nombres de salles de bain</b></label>
                         <input type="number" class="form-control" [(ngModel)]="formdata.number_of_bathrooms">
                     </div>
                     <div class="form-group" *ngIf="getMetaName(formdata.type[0], typesList) =='Champ' || getMetaName(formdata.type[0], typesList) =='Magasin' || getMetaName(formdata.type[0], typesList) =='Boutique' || getMetaName(formdata.type[0], typesList) =='Bureau'">
-                        <label><b>Nbre de pièces</b></label>
+                        <label><b>Nombres de pièces</b></label>
                         <input type="number" class="form-control" [(ngModel)]="formdata.number_of_rooms">
                     </div>
                     <div class="form-group" *ngIf="getMetaName(formdata.type[0], typesList) =='Champ' || getMetaName(formdata.type[0], typesList) =='Magasin' || getMetaName(formdata.type[0], typesList) =='Boutique' || getMetaName(formdata.type[0], typesList) =='Bureau'">
-                        <label><b>Nbre de toilettes</b></label>
+                        <label><b>Nombres de toilettes</b></label>
                         <input type="number" class="form-control" [(ngModel)]="formdata.number_of_toilets">
                     </div>
                     <div class="form-group" *ngIf="formdata.purpose == 'rent'">
                         <label><b>Type de location</b></label>
                         <select class="form-control" [(ngModel)]="formdata.type_of_rental">
-                            <option value="">-- Select --</option>
+                            <option value="">-- Sélectionnez l'option --</option>
                             <option *ngFor="let rental of rentalsList;let i = index;" value="{{rental.id}}">{{rental.name}}</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label><b>Localisation</b></label>
                         <input type="text" class="form-control" [(ngModel)]="formdata.location" ngx-google-places-autocomplete [options]='options' #placesRef="ngx-places"
-                        (onAddressChange)="handleAddressChange($event)" placeholder="Saisir la localisation">
+                        (onAddressChange)="handleAddressChange($event)" placeholder="Choisissez un lieu">
                         <span class="required" *ngIf="error.location"><i class="fa fa-warning"></i> Le champ de localisation est obligatoire.</span>
                     </div>
                     <div class="form-group">
@@ -148,7 +148,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" (click)="closepopup()">
-                            Close
+                            Fermer
                         </button>
                     </div>
                 </div>

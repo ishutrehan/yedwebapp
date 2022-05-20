@@ -49,22 +49,22 @@
                 </div>
                 <div class="search"
                     *ngIf="getMetaName(updatedata.type[0], typesList) =='Appartement' || getMetaName(updatedata.type[0], typesList) =='Villa' || getMetaName(updatedata.type[0], typesList) =='Duplex'">
-                    <label><b>Nb de chambres</b></label>
+                    <label><b>Nombres de chambres</b></label>
                     <input type="number" class="form-control" [(ngModel)]="updatedata.number_of_bedrooms">
                 </div>
                 <div class="search"
                     *ngIf="getMetaName(updatedata.type[0], typesList) =='Appartement' || getMetaName(updatedata.type[0], typesList) =='Villa' || getMetaName(updatedata.type[0], typesList) =='Duplex'">
-                    <label><b>Nb de salles de bain</b></label>
+                    <label><b>Nombres de salles de bain</b></label>
                     <input type="number" class="form-control" [(ngModel)]="updatedata.number_of_bathrooms">
                 </div>
                 <div class="search"
                     *ngIf="getMetaName(updatedata.type[0], typesList) =='Champ' || getMetaName(updatedata.type[0], typesList) =='Magasin' || getMetaName(updatedata.type[0], typesList) =='Boutique' || getMetaName(updatedata.type[0], typesList) =='Bureau'">
-                    <label><b>Nbre de pièces</b></label>
+                    <label><b>Nombres de pièces</b></label>
                     <input type="number" class="form-control" [(ngModel)]="updatedata.number_of_rooms">
                 </div>
                 <div class="search"
                     *ngIf="getMetaName(updatedata.type[0], typesList) =='Champ' || getMetaName(updatedata.type[0], typesList) =='Magasin' || getMetaName(updatedata.type[0], typesList) =='Boutique' || getMetaName(updatedata.type[0], typesList) =='Bureau'">
-                    <label><b>Nbre de toilettes</b></label>
+                    <label><b>Nombres de toilettes</b></label>
                     <input type="number" class="form-control" [(ngModel)]="updatedata.number_of_toilets">
                 </div>
                 <div class="search" *ngIf="updatedata.purpose == 'rent'">
@@ -79,7 +79,7 @@
                     <label><b>Localisation</b></label>
                     <input type="text" class="form-control" [(ngModel)]="updatedata.location"
                         ngx-google-places-autocomplete [options]='options' #placesRef="ngx-places"
-                        (onAddressChange)="handleAddressChange($event)">
+                        (onAddressChange)="handleAddressChange($event)" placeholder="Choisissez un lieu">
                 </div>
                 <div class="search mb-3">
                     <label><b>Mots-clés de localisation</b></label>

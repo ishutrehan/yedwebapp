@@ -46,16 +46,18 @@ export class ListingsComponent implements OnInit {
     singleSelection: false,
     idField: 'id',
     textField: 'name',
-    selectAllText: 'Select All',
-    unSelectAllText: 'UnSelect All',
-    allowSearchFilter: true
+    selectAllText: 'Tout sélectionner',
+    unSelectAllText: 'Tout déselectionner',
+    allowSearchFilter: true,
+    searchPlaceholderText: 'Recherche'
   };
   dropdownSettingsSingle:IDropdownSettings = {
     singleSelection: true,
     idField: 'value',
     textField: 'name',
     closeDropDownOnSelection: true,
-    allowSearchFilter: true
+    allowSearchFilter: true,
+    searchPlaceholderText: 'Recherche'
   };
   payload:any = {};
   options:any =   {};
@@ -174,6 +176,7 @@ constructor(public utility:UtilityProvider, public auth:ApiProvider, private rou
     this.currentPayload = payload;
     this.searchParams.type = [];
     this.searchParams.rentals = [];
+    this.searchParams.distance = "";
     this.selectedTypes.forEach(type => {
       this.searchParams.type.push(type.id)
     });
