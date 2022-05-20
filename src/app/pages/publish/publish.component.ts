@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UtilityProvider } from '../../../providers/utilities/utility';
 import { ApiProvider } from '../../../providers/auth/auth';
+import { BrowserModule, Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-publish',
@@ -25,7 +26,9 @@ export class PublishComponent implements OnInit {
  featured: any = [];
  gallery: any = [];
  error: any = {};
-  constructor(public utility:UtilityProvider, public auth:ApiProvider) {
+ title = 'Publier | Yedimmobilier';
+
+  constructor(public utility:UtilityProvider, public auth:ApiProvider,  public titleService:Title) {
     this.getTypes();
     this. getRentalTypes();
     this.getAmenities();
@@ -49,6 +52,7 @@ export class PublishComponent implements OnInit {
    }
 
   ngOnInit(): void {
+      this.titleService.setTitle(this.title);
       if(!this.utility.getStorage('isLogin')){
       window.location.href = '';
     }

@@ -4,6 +4,7 @@ import { UtilityProvider } from '../../../providers/utilities/utility';
 import { ApiProvider } from '../../../providers/auth/auth';
 import { SocialAuthService } from "@abacritt/angularx-social-login";
 import { FacebookLoginProvider, GoogleLoginProvider } from "@abacritt/angularx-social-login";
+import { BrowserModule, Title } from '@angular/platform-browser';
 
 
 @Component({
@@ -18,7 +19,9 @@ export class LoginComponent implements OnInit {
   successmessage:any  = "";
   overlayloader: boolean;
   error : any = {};
-  constructor(private router: Router, public utility:UtilityProvider, public auth:ApiProvider, private authService: SocialAuthService) { 
+  title = 'S\'identifier | Yedimmobilier';
+
+  constructor(private router: Router, public utility:UtilityProvider, public auth:ApiProvider, private authService: SocialAuthService, public titleService:Title) { 
      this.userPayload = {
       "email": null,
       "password": null,
@@ -26,6 +29,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.titleService.setTitle(this.title);
     if(this.utility.getStorage('isLogin')){
       window.location.href = '';
     }

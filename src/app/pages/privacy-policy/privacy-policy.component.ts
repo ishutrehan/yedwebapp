@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { BrowserModule, Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-privacy-policy',
@@ -6,10 +7,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./privacy-policy.component.css']
 })
 export class PrivacyPolicyComponent implements OnInit {
+  title = 'Politique De Confidentialité | Yedimmobilier';
 
-  constructor() { }
+  constructor(public titleService:Title) { }
 
   ngOnInit(): void {
+    this.titleService.setTitle(this.title);
     document.body.scrollTop = document.documentElement.scrollTop = 0;
   }
 

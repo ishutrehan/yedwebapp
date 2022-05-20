@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UtilityProvider } from '../../../providers/utilities/utility';
 import { ApiProvider } from '../../../providers/auth/auth';
+import { BrowserModule, Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-contact',
@@ -9,12 +10,14 @@ import { ApiProvider } from '../../../providers/auth/auth';
 })
 export class ContactComponent implements OnInit {
 contactDetails: any;
+title = 'Contact | Yedimmobilier';
 
-  constructor(public utility:UtilityProvider, public auth:ApiProvider) {
+  constructor(public utility:UtilityProvider, public auth:ApiProvider, public titleService:Title) {
      this.contactDetails = {}
    }
 
   ngOnInit(): void {
+    this.titleService.setTitle(this.title);
     this.getContactData();
   }
 

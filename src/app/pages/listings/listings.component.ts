@@ -4,6 +4,7 @@ import { ApiProvider } from '../../../providers/auth/auth';
 import { PaginationInstance } from 'ngx-pagination/dist/ngx-pagination.module';
 import {Router, ActivatedRoute} from '@angular/router';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
+import { BrowserModule, Title } from '@angular/platform-browser';
 
 
 export interface MarkerOptions { 
@@ -73,9 +74,10 @@ export class ListingsComponent implements OnInit {
   position: { lat: 38.9987208, lng: -77.2538699 },
 }
 deleteloader: boolean;
+title = 'Yedimmobilier | Maisons et Appartements à vendre et à louer';
 
-constructor(public utility:UtilityProvider, public auth:ApiProvider, private router: Router, private activatedRoute: ActivatedRoute) {
-  
+constructor(public utility:UtilityProvider, public auth:ApiProvider, private router: Router, private activatedRoute: ActivatedRoute, public titleService:Title) {
+  this.titleService.setTitle(this.title);
   if(this.utility.getStorage('user_email')) this.useremail = this.utility.getStorage('user_email');
     this.dateFormat = this.utility.getDateFormat;
     this.offset_value = 0;

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UtilityProvider } from '../../../providers/utilities/utility';
 import { ApiProvider } from '../../../providers/auth/auth';
+import { BrowserModule, Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-forgot-password',
@@ -13,13 +14,17 @@ export class ForgotPasswordComponent implements OnInit {
   errormessage: any = "";
   successmessage:any  = "";
   error = [];
-  constructor(public utility:UtilityProvider, public auth:ApiProvider) { 
+  title = 'Mot de passe oublié | Yedimmobilier';
+
+  constructor(public utility:UtilityProvider, public auth:ApiProvider, public titleService:Title) { 
      this.userPayload = {
       "email": null
      }
   }
 
   ngOnInit(): void {
+    this.titleService.setTitle(this.title);
+
   }
   
 forgot() {

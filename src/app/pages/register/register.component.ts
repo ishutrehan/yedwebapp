@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UtilityProvider } from '../../../providers/utilities/utility';
 import { ApiProvider } from '../../../providers/auth/auth';
+import { BrowserModule, Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-register',
@@ -13,7 +14,9 @@ export class RegisterComponent implements OnInit {
  errormessage: any = "";
  successmessage:any  = "";
  error : any = {};
-  constructor(public utility:UtilityProvider, public auth:ApiProvider) { 
+ title = 'S\'inscrire | Yedimmobilier';
+
+  constructor(public utility:UtilityProvider, public auth:ApiProvider, public titleService:Title) { 
     var userrole = localStorage.getItem('userRole') ? localStorage.getItem('userRole') : 'individual';
 
     this.userPayload = {
@@ -27,7 +30,7 @@ export class RegisterComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    
+    this.titleService.setTitle(this.title);
     if(this.utility.getStorage('isLogin')){
       window.location.href = '';
     }

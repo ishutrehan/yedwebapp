@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import { UtilityProvider } from '../../../providers/utilities/utility';
+import { BrowserModule, Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-landing',
@@ -9,11 +10,14 @@ import { UtilityProvider } from '../../../providers/utilities/utility';
 })
 export class LandingComponent implements OnInit {
   isLogin: boolean = false;
-  constructor(private router: Router, public utility:UtilityProvider) { 
+  title = 'Yedimmobilier | Maisons et Appartements à vendre et à louer';
+
+  constructor(private router: Router, public utility:UtilityProvider, public titleService:Title) { 
 
   }
 
   ngOnInit(): void {
+    this.titleService.setTitle(this.title);
     if(this.utility.getStorage('isLogin')){
       this.isLogin = true;
     }

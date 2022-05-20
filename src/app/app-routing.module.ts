@@ -15,6 +15,7 @@ import { PublishComponent } from './pages/publish/publish.component';
 import { UpdatepropertyComponent } from './pages/updateproperty/updateproperty.component';
 import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
 import { PrivacyPolicyComponent } from './pages/privacy-policy/privacy-policy.component';
+import { BrowserModule, Title } from '@angular/platform-browser';
 
 
 
@@ -39,7 +40,10 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  imports: [RouterModule.forRoot(routes),BrowserModule],
+  exports: [RouterModule],
+  providers: [
+    Title                   //Register the Service
+  ],
 })
 export class AppRoutingModule { }

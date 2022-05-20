@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { UtilityProvider } from '../../../providers/utilities/utility';
 import { Router, NavigationEnd, Event } from '@angular/router';
 import { ApiProvider } from '../../../providers/auth/auth';
+import { BrowserModule, Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-header',
@@ -13,11 +14,14 @@ export class HeaderComponent implements OnInit {
   profiledetails: any;
   loading: boolean;
   navWidth: any;
-  constructor(public utility: UtilityProvider, public router: Router,public auth: ApiProvider) { 
+  title = 'Yedimmobilier';
+
+  constructor(public utility: UtilityProvider, public router: Router,public auth: ApiProvider, public titleService:Title) { 
     this.getProfileData()
    }
 
   ngOnInit(): void {
+    this.titleService.setTitle(this.title);
     if(this.utility.getStorage('isLogin')){
       this.showHeader = true;
     }else{

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UtilityProvider } from '../../../providers/utilities/utility';
 import { ApiProvider } from '../../../providers/auth/auth';
+import { BrowserModule, Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-profile',
@@ -13,8 +14,9 @@ export class ProfileComponent implements OnInit {
  errormessage: any = "";
  successmessage:any  = "";
  defaultprofileimage = '../../../assets/images/person.png';
+ title = 'Mon-Compte | Yedimmobilier';
 
-  constructor(public utility:UtilityProvider, public auth:ApiProvider) { 
+  constructor(public utility:UtilityProvider, public auth:ApiProvider, public titleService:Title) { 
     
     this.getProfile();
     this.userPayload = {
@@ -25,6 +27,7 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.titleService.setTitle(this.title);
     if(!this.utility.getStorage('isLogin')){
       window.location.href = '';
     }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UtilityProvider } from '../../../providers/utilities/utility';
+import { BrowserModule, Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-join',
@@ -8,10 +9,12 @@ import { UtilityProvider } from '../../../providers/utilities/utility';
   styleUrls: ['./join.component.css']
 })
 export class JoinComponent implements OnInit {
+title = 'Rejoignez-nous | Yedimmobilier';
 
-  constructor(private router: Router, public utility:UtilityProvider) { }
+  constructor(private router: Router, public utility:UtilityProvider, public titleService:Title) { }
 
   ngOnInit(): void {
+    this.titleService.setTitle(this.title);
     if(this.utility.getStorage('isLogin')){
       window.location.href = '';
     }

@@ -3,6 +3,8 @@ import { UtilityProvider } from '../../../providers/utilities/utility';
 import { ApiProvider } from '../../../providers/auth/auth';
 import { PaginationInstance } from 'ngx-pagination/dist/ngx-pagination.module';
 import {Router} from '@angular/router';
+import { BrowserModule, Title } from '@angular/platform-browser';
+
 
 @Component({
   selector: 'app-myfavorites',
@@ -30,7 +32,10 @@ public config: PaginationInstance = {
     currentPage: this.page,
     totalItems: this.total
   };
-  constructor(public utility:UtilityProvider, public auth:ApiProvider, public router: Router) {
+  title = 'Mes -Favoris | Yedimmobilier';
+
+  constructor(public utility:UtilityProvider, public auth:ApiProvider, public router: Router, public titleService:Title) {
+    this.titleService.setTitle(this.title);
     this.dateFormat = this.utility.getDateFormat;
     this.offset_value = 0;
     this.placeholderCount = 10;

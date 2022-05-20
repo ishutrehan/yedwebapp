@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UtilityProvider } from '../../../providers/utilities/utility';
 import { ApiProvider } from '../../../providers/auth/auth';
 import {Router, ActivatedRoute} from '@angular/router';
+import { BrowserModule, Title } from '@angular/platform-browser';
 
 
 @Component({
@@ -32,8 +33,9 @@ export class UpdatepropertyComponent implements OnInit {
   singleItem: any = {};
   showSingle: boolean;
   propertyid: any;
+  title = 'Mettre à jour | Yedimmobilier';
 
-  constructor(public utility:UtilityProvider, public auth:ApiProvider, private activatedRoute: ActivatedRoute) {
+  constructor(public utility:UtilityProvider, public auth:ApiProvider, private activatedRoute: ActivatedRoute, public titleService:Title) {
     this.updatedata.gallery = [];
     this.updatedata.type = [];
     this.updatedata.image = [];
@@ -60,6 +62,7 @@ export class UpdatepropertyComponent implements OnInit {
     //this.config.currentPage = this.page;
   }
   ngOnInit(): void {
+    this.titleService.setTitle(this.title);
     if(!this.utility.getStorage('isLogin')){
       window.location.href = '';
     }
