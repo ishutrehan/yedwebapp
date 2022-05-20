@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { UtilityProvider } from '../../../providers/utilities/utility';
 import { BrowserModule, Title } from '@angular/platform-browser';
@@ -9,6 +9,7 @@ import { BrowserModule, Title } from '@angular/platform-browser';
   styleUrls: ['./join.component.css']
 })
 export class JoinComponent implements OnInit {
+  @Input() navWidth: any ;
 title = 'Rejoignez-nous | Yedimmobilier';
 
   constructor(private router: Router, public utility:UtilityProvider, public titleService:Title) { }

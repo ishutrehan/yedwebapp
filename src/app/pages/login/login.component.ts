@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import {Router} from '@angular/router';
 import { UtilityProvider } from '../../../providers/utilities/utility';
 import { ApiProvider } from '../../../providers/auth/auth';
@@ -13,6 +13,7 @@ import { BrowserModule, Title } from '@angular/platform-browser';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  @Input() navWidth: any ;
   userPayload: any;
   loading: boolean;
   errormessage: any = "";

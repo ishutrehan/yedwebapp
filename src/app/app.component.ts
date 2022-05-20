@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { UtilityProvider } from '../providers/utilities/utility';
 
 @Component({
   selector: 'app-root',
@@ -7,13 +6,25 @@ import { UtilityProvider } from '../providers/utilities/utility';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  
+  navWidth: any;
   constructor() { 
    
   }
   ngOnInit(): void {
-    
+    this.navWidth = "0px";
   }
   
+  /* Set the width of the side navigation to 250px */
+  openNav= (): void => {
+    this.navWidth = "250px";
+  }
+
+  /* Set the width of the side navigation to 0 */
+  closeNav= (): void => {
+    this.navWidth = "0px";
+  }
+  onActivate(componentReference) {
+    this.navWidth = "0px";
+  }
   
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit, Input} from '@angular/core';
 import { UtilityProvider } from '../../../providers/utilities/utility';
 import { Router, NavigationEnd, Event } from '@angular/router';
 import { ApiProvider } from '../../../providers/auth/auth';
@@ -10,10 +10,12 @@ import { BrowserModule, Title } from '@angular/platform-browser';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
+  @Input() navWidth: any ;
+  @Input() openNav: any;
+  @Input() closeNav: any;
   showHeader: boolean;
   profiledetails: any;
   loading: boolean;
-  navWidth: any;
   title = 'Yedimmobilier';
 
   constructor(public utility: UtilityProvider, public router: Router,public auth: ApiProvider, public titleService:Title) { 
@@ -61,13 +63,5 @@ export class HeaderComponent implements OnInit {
     this.utility.removeStorage('refreshToen');
     window.location.href = '';
   }
-  /* Set the width of the side navigation to 250px */
-  openNav() {
-    this.navWidth = "250px";
-  }
-
-  /* Set the width of the side navigation to 0 */
-  closeNav() {
-    this.navWidth = "0";
-  }
+  
 }

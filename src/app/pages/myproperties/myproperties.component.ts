@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { UtilityProvider } from '../../../providers/utilities/utility';
 import { ApiProvider } from '../../../providers/auth/auth';
 import { PaginationInstance } from 'ngx-pagination/dist/ngx-pagination.module';
@@ -11,6 +11,7 @@ import { BrowserModule, Title } from '@angular/platform-browser';
   styleUrls: ['./myproperties.component.css']
 })
 export class MypropertiesComponent implements OnInit {
+  @Input() navWidth: any ;
 searchParams : any;
   distanceOptions : any;
   currentPayload : any = {};

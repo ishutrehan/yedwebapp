@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { BrowserModule, Title } from '@angular/platform-browser';
 
 @Component({
@@ -7,6 +7,7 @@ import { BrowserModule, Title } from '@angular/platform-browser';
   styleUrls: ['./privacy-policy.component.css']
 })
 export class PrivacyPolicyComponent implements OnInit {
+  @Input() navWidth: any ;
   title = 'Politique De Confidentialité | Yedimmobilier';
 
   constructor(public titleService:Title) { }

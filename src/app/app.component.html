@@ -1,2 +1,2 @@
-<app-header></app-header>
-<router-outlet></router-outlet>
+<app-header [navWidth]="navWidth" [openNav]="openNav" [closeNav]="closeNav"></app-header>
+<router-outlet (activate)="onActivate($event)"></router-outlet>

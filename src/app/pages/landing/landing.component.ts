@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit, Input} from '@angular/core';
 import {Router} from '@angular/router';
 import { UtilityProvider } from '../../../providers/utilities/utility';
 import { BrowserModule, Title } from '@angular/platform-browser';
@@ -9,6 +9,7 @@ import { BrowserModule, Title } from '@angular/platform-browser';
   styleUrls: ['./landing.component.css']
 })
 export class LandingComponent implements OnInit {
+  @Input() navWidth: any ;
   isLogin: boolean = false;
   title = 'Yedimmobilier | Maisons et Appartements à vendre et à louer';
 
