@@ -14,7 +14,7 @@ export class ProfileComponent implements OnInit {
  errormessage: any = "";
  successmessage:any  = "";
  defaultprofileimage = '../../../assets/images/person.png';
- title = 'Mon-compte | Yedimmobilier';
+ title = 'Mon-Compte | Yedimmobilier';
 
   constructor(public utility:UtilityProvider, public auth:ApiProvider, public titleService:Title) { 
     

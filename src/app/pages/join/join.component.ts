@@ -10,7 +10,7 @@ import { BrowserModule, Title } from '@angular/platform-browser';
 })
 export class JoinComponent implements OnInit {
   @Input() navWidth: any ;
-title = 'Rejoignez-nous | Yedimmobilier';
+  title = 'Rejoignez-nous | Yedimmobilier';
 
   constructor(private router: Router, public utility:UtilityProvider, public titleService:Title) { }
 

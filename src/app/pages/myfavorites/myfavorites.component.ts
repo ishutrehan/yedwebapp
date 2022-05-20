@@ -33,7 +33,7 @@ public config: PaginationInstance = {
     currentPage: this.page,
     totalItems: this.total
   };
-  title = 'Mes-favoris | Yedimmobilier';
+  title = 'Mes-Favoris | Yedimmobilier';
 
   constructor(public utility:UtilityProvider, public auth:ApiProvider, public router: Router, public titleService:Title) {
     this.titleService.setTitle(this.title);
