@@ -8,7 +8,7 @@ import { BrowserModule, Title } from '@angular/platform-browser';
 })
 export class PrivacyPolicyComponent implements OnInit {
   @Input() navWidth: any ;
-  title = 'Politique De Confidentialité | Yedimmobilier';
+  title = 'Politique de confidentialité | Yedimmobilier';
 
   constructor(public titleService:Title) { }
 
